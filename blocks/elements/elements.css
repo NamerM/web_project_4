@@ -1,11 +1,3 @@
 .elements {
-  margin: 0px 200px 68px;
-  max-width: 880px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px 17px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding:  0px;
+  margin: 0 auto;
 }
