@@ -1,6 +1,5 @@
 .profile__button-image {
-  /*max-width: 10px;
-  max-height: 10px;*/
   margin:0px;
-  /*grid-column: 2/3;*/
+  padding: 0px;
+  border:0px;
 }

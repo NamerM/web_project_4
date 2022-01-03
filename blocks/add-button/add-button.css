@@ -1,5 +1,8 @@
 .add-button {
   display: flex;
   align-self: center;
+  justify-content: flex-end;
   background-color: black;
+  padding: 14px 64px;
+  margin: 35px 0px 35px 163px;
 }
