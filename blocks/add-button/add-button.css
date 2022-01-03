@@ -3,6 +3,9 @@
   align-self: center;
   justify-content: flex-end;
   background-color: black;
-  padding: 14px 64px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 64px;
+  padding-right: 64px;
   margin: 35px 0px 35px 163px;
 }

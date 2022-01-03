@@ -1,0 +1,11 @@
+.elements__card-text {
+  color: #000000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-left: 15px;
+  margin-right: 21px;
+  display: flex;
+  justify-content:space-between ;
+}

@@ -1,7 +1,7 @@
 .elements__cards {
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: white;
 
-
-}
+  }
