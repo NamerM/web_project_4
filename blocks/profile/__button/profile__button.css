@@ -1,0 +1,7 @@
+.profile__button {
+  display: flex;
+  align-self: center;
+  background-color: black;
+  margin: 22px 0px 45px;
+  padding: 7px;
+}
