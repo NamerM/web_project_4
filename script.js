@@ -1,21 +1,29 @@
 let content = document.querySelector(".content");
-let profile = content.querySelector(".profile");  // section of profile info
+let profile = document.querySelector(".profile");  // section of profile info
+let editButton = document.querySelector(".profile__button"); // button with pen image for edit
+let addButton = document.querySelector(".add-button"); // Add button , 2nd on the section
 
-let editButton = content.querySelector(".profile__button"); // button with pen image for edit
-let addButton = content.querySelector(".add-button"); // Add button , 2nd on the section
+const popup = document.querySelector('.popup');
 
 editButton.addEventListener('click', editProfile);
 
-function editProfile () {
-let profileData = document.querySelector('.profile__ifno');
 
-let profileName = document.querySelector('.profile__header');
-let profileProfession = document.querySelector('.profile__profession');
+
+function editProfile () {
+let profileData = document.querySelector('.profile__info');
+
+let profileName = profileData.querySelector('.profile__header');
+let profileProfession = profileData.querySelector('.profile__profession');
 
 profile.insertAdjacentHTML('beforeend', `
   <div class='profileData'>
-  <p class='profileName'>${profileName.value}</p>
-  <p class='profileProfession'>${profileProfession.value}</p>
+  <p class='profileName'>${profileName.innerText}</p>
+  <p class='profileProfession'>${profileProfession.innerText}</p>
   </div>
-`)
+`);
+renderAdded();
+  profileName.value = "";
+  profileProfession.value = "";
 }
+
+
