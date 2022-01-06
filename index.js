@@ -1,11 +1,20 @@
-let content = document.querySelector(".content");
-let profile = content.querySelector(".profile");  // section of profile info
-let editButton = content.querySelector(".profile__button"); // button with pen image for edit
-let addButton = content.querySelector(".add-button"); // Add button , 2nd on the section
 
+const content = document.querySelector(".content");
+const profile = document.querySelector(".profile");  // section of profile info
+const editButton = document.querySelector (".profile__button"); // Edit buton, pen icon
+const addButton = document.querySelector(".add-button"); // Add button , 2nd on the section
+
+let profileData = document.querySelector('.popup');
+let profileName = profileData.querySelector('.popup__input-text');
+let profileProfession = profileData.querySelector('.popup__input-text-profession');
+
+
+editButton.addEventListener('click', function(event) {
+  editButton.style.display = 'flex';
+  profileData.style.display = 'block';
+});
 
 function editProfile () {
-let profileData = document.querySelector('.popup');
 let profileName = profileData.querySelector('.popup__input-text');
 let profileProfession = profileData.querySelector('.popup__input-text-profession');
 
@@ -18,7 +27,7 @@ profile.insertAdjacentHTML('beforeend', `
 `);
 }
 
-editButton.addEventListener('click', true);
+
 
 //const popup = document.querySelector('.popup');
 
