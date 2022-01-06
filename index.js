@@ -27,7 +27,7 @@ inputProfession.value = profileProfession.textContent;
 }
 editProfile();
 
-saveButton.addEventListener('click', formChange);
+//saveButton.addEventListener('click', formChange);
 
 function formChange() {
   profileInfo.innerHTML.textContent = `<div class="profile__info">
