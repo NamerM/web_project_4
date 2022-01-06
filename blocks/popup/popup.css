@@ -1,6 +1,14 @@
 .popup {
-  max-width: 430px;
-  max-height: 330px;
-  background-color: white;
-  border-radius: 10%;
+  display:none;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  position: fixed;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup::after {
+  display: block;
+
 }
