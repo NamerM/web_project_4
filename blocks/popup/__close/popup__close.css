@@ -1,9 +1,8 @@
 .popup__close {
   position: fixed;
-  top: -20px;
+  top: -2.5rem;
   left: calc(50% + 215px);
   background-color: transparent;
-  /*transform: rotate(-45deg);*/
   border: 0;
 }
 
