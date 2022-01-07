@@ -1,11 +1,17 @@
 .popup__square {
-  max-width: 430px;
-  width: 100%;
+  width: 430px;
   max-height: 330px;
-  height: 100%;
   background-color: white;
   color: #000000;
   border-radius: 10px;
   /*position: fixed;*/
 
+}
+
+@media screen and (max-width: 540px) {
+  .popup__square {
+    display: flex;
+    justify-content: center;
+    width:282px;
+  }
 }
