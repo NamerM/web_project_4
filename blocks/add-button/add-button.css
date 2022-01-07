@@ -13,3 +13,9 @@
 .add-button:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 362px) {
+  .add-button {
+    margin: 35px 0px 35px 60px;
+  }
+}
