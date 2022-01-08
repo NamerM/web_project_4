@@ -19,11 +19,14 @@
       <section class="profile">
         <img class="profile__image" src="./images/image.jpg" alt="An image of Jacques Costau">
         <div class="profile__info">
-        <p class="profile__header">Jacques Cousteau </p>
-        <p class="profile__profession">Explorer</p>
+          <div class="profile__line-header">
+            <p class="profile__header">Jacques Cousteau </p>
+            <button type="button" class="profile__button"></button>
+          </div>
+          <p class="profile__profession">Explorer</p>
         </div>
-        <button type="button" class="profile__button"><img class="profile__button-image" src="images/Vector-pen.png" alt="A white rectangle frame with a pencil image inside"></button>
-        <button  type="button" class="add-button"><img class="add-button__image" src="./images/Vector_plus.png" alt=""></button>
+
+        <button  type="button" class="add-button"></button>
       </section>
 
       <section class="elements">
@@ -78,7 +81,7 @@
 
     <section class="popup">
       <div class="popup__square">
-      <form name="profile">
+      <form name="profileForm">
       <h2 class="popup__title">Edit Profile</h2>
       <p><input class="popup__input-name" type="text" name="Name" ></p>
       <p><input class="popup__input-profession" type="text" name="Profession"></p>

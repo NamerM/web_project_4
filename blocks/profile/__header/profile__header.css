@@ -6,4 +6,20 @@
   line-height: 1.15;
   margin-top: 22px;
   margin-bottom: 16px;
+  margin-right: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__header {
+    font-family: "Inter", 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-break: 1.21;
+    max-width: 282px;
+    margin: 26.25px 10px 14px 48px;
+  }
 }

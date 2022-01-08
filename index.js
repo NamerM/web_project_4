@@ -1,4 +1,5 @@
 //Profile Section Header Elements
+//const page = document.querySelector(".page");
 const header = document.querySelector(".header");
 const content = document.querySelector(".content");
 const footer = document.querySelector(".footer");
@@ -9,8 +10,9 @@ const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
 //Popup-Form Section Elements
+const profileForm = document.forms.profileForm;
 const profilePopup = document.querySelector('.popup');
-const saveButton = document.querySelector('.popup__save');
+const saveButton = document.querySelector('.popup__save'); //popup.querySelector
 let inputName = document.querySelector('.popup__input-name');
 let inputProfession = document.querySelector('.popup__input-profession');
 
@@ -19,22 +21,21 @@ editButton.addEventListener('click', function(event) {
   profilePopup.style.display = 'block';
   header.setAttribute('style', 'opacity:0.5');
   content.setAttribute('style', 'opacity:0.5');
-  footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected.//
+  footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected. So tried also setting Attribute for popup but didn't work//
 });
 
 inputName.value = profileName.textContent;
 inputProfession.value = profileProfession.textContent;
 
-inputName.addEventListener('input', function(event){
-  const inputValue = event.target.value;
-  profileName.textContent = inputValue;
+profileForm.addEventListener('submit', function (event) {
+  profileName.textContent =inputName.value;
+  profileProfession.textContent = inputProfession.value;
+  profilePopup.style.display = 'none';
+  event.preventDefault();
+  header.removeAttribute('style');
+  content.removeAttribute('style');
+  footer.removeAttribute('style');
 });
-
-inputProfession.addEventListener('input', function(event){
-  const inputValue = event.target.value;
-  profileProfession.textContent = inputValue;
-});
-
 
 const addButton = document.querySelector(".add-button"); // Add button , 2nd on the section
 addButton.addEventListener('click', function(event2) {

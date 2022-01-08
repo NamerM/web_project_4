@@ -4,3 +4,12 @@
   max-width: 120px;
   max-height: 120px;
 }
+
+@media screen and (max-width: 320px) {
+  .profile__image {
+    margin: 38.25px auto 26.25px;
+    display: flex;
+    justify-content: center;
+  }
+
+}
