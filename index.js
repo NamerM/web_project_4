@@ -37,7 +37,7 @@ profileForm.addEventListener('submit', function (event) {
   footer.removeAttribute('style');
 });
 
-const addButton = document.querySelector(".add-button"); // Add button , 2nd on the section
+const addButton = document.querySelector(".add-button");
 addButton.addEventListener('click', function(event2) {
   alert("This button will be functional in Sprint 5");
 });
