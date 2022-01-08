@@ -19,6 +19,7 @@ let inputProfession = document.querySelector('.popup__input-profession');
 editButton.addEventListener('click', function(event) {
   editButton.style.display = 'flex';
   profilePopup.style.display = 'block';
+  //profilePopup.classList.toggle('popup_open');
   header.setAttribute('style', 'opacity:0.5');
   content.setAttribute('style', 'opacity:0.5');
   footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected. So tried also setting Attribute for popup but didn't work//
@@ -35,6 +36,7 @@ profileForm.addEventListener('submit', function (event) {
   header.removeAttribute('style');
   content.removeAttribute('style');
   footer.removeAttribute('style');
+  //profilePopup.classList.remove('popup_open');
 });
 
 const addButton = document.querySelector(".add-button");
