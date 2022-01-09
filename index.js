@@ -22,7 +22,7 @@ editButton.addEventListener('click', function(event) {
   profilePopup.classList.toggle('popup__open');
   //header.setAttribute('style', 'opacity:0.5');
   //content.setAttribute('style', 'opacity:0.5');
- // footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected. So tried also setting Attribute for popup but didn't work, will be happy to learn how it will be if we did with js style attributes. thx//
+ // footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected. So tried also setting Attribute for popup but didn't work, will be happy to learn how it will be if we did with js style attributes.that's why I left style.attribute lines - to learn - thx//
 });
 
 inputName.value = profileName.textContent;

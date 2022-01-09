@@ -3,8 +3,12 @@
   max-height: 330px;
   background-color: white;
   color: #000000;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  /*position: fixed;*/
+  position: relative;
+  top: 26%;
+  left: 34%;
+
 
 }
 
