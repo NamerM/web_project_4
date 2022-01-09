@@ -12,16 +12,17 @@ const profileProfession = profileInfo.querySelector('.profile__profession');
 const profileForm = document.forms.profileForm;
 const profilePopup = document.querySelector('.popup');
 const saveButton = document.querySelector('.popup__save'); //popup.querySelector
+const closeButton = document.querySelector('.popup__close');
 let inputName = document.querySelector('.popup__input-name');
 let inputProfession = document.querySelector('.popup__input-profession');
 
 editButton.addEventListener('click', function(event) {
   //editButton.style.display = 'flex';
   //profilePopup.style.display = 'block';
-  profilePopup.classList.toggle('popup_open');
+  profilePopup.classList.toggle('popup__open');
   //header.setAttribute('style', 'opacity:0.5');
   //content.setAttribute('style', 'opacity:0.5');
- // footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected. So tried also setting Attribute for popup but didn't work//
+ // footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected. So tried also setting Attribute for popup but didn't work, will be happy to learn how it will be if we did with js style attributes. thx//
 });
 
 inputName.value = profileName.textContent;
@@ -35,7 +36,7 @@ profileForm.addEventListener('submit', function (event) {
  //header.removeAttribute('style');
   //content.removeAttribute('style');
   //footer.removeAttribute('style');
-  profilePopup.classList.remove('popup_open');
+  profilePopup.classList.remove('popup__open');
 });
 
 const addButton = document.querySelector(".add-button");
