@@ -43,3 +43,4 @@ const addButton = document.querySelector(".add-button");
 addButton.addEventListener('click', function(event2) {
   alert("This button will be functional in Sprint 5");
 });
+
