@@ -12,3 +12,10 @@
   margin: 0 36px 30px;
   width: 358px;
 }
+
+@media screen and (max-width: 400px) {
+  .popup__input-profession {
+    width: 238px;
+  }
+
+}
