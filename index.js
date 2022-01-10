@@ -22,14 +22,17 @@ let inputProfession = profilePopup.querySelector('.popup__input-profession');
   //content.setAttribute('style', 'opacity:0.5');
  // footer.setAttribute('style', 'opacity:0.5');  // I tried page.setAttribute but popup is also effected. So tried also setting Attribute for popup but didn't work, will be happy to learn how it will be if we did with js style attributes.that's why I left style.attribute lines - to learn - thx//
 //});
-inputName.value = profileName.textContent;
-inputProfession.value = profileProfession.textContent;
 
-function togglePopup () {
-  profilePopup.classList.toggle('popup__open');
+function formLoadUp () {
+  inputName.value = profileName.textContent;
+  inputProfession.value = profileProfession.textContent;
 }
 
-profileForm.addEventListener('submit', function (event) {
+function togglePopup () {
+  profilePopup.classList.toggle('popup_open');
+}
+
+function formProfileHandle(event) {
   profileName.textContent =inputName.value;
   profileProfession.textContent = inputProfession.value;
   //profilePopup.style.display = 'none';
@@ -37,13 +40,11 @@ profileForm.addEventListener('submit', function (event) {
  //header.removeAttribute('style');
   //content.removeAttribute('style');
   //footer.removeAttribute('style');
-  profilePopup.classList.remove('popup__open');
-});
+  profilePopup.classList.remove('popup_open');
+}
 
 editButton.addEventListener('click', togglePopup);
+editButton.addEventListener('click', formLoadUp);
+profileForm.addEventListener('submit', formProfileHandle);
 closeButton.addEventListener('click', togglePopup);
-const addButton = document.querySelector(".add-button");
-addButton.addEventListener('click', function(event2) {
-  alert("This button will be functional in Sprint 5");
-});
 

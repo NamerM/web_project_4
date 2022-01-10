@@ -14,9 +14,6 @@
 
 @media screen and (max-width: 320px) {
   .profile__header {
-    font-family: "Inter", 'Arial', sans-serif;
-    font-style: normal;
-    font-weight: 500;
     font-size: 22px;
     line-break: 1.21;
     max-width: 282px;
