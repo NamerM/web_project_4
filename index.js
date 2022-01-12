@@ -9,8 +9,8 @@ const profileForm = document.forms.profileForm;
 const profilePopup = document.querySelector('.popup');
 const saveButton = profilePopup.querySelector('.popup__save');
 const closeButton = profilePopup.querySelector('.popup__close');
-let inputName = profilePopup.querySelector('.popup__input-name');
-let inputProfession = profilePopup.querySelector('.popup__input-profession');
+let inputName = profilePopup.querySelector('.popup__input_type_name');
+let inputProfession = profilePopup.querySelector('.popup__input_type_profession');
 
 function formLoadUp () {
   profilePopup.classList.toggle('popup_open')

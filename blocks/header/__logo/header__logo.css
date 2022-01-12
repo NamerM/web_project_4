@@ -1,6 +1,6 @@
 .header__logo {
   margin-top: 45px;
-  /*margin-left: 0px;*/
+  margin-bottom: 0px;
 }
 
 
@@ -8,6 +8,7 @@
     .header__logo {
         margin-top: 28px;
         margin-left: 27px;
+        margin-bottom: 32px;
         width: 126px;
         height: 24px;
     }

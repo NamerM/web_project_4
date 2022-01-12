@@ -5,13 +5,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
-}
-
-.popup_open {
-  display: block;
-  visibility: visible;
-  display: flex;
   justify-content: center;
   align-items:center;
-  margin: 0;
 }
+
