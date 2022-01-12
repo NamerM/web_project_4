@@ -12,6 +12,15 @@
   white-space: nowrap;
 }
 
+
+@media screen and (max-width: 720px) {
+  .profile__header {
+    font-size: 24px;
+    max-width: 75%;
+  }
+}
+
+
 @media screen and (max-width: 320px) {
   .profile__header {
     font-size: 22px;

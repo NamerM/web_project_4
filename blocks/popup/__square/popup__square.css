@@ -9,10 +9,9 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 524px) {
   .popup__square {
-    /*display: flex;
-    justify-content: center;*/
+    margin: auto;
     width:282px;
   }
 }

@@ -1,11 +1,16 @@
 .profile__info {
   max-width: 60%;
-  /*max-height: 77px;*/
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-
+@media screen and (max-width: 720px) {
+  .profile__info{
+    max-width: 80%;
+    align-items: center;
+  }
+}
 @media screen and (max-width: 320px) {
   .profile__info {
     max-width: 100%;

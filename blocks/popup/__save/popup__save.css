@@ -18,7 +18,7 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 524px) {
   .popup__save {
     max-width: 238px;
     display: flex;
