@@ -10,7 +10,7 @@
   background-image: url(../../../images/edit-pen.svg);
   background-repeat: no-repeat;
   background-position: center;
-  /*margin: 22px 0px 45px 16px;*/
+  margin-left: 16px;
 }
 
 .profile__button:hover {

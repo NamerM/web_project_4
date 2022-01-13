@@ -6,7 +6,7 @@
   line-height: 1.15;
   margin-top: 22px;
   margin-bottom: 16px;
-  margin-right: 16px;
+  /*margin-right: 16px;*/ /*moved to profile button as left*/
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
