@@ -6,13 +6,12 @@
   border-radius: 10px;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-items: center;
 }
 
 @media screen and (max-width: 524px) {
   .popup__square {
-    /*margin: auto;*/
-    width:282px;
+    max-width: 282px;
   }
 }
 
