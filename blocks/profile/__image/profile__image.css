@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 320px) {
   .profile__image {
-    margin: 0px 73.75px 26.25px 77px;
+    margin: 0px auto 26.25px;
     display: flex;
     justify-content: center;
   }
