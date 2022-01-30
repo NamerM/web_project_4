@@ -6,6 +6,9 @@
   border: 0px;
   background-color: transparent;
   transition: opacity linear 0.35s;
+  display: flex;
+  margin-top: 23.8px;
+  margin-right: 16.3px;
 }
 
 .elements__button-delete:hover {
