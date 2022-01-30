@@ -32,6 +32,7 @@
 @import url(../blocks/elements/__handle/elements__handle.css);
 @import url(../blocks/elements/__card-text/elements__card-text.css);
 @import url(../blocks/elements/__button-like/elements__button-like.css);
+@import url(../blocks/elements/__button-delete/elements__button-delete.css);
 
 @import url(../blocks/footer/__text/footer__text.css);
 
