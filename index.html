@@ -11,7 +11,7 @@
     content="Practicum by Yandex Sprint4 Project"/>
 </head>
 <body class="page">
-  <section class="popup" id="popup-template">
+  <section class="popup popup_type_edit_profile" id="popup-template">
     <div class="popup__square">
       <form name="profileForm" class="popup__form">
         <h1 class="popup__title">Edit Profile</h1>
@@ -22,6 +22,18 @@
       </form>
     </div>
   </section>
+  <!--popup sonrası bir class daha atayacağım form ayrı öbürü ayrı
+    <section class="popup popup_type_add_card" id="popup-template">
+    <div class="popup__square">
+      <form name="addCards" class="popup__form">
+        <h1 class="popup__title">New Place</h1>
+        <input class="popup__input popup__input_type_name" type="text" id="Title" >
+        <input class="popup__input popup__input_type_profession" type="text" id="Image Link">
+        <button type='submit' class="popup__save">Create</button>
+        <button type='button' class='popup__close'></button>
+      </form>
+    </div>
+  </section>-->
   <div class="page__content">
     <header class="header">
       <img class="header__logo" src="./images/logo-aroundtheus.svg" alt="Logo text writes Around the U.S.">
@@ -90,8 +102,9 @@
     <footer class="footer"><p class="footer__text">© 2021 Around The U.S.</p></footer>
     <template id="card-template">
       <li class="elements__card">
-        <button class="elements__button-delete" type="button" ></button>
+
         <div class="elements__image" alt=" ">
+          <button class="elements__button-delete" type="button" ></button>
         </div>
         <div class="elements__handle">
           <h2 class="elements__card-text"></h2>

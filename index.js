@@ -1,3 +1,4 @@
+// CARDS //
 const initialCards = [
 {
   name: "Yosemite Valley",
@@ -34,7 +35,9 @@ const listContainer = document.querySelector('.elements__cards');
 
 const createNewElementsCard = (title, imageSrc) => {
   const clonedElementsCard = cardTemplate.cloneNode(true);
-  clonedElementsCard.style = "background-image: url(" + imageSrc + ");";
+  /*clonedElementsCard.style = "background-image: url(" + imageSrc + ");";*/
+  const cardImage = clonedElementsCard.querySelector(".elements__image")
+  cardImage.style = "background-image: url(" + imageSrc + ");";
   const cardTitle = clonedElementsCard.querySelector(".elements__card-text");
   cardTitle.textContent = title;
   return clonedElementsCard;
@@ -49,6 +52,12 @@ const cardsStack = ()=>{
 
 cardsStack();
 
+//ADD CARDS //
+
+
+
+
+// EDIT PROFILE  //
 const profile = document.querySelector(".profile");
 const editButton = document.querySelector (".profile__button");
 
