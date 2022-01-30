@@ -30,11 +30,11 @@ const cardTemplate = document
 .content.querySelector(".elements__card");
 
 const cardElement = cardTemplate.cloneNode(true);
-const listContainer = document.querySelector('.elements__Cards');
+const listContainer = document.querySelector('.elements__cards');
 
 const createNewElementsCard = (title, imageSrc) => {
   const clonedElementsCard = cardTemplate.cloneNode(true);
-  clonedElementsCard.style = 'background-image: url(" + imageSrc + ");';
+  clonedElementsCard.style = "background-image: url(" + imageSrc + ");";
   const cardTitle = clonedElementsCard.querySelector(".elements__card-text");
   cardTitle.textContent = title;
   return clonedElementsCard;
@@ -42,7 +42,6 @@ const createNewElementsCard = (title, imageSrc) => {
 
 const cardsStack = ()=>{
   const listContainer = document.querySelector('.elements__cards');
-  const initialCardsImage = document.querySelector('.elements__image');
     initialCards.forEach((item)=>{
     listContainer.append(createNewElementsCard(item.name, item.link));
  });
