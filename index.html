@@ -11,7 +11,7 @@
     content="Practicum by Yandex Sprint4 Project"/>
 </head>
 <body class="page">
-  <section class="popup">
+  <section class="popup" id="popup-template">
     <div class="popup__square">
       <form name="profileForm" class="popup__form">
         <h1 class="popup__title">Edit Profile</h1>
@@ -42,8 +42,8 @@
 
       <section class="elements">
         <ul class="elements__cards">
-          <li class="elements__card">
-            <img class="elements__image" src="./images/card-image-yosemite.png" alt="A photo of Yosemite Valley, a river with pine trees on both sides">
+           <!-- <li class="elements__card">
+           <img class="elements__image" src="./images/card-image-yosemite.png" alt="A photo of Yosemite Valley, a river with pine trees on both sides">
             <div class="elements__handle">
               <h2 class="elements__card-text">Yosemite Valley</h2>
               <button class="elements__button-like" type="button"></button>
@@ -77,19 +77,28 @@
               <button class="elements__button-like" type="button"></button>
             </div>
           </li>
-
           <li class="elements__card">
             <img class="elements__image" src="./images/card-image-lago-di-braies.png" alt="A photo of Lago Di Braies, rocky mountains in the back, lack side with a wooden port with wooden rowboats anchored and tied to it">
             <div class="elements__handle">
               <h2 class="elements__card-text">Lago Di Braies</h2>
               <button class="elements__button-like" type="button"></button>
             </div>
-          </li>
+          </li>-->
         </ul>
       </section>
     </main>
     <footer class="footer"><p class="footer__text">© 2021 Around The U.S.</p></footer>
-
+    <template id="card-template">
+      <li class="elements__card">
+        <div class="elements__image" style="">
+        </div>
+        <button class="elements__button-delete" type="button" ></button>
+        <div class="elements__handle">
+          <h2 class="elements__card-text"></h2>
+          <button class="elements__button-like" type="button"></button>
+        </div>
+      </li>
+    </template>
   </div>
   <script src="index.js" async></script>
 </body>
