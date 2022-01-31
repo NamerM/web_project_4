@@ -33,26 +33,79 @@ const cardTemplate = document
 const cardElement = cardTemplate.cloneNode(true);
 const listContainer = document.querySelector('.elements__cards');
 
-const createNewElementsCard = (title, imageSrc) => {
-  const clonedElementsCard = cardTemplate.cloneNode(true);
-  const cardImage = clonedElementsCard.querySelector(".elements__image")
-  cardImage.style = "background-image: url(" + imageSrc + ");";
-  const cardTitle = clonedElementsCard.querySelector(".elements__card-text");
-  cardTitle.textContent = title;
-  return clonedElementsCard;
-}
+// dom memory save için aşağıda element yaratıp onu cardsStack'te hafızadan 6 kere çağırmış olduk //
+const createListWrapper = (props) => {
+  const className = props.className;
+  const newElement = document.createElement("ul");
+  newElement.classList.toggle(className);
+  return newElement;
+};
 
-const cardsStack = ()=>{
-  const listContainer = document.querySelector('.elements__cards');
+const createNewElementsCard = (props) => {
+  const localTitle = props.name;
+  const localLink = props.link;
+  const localCardTemplate = props.cardTemplate;
+
+  const clonedElementsCard = localCardTemplate.cloneNode(true);
+  const cardImage = clonedElementsCard.querySelector(".elements__image");
+  cardImage.style.backgroundImage = "url("+localLink+")";
+  const cardTitle = clonedElementsCard.querySelector(".elements__card-text");
+  cardTitle.textContent = localTitle;
+  return clonedElementsCard;
+};
+
+const cardsStack = () => {
+  const listContainer = createListWrapper({className: 'elements__cards'}); //document.querySelector(".elements__cards");
+  const listPageSection = document.querySelector(".elements.page__section")
+  const cardTemplate = document
+    .querySelector("#card-template")
+    .content.querySelector(".elements__card");
     initialCards.forEach((item)=>{
-    listContainer.append(createNewElementsCard(item.name, item.link));
+    const cardPropsObject = {
+      name:item.name,
+      link:item.link,
+      cardTemplate: cardTemplate
+    };
+    listContainer.append(createNewElementsCard(cardPropsObject));
  });
+ listPageSection.append(listContainer);
 };
 
 cardsStack();
 
+//ADD CARDS //
 
+const addCards = document.forms.addCards;
+const addCardPopUp = document.querySelector(".popup.popup_type_add_card");
+const addButton = document.querySelector(".add-button");
+const createButton = addCards.querySelector('.popup__save');
+const deleteButton = document.querySelector('.elements__button-delete');
+let inputTitle = addCards.querySelector('.popup.popup__input_type_name');
+let inputLink = addCards.querySelector('.popup.popup__input_type_link');
 
+ // inputName yukarıda var pseudo class kullanıldı
+ // closeButton ve fonksiyon yukarıdan alınacak
+ function addUpFormLoad() {
+  addCardPopUp.classList.toggle('popup_open');
+  inputTitle.value = inputTitle.textcontent;
+  inputLink.value = inputLink.textcontent;
+}
+
+ function addCard (event){
+  inputTitle.textcontent = inputTitle.value;
+  inputLink.textcontent = inputLink.value;
+  event.preventDefault();
+  addCards.classList.remove('popup_open');
+ }
+
+function removeCard (event) {
+cardsStack.remove(cardTemplate);
+};
+
+  addButton.addEventListener('click', addUpFormLoad);
+  deleteButton.addEventListener('click', removeCard);
+ //     createButton.addEventListener('click', addCard);
+ // ??? createButton.addEventListener('click', createNewElementsCard);
 
 // EDIT PROFILE  //
 const profile = document.querySelector(".profile");
@@ -91,33 +144,3 @@ editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formProfileHandle);
 closeButton.addEventListener('click', closePopup);
 
-//ADD CARDS //
-
-const addCards = document.forms.addCards;
-const addCardPopUp = document.querySelector(".popup");
-const addButton = document.querySelector(".add-button");
-const cardTitle =  "Title";
-const cardLink = "Link";
-const createButton = addCardPopUp.querySelector('.popup__save');
-let inputTitle = addCardPopUp.querySelector('.popup__input_type_title');
-let inputLink = addCardPopUp.querySelector('.popup__input_type_link');
-
- // inputName yukarıda var pseudo class kullanıldı
- // closeButton ve fonksiyon yukarıdan alınacak
- function addUpFormLoad() {
-  addCardPopUp.classList.toggle('popup_open');
-  inputTitle.value = cardTitle.textContent;
-  inputLink.value = cardLink.textContent;
-}
-
- function addCard (event){
-  inputTitle.textcontent = inputTitle.value;
-  inputLink.textcontent = inputLink.value;
-  event.preventDefault();
-  addCardPopUp.classList.remove('popup_open');
- }
-
-
-
- addButton.addEventListener('click', addUpFormLoad);
- createButton.addEventListener('click', addCard);

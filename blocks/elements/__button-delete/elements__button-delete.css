@@ -8,7 +8,8 @@
   transition: opacity linear 0.35s;
   display: flex;
   margin-top: 23.8px;
-  margin-right: 16.3px;
+  margin-left: 249px;
+  margin-right: 16px;
 }
 
 .elements__button-delete:hover {
