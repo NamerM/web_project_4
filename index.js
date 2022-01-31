@@ -78,7 +78,7 @@ cardsStack();
 const addCards = document.forms.addCards;
 const addCardPopUp = document.querySelector(".popup.popup_type_add_card");
 const addButton = document.querySelector(".add-button");
-const createButton = addCards.querySelector('.popup__save');
+const createButton = document.querySelector('.popup__save');
 const deleteButton = document.querySelector('.elements__button-delete');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
 let inputTitle = addCards.querySelector('.popup.popup__input_type_name');
