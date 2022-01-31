@@ -80,6 +80,7 @@ const addCardPopUp = document.querySelector(".popup.popup_type_add_card");
 const addButton = document.querySelector(".add-button");
 const createButton = addCards.querySelector('.popup__save');
 const deleteButton = document.querySelector('.elements__button-delete');
+const buttonclose = document.querySelector('.popup__close.popup__close_add');
 let inputTitle = addCards.querySelector('.popup.popup__input_type_name');
 let inputLink = addCards.querySelector('.popup.popup__input_type_link');
 
@@ -89,6 +90,10 @@ let inputLink = addCards.querySelector('.popup.popup__input_type_link');
   addCardPopUp.classList.toggle('popup_open');
   inputTitle.value = inputTitle.textcontent;
   inputLink.value = inputLink.textcontent;
+}
+
+function closeAddUp() {
+  addCardPopUp.classList.remove('popup_open');
 }
 
  function addCard (event){
@@ -104,6 +109,7 @@ cardsStack.remove(cardTemplate);
 
   addButton.addEventListener('click', addUpFormLoad);
   deleteButton.addEventListener('click', removeCard);
+  buttonclose.addEventListener('click', closeAddUp);
  //     createButton.addEventListener('click', addCard);
  // ??? createButton.addEventListener('click', createNewElementsCard);
 
