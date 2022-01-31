@@ -35,7 +35,6 @@ const listContainer = document.querySelector('.elements__cards');
 
 const createNewElementsCard = (title, imageSrc) => {
   const clonedElementsCard = cardTemplate.cloneNode(true);
-  /*clonedElementsCard.style = "background-image: url(" + imageSrc + ");";*/
   const cardImage = clonedElementsCard.querySelector(".elements__image")
   cardImage.style = "background-image: url(" + imageSrc + ");";
   const cardTitle = clonedElementsCard.querySelector(".elements__card-text");
@@ -51,8 +50,6 @@ const cardsStack = ()=>{
 };
 
 cardsStack();
-
-//ADD CARDS //
 
 
 
@@ -94,3 +91,33 @@ editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formProfileHandle);
 closeButton.addEventListener('click', closePopup);
 
+//ADD CARDS //
+
+const addCards = document.forms.addCards;
+const addCardPopUp = document.querySelector(".popup");
+const addButton = document.querySelector(".add-button");
+const cardTitle =  "Title";
+const cardLink = "Link";
+const createButton = addCardPopUp.querySelector('.popup__save');
+let inputTitle = addCardPopUp.querySelector('.popup__input_type_title');
+let inputLink = addCardPopUp.querySelector('.popup__input_type_link');
+
+ // inputName yukarıda var pseudo class kullanıldı
+ // closeButton ve fonksiyon yukarıdan alınacak
+ function addUpFormLoad() {
+  addCardPopUp.classList.toggle('popup_open');
+  inputTitle.value = cardTitle.textContent;
+  inputLink.value = cardLink.textContent;
+}
+
+ function addCard (event){
+  inputTitle.textcontent = inputTitle.value;
+  inputLink.textcontent = inputLink.value;
+  event.preventDefault();
+  addCardPopUp.classList.remove('popup_open');
+ }
+
+
+
+ addButton.addEventListener('click', addUpFormLoad);
+ createButton.addEventListener('click', addCard);
