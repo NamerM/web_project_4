@@ -39,8 +39,7 @@ closeButton.addEventListener('click', closePopup);
   ///////////
  // CARDS //
 ///////////
-const addCards = document.querySelector('.popup_type_add-card')
-//const addCardPopUp = document.querySelector('.popup.popup_type_add-card');
+const addCards = document.querySelector('.popup_type_add-card') //const addCardPopUp = document.querySelector('.popup.popup_type_add-card');
 
 //buttons and DOM elements
 const addButton = document.querySelector('.add-button');
@@ -68,11 +67,12 @@ function createCardElement(card) {
       // handle image click
     });
 
-    likeButton.addEventListener('click', () => {
-      // like button
-      const likeButton = cardElement.querySelector('.elements__button-like');
-      let source = '../../../images/blackfillheart';
-      likeButton.style.backgroundImage = 'url(' + source + ');';
+    likeButton.addEventListener('click', (evt) => {
+      const likeActive = evt.target;
+      likeActive.classList.toggle('elements__button-like_active');
+      //const likeButton = cardElement.querySelector('.elements__button-like');
+      //let source = '../../../images/blackfillheart';
+      //likeButton.style.backgroundImage = 'url('+ source + ');';   Question: How could I make it work with this?
     });
 
     deleteButton.addEventListener('click', () => {
