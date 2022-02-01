@@ -51,7 +51,7 @@ const createNewElementsCard = (props) => {
   return clonedElementsCard;
 };
 
-const cardsStack = () => {
+const cardsStack = (props) => {
   const listContainer = createListWrapper({className: 'elements__cards'}); //document.querySelector(".elements__cards");
   const listPageSection = document.querySelector(".elements.page__section")
   const cardTemplate = document.querySelector("#card-template").content.querySelector(".elements__card");
@@ -66,7 +66,7 @@ const cardsStack = () => {
  listPageSection.append(listContainer);
 };
 
-cardsStack();
+cardsStack({initialCards: initialCards});
 
 //ADD CARDS FORM //
 const addCards = document.forms.addCards;
@@ -90,30 +90,27 @@ function closeAddUp() {
 
  function addCard (event){
   createNewElementsCard ((simplyAdd) => {
-    //const localTitle = props.name;
-    //const localLink = props.link;
-    //const localCardTemplate = props.cardTemplate;
-    inputTitle.value = localTitle;
-    inputLink.value = localLink;
+    inputTitle.textContent = localTitle;
+    inputLink.textContent = localLink;
     return simplyAdd;
     });
-    listContainer.append(createNewElementsCard(simplyAdd));
+
    //create button should open the new card here
-  //inputTitle.textcontent = inputTitle.value;
-  //inputLink.textcontent = inputLink.value;
     event.preventDefault();
     addCards.classList.remove('popup_open');
+    listContainer.prepend(cardElement);
  };
 
 function removeCard (event) {
   // deletebutton should delete the card
-cardsStack.remove(cardTemplate);
+  // need to find the correct removal tag for in ();
+listContainer.remove(cardElement);
 };
 
   addButton.addEventListener('click', addUpFormLoad);
   deleteButton.addEventListener('click', removeCard);
   buttonclose.addEventListener('click', closeAddUp);
-  createButton.addEventListener('click', addCard );
+  createButton.addEventListener('submit', addCard );
 
   ///////////////////
  // EDIT PROFILE  //
