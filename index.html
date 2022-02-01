@@ -53,8 +53,28 @@
       </section>
 
       <section class="elements page__section">
-        <ul class="elements__cards">
-           <!-- <li class="elements__card">
+        <ul class="elements__cards"></ul>
+      </section>
+    </main>
+    <footer class="footer"><p class="footer__text">© 2021 Around The U.S.</p></footer>
+    <template id="card-template">
+      <li class="elements__card">
+        <div class="elements__image" style="">
+          <button class="elements__button-delete" type="button" ></button>
+        </div>
+        <div class="elements__handle">
+          <h2 class="elements__card-text"></h2>
+          <button class="elements__button-like" type="button"></button>
+        </div>
+      </li>
+    </template>
+  </div>
+  <script src="index.js" async></script>
+</body>
+</html>
+
+
+<!-- <li class="elements__card">
            <img class="elements__image" src="./images/card-image-yosemite.png" alt="A photo of Yosemite Valley, a river with pine trees on both sides">
             <div class="elements__handle">
               <h2 class="elements__card-text">Yosemite Valley</h2>
@@ -96,22 +116,3 @@
               <button class="elements__button-like" type="button"></button>
             </div>
           </li>-->
-        </ul>
-      </section>
-    </main>
-    <footer class="footer"><p class="footer__text">© 2021 Around The U.S.</p></footer>
-    <template id="card-template">
-      <li class="elements__card">
-        <div class="elements__image" style="">
-          <button class="elements__button-delete" type="button" ></button>
-        </div>
-        <div class="elements__handle">
-          <h2 class="elements__card-text"></h2>
-          <button class="elements__button-like" type="button"></button>
-        </div>
-      </li>
-    </template>
-  </div>
-  <script src="index.js" async></script>
-</body>
-</html>

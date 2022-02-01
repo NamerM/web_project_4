@@ -26,13 +26,11 @@ const initialCards = [
 }
 ];
 
-
 // Wrappers
 const elementsList = document.querySelector('.elements__cards');
 
-
-initialCards.forEach(card => {
-  // get a reference to template
+//functions - cards
+function createCardElement(card) {
     const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
     const cardElement = cardTemplate.cloneNode(true);
 
@@ -42,11 +40,16 @@ initialCards.forEach(card => {
     cardImage.style.backgroundImage = `url(${card.link})` // = 'url('+ card.link ');';``
     cardTitle.textContent = card.name;
 
-    elementsList.append(cardElement);
-  // createa card element
-  // append - prepend that card - elements__cards - into elements__card
+    return cardElement;
+ }
 
-});
+ function renderCard(card, wrapper) {
+   wrapper.append(createCardElement(card));
+ }
+
+
+
+initialCards.forEach(card => renderCard(card, elementsList));
 
 
 
@@ -83,6 +86,7 @@ initialCards.forEach(card => {
 //listContainer.remove(cardElement);
 };
 
+// Add Card Event Handlers
   addButton.addEventListener('click', addUpFormLoad);
   deleteButton.addEventListener('click', removeCard);
   buttonclose.addEventListener('click', closeAddUp);
@@ -98,7 +102,6 @@ const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
 
-
 const profileForm = document.forms.profileForm;
 const profilePopup = document.querySelector('.popup');
 const saveButton = profilePopup.querySelector('.popup__save');
@@ -106,6 +109,7 @@ const closeButton = profilePopup.querySelector('.popup__close');
 let inputName = profilePopup.querySelector('.popup__input_type_name');
 let inputProfession = profilePopup.querySelector('.popup__input_type_profession');
 
+//functions
 function formLoadUp () {
   profilePopup.classList.toggle('popup_open');
   inputName.value = profileName.textContent;
@@ -122,7 +126,7 @@ function formProfileHandle(event) {
   event.preventDefault();
   profilePopup.classList.remove('popup_open');
 }
-
+//handlers
 editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formProfileHandle);
 closeButton.addEventListener('click', closePopup);
