@@ -14,5 +14,5 @@
 }
 
 .elements__button-like:active {
- background-color: #000000; /*unfinished*/
+ background-image: url('../../../images/blackfillheart.svg');
 }
