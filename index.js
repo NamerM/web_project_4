@@ -35,7 +35,7 @@ function formSubmitHandle(event) {
 editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formSubmitHandle);
 closeButton.addEventListener('click', closePopup);
-//------------------  --------------  --------------------//
+//________________________________________________________________
   ///////////
  // CARDS //
 ///////////
@@ -44,7 +44,7 @@ const addCards = document.querySelector('.popup_type_add-card') //const addCardP
 //buttons and DOM elements
 const addButton = document.querySelector('.add-button');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
-const createButton = document.querySelector('.popup__save');
+const createButton = document.querySelector('.popup__save.popup_type_addup');
 let inputTitle = addCards.querySelector('.popup.popup__input_type_name');
 let inputLink = addCards.querySelector('.popup.popup__input_type_link');
 // Wrappers
@@ -75,49 +75,43 @@ function createCardElement(card) {
       //likeButton.style.backgroundImage = 'url('+ source + ');';   Question: How could I make it work with this?
     });
 
+
     deleteButton.addEventListener('click', () => {
       cardElement.remove();
     });
-   // createButton.addEventListener('submit',()=> {
-   //
-   // });
+
    return cardElement;
  };
-
 
  function renderCard(card, wrapper) {
    wrapper.append(createCardElement(card));
  };
 
- initialCards.forEach(card => renderCard(card, elementsList));
+initialCards.forEach(card => renderCard(card, elementsList));
+
+
+createButton.addEventListener("submit", (evt) => {
+  const card = {
+      name: cardTitle.value,
+      link: cardImage.value,
+  };
+  renderCard(createCardElement(card, elementsList));
+  toggleForm();
+  evt.preventDefault();
+  createButton.reset();
+});
 
 
 
-//const addCards = document.forms.addCards;
- function addUpFormLoad() {
+ function toggleForm() {
   addCards.classList.toggle('popup_open');
 }
 
-function closeAddUp() {
-  addCards.classList.remove('popup_open');
-}
+addButton.addEventListener('click', toggleForm);
+buttonclose.addEventListener('click', toggleForm);
 
- function addCard (event){
+ //function addCard (event){
     // card.name  & card.link should be added from form.
-    addCards.classList.remove('popup_open');
- };
+ //   addCard.classList.remove('popup_open');
+ //};
 
-// Add Card Event Handlers
-  addButton.addEventListener('click', addUpFormLoad);    //deleteButton.addEventListener('click', removeCard);
-  buttonclose.addEventListener('click', closeAddUp);
-  //createButton.addEventListener('submit', addCard );
-
-
-
-
-//function removeCard () {
-//initialCards.forEach(card => {
-//  card.remove();
-//})
-//listContainer.remove(cardElement);
-//};
