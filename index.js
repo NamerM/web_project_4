@@ -26,10 +26,7 @@ const initialCards = [
 }
 ];
 
-const cardTemplate = document
-.querySelector("#card-template")
-.content.querySelector(".elements__card");
-
+const cardTemplate = document.querySelector("#card-template").content.querySelector(".elements__card");
 const cardElement = cardTemplate.cloneNode(true);
 const listContainer = document.querySelector('.elements__cards');
 
@@ -57,9 +54,7 @@ const createNewElementsCard = (props) => {
 const cardsStack = () => {
   const listContainer = createListWrapper({className: 'elements__cards'}); //document.querySelector(".elements__cards");
   const listPageSection = document.querySelector(".elements.page__section")
-  const cardTemplate = document
-    .querySelector("#card-template")
-    .content.querySelector(".elements__card");
+  const cardTemplate = document.querySelector("#card-template").content.querySelector(".elements__card");
     initialCards.forEach((item)=>{
     const cardPropsObject = {
       name:item.name,
@@ -73,8 +68,7 @@ const cardsStack = () => {
 
 cardsStack();
 
-//ADD CARDS //
-
+//ADD CARDS FORM //
 const addCards = document.forms.addCards;
 const addCardPopUp = document.querySelector(".popup.popup_type_add_card");
 const addButton = document.querySelector(".add-button");
@@ -88,8 +82,6 @@ let inputLink = addCards.querySelector('.popup.popup__input_type_link');
  // closeButton ve fonksiyon yukarıdan alınacak
  function addUpFormLoad() {
   addCardPopUp.classList.toggle('popup_open');
-  inputTitle.value = inputTitle.textcontent;
-  inputLink.value = inputLink.textcontent;
 }
 
 function closeAddUp() {
@@ -97,23 +89,35 @@ function closeAddUp() {
 }
 
  function addCard (event){
-  inputTitle.textcontent = inputTitle.value;
-  inputLink.textcontent = inputLink.value;
-  event.preventDefault();
-  addCards.classList.remove('popup_open');
- }
+  createNewElementsCard ((simplyAdd) => {
+    //const localTitle = props.name;
+    //const localLink = props.link;
+    //const localCardTemplate = props.cardTemplate;
+    inputTitle.value = localTitle;
+    inputLink.value = localLink;
+    return simplyAdd;
+    });
+    listContainer.append(createNewElementsCard(simplyAdd));
+   //create button should open the new card here
+  //inputTitle.textcontent = inputTitle.value;
+  //inputLink.textcontent = inputLink.value;
+    event.preventDefault();
+    addCards.classList.remove('popup_open');
+ };
 
 function removeCard (event) {
+  // deletebutton should delete the card
 cardsStack.remove(cardTemplate);
 };
 
   addButton.addEventListener('click', addUpFormLoad);
   deleteButton.addEventListener('click', removeCard);
   buttonclose.addEventListener('click', closeAddUp);
- //     createButton.addEventListener('click', addCard);
- // ??? createButton.addEventListener('click', createNewElementsCard);
+  createButton.addEventListener('click', addCard );
 
-// EDIT PROFILE  //
+  ///////////////////
+ // EDIT PROFILE  //
+///////////////////
 const profile = document.querySelector(".profile");
 const editButton = document.querySelector (".profile__button");
 
