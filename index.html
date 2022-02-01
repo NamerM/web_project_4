@@ -22,13 +22,13 @@
       </form>
     </div>
   </section>
-  <!--Addup popup sonrası bir class daha atayacağım form ayrı öbürü ayrı-->
+  <!--Addup popup form-->
     <section class="popup popup_type_add_card" id="popup-template">
     <div class="popup__square">
       <form name="addCards" class="popup__form">
         <h1 class="popup__title">New Place</h1>
-        <input class="popup__input popup__input_type_name" type="text" placeholder="Title" id="Title" >
-        <input class="popup__input popup__input_type_link" type="text" placeholder="Link" id="Image Link">
+        <input class="popup__input popup__input_type_name" type="text" placeholder="Title" id="Title" minlength="1" maxlength="30" required>
+        <input class="popup__input popup__input_type_link" type="text" placeholder="Link" pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?" id="Image Link" required>
         <button type='submit' class="popup__save popup_type_addup">Create</button>
         <button type='button' class='popup__close popup__close_add'></button>
       </form>
@@ -102,8 +102,7 @@
     <footer class="footer"><p class="footer__text">© 2021 Around The U.S.</p></footer>
     <template id="card-template">
       <li class="elements__card">
-
-        <div class="elements__image" alt=" ">
+        <div class="elements__image" style="">
           <button class="elements__button-delete" type="button" ></button>
         </div>
         <div class="elements__handle">

@@ -26,52 +26,34 @@ const initialCards = [
 }
 ];
 
-const cardTemplate = document.querySelector("#card-template").content.querySelector(".elements__card");
-const cardElement = cardTemplate.cloneNode(true);
-const listContainer = document.querySelector('.elements__cards');
 
-// dom memory save için aşağıda element yaratıp onu cardsStack'te hafızadan 6 kere çağırmış olduk //
-const createListWrapper = (props) => {
-  const className = props.className;
-  const newElement = document.createElement("ul");
-  newElement.classList.toggle(className);
-  return newElement;
-};
+// Wrappers
+const elementsList = document.querySelector('.elements__cards');
 
-const createNewElementsCard = (props) => {
-  const localTitle = props.name;
-  const localLink = props.link;
-  const localCardTemplate = props.cardTemplate;
 
-  const clonedElementsCard = localCardTemplate.cloneNode(true);
-  const cardImage = clonedElementsCard.querySelector(".elements__image");
-  cardImage.style.backgroundImage = "url("+localLink+")";
-  const cardTitle = clonedElementsCard.querySelector(".elements__card-text");
-  cardTitle.textContent = localTitle;
-  return clonedElementsCard;
-};
+initialCards.forEach(card => {
+  // get a reference to template
+    const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
+    const cardElement = cardTemplate.cloneNode(true);
 
-const cardsStack = (props) => {
-  const listContainer = createListWrapper({className: 'elements__cards'}); //document.querySelector(".elements__cards");
-  const listPageSection = document.querySelector(".elements.page__section")
-  const cardTemplate = document.querySelector("#card-template").content.querySelector(".elements__card");
-    initialCards.forEach((item)=>{
-    const cardPropsObject = {
-      name:item.name,
-      link:item.link,
-      cardTemplate: cardTemplate
-    };
-    listContainer.append(createNewElementsCard(cardPropsObject));
- });
- listPageSection.append(listContainer);
-};
+    const cardImage = cardElement.querySelector('.elements__image');
+    const cardTitle = cardElement.querySelector('.elements__card-text');
 
-cardsStack({initialCards: initialCards});
+    cardImage.style.backgroundImage = `url(${card.link})` // = 'url('+ card.link ');';``
+    cardTitle.textContent = card.name;
+
+    elementsList.append(cardElement);
+  // createa card element
+  // append - prepend that card - elements__cards - into elements__card
+
+});
+
+
 
 //ADD CARDS FORM //
 const addCards = document.forms.addCards;
-const addCardPopUp = document.querySelector(".popup.popup_type_add_card");
-const addButton = document.querySelector(".add-button");
+const addCardPopUp = document.querySelector('.popup.popup_type_add_card');
+const addButton = document.querySelector('.add-button');
 const createButton = document.querySelector('.popup__save');
 const deleteButton = document.querySelector('.elements__button-delete');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
@@ -89,22 +71,16 @@ function closeAddUp() {
 }
 
  function addCard (event){
-  createNewElementsCard ((simplyAdd) => {
-    inputTitle.textContent = localTitle;
-    inputLink.textContent = localLink;
-    return simplyAdd;
-    });
 
-   //create button should open the new card here
-    event.preventDefault();
     addCards.classList.remove('popup_open');
-    listContainer.prepend(cardElement);
+
  };
 
 function removeCard (event) {
-  // deletebutton should delete the card
-  // need to find the correct removal tag for in ();
-listContainer.remove(cardElement);
+initialCards.forEach(card => {
+  card.remove();
+})
+//listContainer.remove(cardElement);
 };
 
   addButton.addEventListener('click', addUpFormLoad);
