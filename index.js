@@ -35,10 +35,11 @@ function formSubmitHandle(event) {
 editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formSubmitHandle);
 closeButton.addEventListener('click', closePopup);
-//________________________________________________________________
+
   ///////////
  // CARDS //
 ///////////
+
 const formCards = document.querySelector('.popup_form_cards');
 
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
@@ -48,8 +49,8 @@ const addButton = document.querySelector('.add-button');
 const previewButtonClose = document.querySelector('.popup__close.popup__close_preview');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
 const createButton = document.querySelector('.popup__save.popup_type_addup');
-let inputTitle = formCards.querySelector('.popup__input_type_title');
-let inputImage = formCards.querySelector('.popup__input_type_link');
+let inputTitle = document.querySelector('.popup__input_type_title');
+let inputImage = document.querySelector('.popup__input_type_link');
 // Wrappers_________________________________________________________________________
 const elementsList = document.querySelector('.elements__cards');
 // Functions________________________________________________________________________
@@ -115,7 +116,9 @@ function toggleFormImage() {
 }
 const clickImagePreview = card => {
   const popupImage = previewImage.querySelector('.popup__image');
+  const popupTitle = previewImage.querySelector('.popup__subtitle');
   popupImage.src = card.link;
+  popupTitle.textContent = card.name;
   toggleFormImage(previewImage);
 };
 
