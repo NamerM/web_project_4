@@ -40,7 +40,7 @@ closeButton.addEventListener('click', closePopup);
  // CARDS //
 ///////////
 
-const formCards = document.querySelector('.popup_form_cards');
+const formCards = document.querySelector('.popup__form_cards');
 
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
 const previewImage = document.querySelector('.popup_type-preview');
@@ -48,7 +48,7 @@ const addCards = document.querySelector('.popup_type_add-card'); //const addCard
 const addButton = document.querySelector('.add-button');
 const previewButtonClose = document.querySelector('.popup__close.popup__close_preview');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
-const createButton = document.querySelector('.popup__save.popup_type_addup');
+const createButton = document.querySelector('.popup__save_addup');
 let inputTitle = document.querySelector('.popup__input_type_title');
 let inputImage = document.querySelector('.popup__input_type_link');
 // Wrappers
