@@ -105,8 +105,8 @@ formCards.addEventListener('submit', (evt) => {
       link: inputImage.value,
   };
   renderCard(createCardElement(card), elementsList);
-  toggleForm();
   evt.preventDefault();
+  toggleForm();
   formCards.reset();
 });
 

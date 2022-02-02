@@ -27,7 +27,7 @@
     <div class="popup__square">
       <form name="addCards" class="popup__form popup_form_cards">
         <h1 class="popup__title">New Place</h1>
-        <input class="popup__input popup__input_type_name" type="text" placeholder="Title" id="Title" minlength="1" maxlength="30" required>
+        <input class="popup__input popup__input_type_title" type="text" placeholder="Title" id="Title" minlength="1" maxlength="30" required>
         <input class="popup__input popup__input_type_link" type="url" placeholder="Link"  id="Image Link" required> <!-- pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"-->
         <button type='submit' class="popup__save popup_type_addup">Create</button>
         <button type='button' class='popup__close popup__close_add'></button>
@@ -67,9 +67,10 @@
     <footer class="footer"><p class="footer__text">© 2021 Around The U.S.</p></footer>
     <template id="card-template">
       <li class="elements__card">
-        <div class="elements__image" style="background-image: ;">
-          <button class="elements__button-delete" type="button" ></button>
-        </div>
+        <img class="elements__image" style="background-image: ;"/>
+        <button class="elements__button_delete" type="button">
+           <!-- <img src="./images/deletebutton.svg" class="elements__button_delete" />-->
+        </button>
         <div class="elements__handle">
           <h2 class="elements__card-text"></h2>
           <button class="elements__button-like" type="button"></button>
