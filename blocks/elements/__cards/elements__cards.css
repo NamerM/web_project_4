@@ -13,7 +13,7 @@
 
   @media screen and (max-width: 620px) {
     .elements__cards{
-      margin: 0px auto ;
+      margin: 0px auto;
       grid-template-columns: repeat(2, auto);
       grid-template-rows: repeat(3, auto);
       max-width: 600px;
