@@ -39,20 +39,23 @@ closeButton.addEventListener('click', closePopup);
   ///////////
  // CARDS //
 ///////////
+const formCards = document.querySelector('.popup_form_cards');
 
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
 const previewImage = document.querySelector('.popup_type-preview');
 const addCards = document.querySelector('.popup_type_add-card'); //const addCardPopUp = document.querySelector('.popup.popup_type_add-card');
 const addButton = document.querySelector('.add-button');
 const previewButtonClose = document.querySelector('.popup__close.popup__close_preview');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
 const createButton = document.querySelector('.popup__save.popup_type_addup');
+let inputTitle = formCards.querySelector('.popup__input_type_title');
+let inputImage = formCards.querySelector('.popup__input_type_link');
 // Wrappers_________________________________________________________________________
 const elementsList = document.querySelector('.elements__cards');
 // Functions________________________________________________________________________
 function createCardElement(card) {
-  const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
+  //const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
   const cardElement = cardTemplate.cloneNode(true);
-
   const cardImage = cardElement.querySelector('.elements__image');
   const cardTitle = cardElement.querySelector('.elements__card-text');
   const likeButton = cardElement.querySelector('.elements__button-like');
@@ -73,18 +76,22 @@ function createCardElement(card) {
 
 
   deleteButton.addEventListener('click', () => {
+    cardImage.remove();
     cardElement.remove();
-    //popupImage.reset();    //popupImage event click needs to be reset//
+     //popupImage event click needs to be reset//
   });
 
    return cardElement;
  };
 
  function renderCard(card, wrapper) {
-   wrapper.append(createCardElement(card));
+   wrapper.append(card); // paranthesis createCardElement removed
  };
 
-initialCards.forEach(card => renderCard(card, elementsList));
+initialCards.forEach(card => {
+  const newCard = createCardElement(card);
+  renderCard(newCard, elementsList);
+});
 
 function toggleForm() {
   addCards.classList.toggle('popup_open');
@@ -92,15 +99,15 @@ function toggleForm() {
 
 
 
-createButton.addEventListener('submit', (evt) => {
+formCards.addEventListener('submit', (evt) => {
   const card = {
-      name: cardTitle.value,
-      link: cardImage.value,
+      name: inputTitle.value,
+      link: inputImage.value,
   };
-  renderCard(createCardElement(card, elementsList));
+  renderCard(createCardElement(card), elementsList);
   toggleForm();
   evt.preventDefault();
-  createButton.reset();
+  formCards.reset();
 });
 
 function toggleFormImage() {
