@@ -23,12 +23,12 @@
     </div>
   </section>
   <!--Addup popup form-->
-  <section class="popup popup_type_add-card" id="popup-template">
+  <section class="popup popup_type_add-card" id="popup-template-form">
     <div class="popup__square">
       <form name="addCards" class="popup__form popup_form_cards">
         <h1 class="popup__title">New Place</h1>
         <input class="popup__input popup__input_type_title" type="text" placeholder="Title" id="Title" minlength="1" maxlength="30" required>
-        <input class="popup__input popup__input_type_link" type="url" placeholder="Link"  id="Image Link" required> <!-- pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"-->
+        <input class="popup__input popup__input_type_link" type="url" placeholder="Link"  id="ImageLink" required> <!-- pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"-->
         <button type='submit' class="popup__save popup_type_addup">Create</button>
         <button type='button' class='popup__close popup__close_add'></button>
       </form>
@@ -38,7 +38,7 @@
   <section class="popup popup_type-preview">
     <div class="popup__square popup__square_preview">
       <button type='button' class='popup__close popup__close_preview'></button>
-      <img class="popup__image" src="" alt="">
+      <img class="popup__image" src="_" alt="">
       <p class="popup__subtitle"></p>
     </div>
   </section>
@@ -68,8 +68,8 @@
     <footer class="footer"><p class="footer__text">© 2021 Around The U.S.</p></footer>
     <template id="card-template">
       <li class="elements__card">
-        <button class="button" type="button"><img src="./images/deletebutton.svg" class="elements__button-delete" alt="Delete Card Button"></button>
-        <img class="elements__image" src=" " alt=" " />
+        <button class="elements__button-delete" type="button"></button>
+        <img class="elements__image" style="background-image: ;"/>
         <div class="elements__handle">
           <h2 class="elements__card-text"></h2>
           <button class="elements__button-like" type="button"></button>
