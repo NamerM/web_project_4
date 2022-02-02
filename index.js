@@ -39,46 +39,42 @@ closeButton.addEventListener('click', closePopup);
   ///////////
  // CARDS //
 ///////////
-const addCards = document.querySelector('.popup_type_add-card') //const addCardPopUp = document.querySelector('.popup.popup_type_add-card');
 
-//buttons and DOM elements
+const previewImage = document.querySelector('.popup_type-preview');
+const addCards = document.querySelector('.popup_type_add-card'); //const addCardPopUp = document.querySelector('.popup.popup_type_add-card');
 const addButton = document.querySelector('.add-button');
+const previewButtonClose = document.querySelector('.popup__close.popup__close_preview');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
 const createButton = document.querySelector('.popup__save.popup_type_addup');
-let inputTitle = addCards.querySelector('.popup.popup__input_type_name');
-let inputLink = addCards.querySelector('.popup.popup__input_type_link');
-// Wrappers
+// Wrappers_________________________________________________________________________
 const elementsList = document.querySelector('.elements__cards');
-
-//functions - cards
+// Functions________________________________________________________________________
 function createCardElement(card) {
-    const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
-    const cardElement = cardTemplate.cloneNode(true);
+  const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
+  const cardElement = cardTemplate.cloneNode(true);
 
-    const cardImage = cardElement.querySelector('.elements__image');
-    const cardTitle = cardElement.querySelector('.elements__card-text');
-    const likeButton = cardElement.querySelector('.elements__button-like');
-    const deleteButton = cardElement.querySelector('.elements__button-delete');
+  const cardImage = cardElement.querySelector('.elements__image');
+  const cardTitle = cardElement.querySelector('.elements__card-text');
+  const likeButton = cardElement.querySelector('.elements__button-like');
+  const deleteButton = cardElement.querySelector('.elements__button-delete');
 
-    cardImage.style.backgroundImage = `url(${card.link})` // = 'url('+ card.link + ');';``
-    cardTitle.textContent = card.name;
+  cardImage.style.backgroundImage = `url(${card.link})` // = 'url('+ card.link + ');';``
+  cardTitle.textContent = card.name;
 
-    cardImage.addEventListener('click', () => {
-      // handle image click
-    });
+  cardImage.addEventListener('click', () => clickImagePreview(card));
 
-    likeButton.addEventListener('click', (evt) => {
-      const likeActive = evt.target;
-      likeActive.classList.toggle('elements__button-like_active');
+  likeButton.addEventListener('click', (evt) => {
+    const likeActive = evt.target;
+    likeActive.classList.toggle('elements__button-like_active');
       //const likeButton = cardElement.querySelector('.elements__button-like');
       //let source = '../../../images/blackfillheart';
       //likeButton.style.backgroundImage = 'url('+ source + ');';   Question: How could I make it work with this?
-    });
+  });
 
 
-    deleteButton.addEventListener('click', () => {
-      cardElement.remove();
-    });
+  deleteButton.addEventListener('click', () => {
+    cardElement.remove();
+  });
 
    return cardElement;
  };
@@ -89,8 +85,13 @@ function createCardElement(card) {
 
 initialCards.forEach(card => renderCard(card, elementsList));
 
+function toggleForm() {
+  addCards.classList.toggle('popup_open');
+}
 
-createButton.addEventListener("submit", (evt) => {
+
+
+createButton.addEventListener('submit', (evt) => {
   const card = {
       name: cardTitle.value,
       link: cardImage.value,
@@ -101,17 +102,15 @@ createButton.addEventListener("submit", (evt) => {
   createButton.reset();
 });
 
-
-
- function toggleForm() {
-  addCards.classList.toggle('popup_open');
+function toggleFormImage() {
+  previewImage.classList.toggle('popup_open');
 }
+const clickImagePreview = card => {
+  const popupImage = previewImage.querySelector('.popup__image');
+  popupImage.src = card.link;
+  toggleFormImage(previewImage);
+};
 
+previewButtonClose.addEventListener('click', toggleFormImage);
 addButton.addEventListener('click', toggleForm);
 buttonclose.addEventListener('click', toggleForm);
-
- //function addCard (event){
-    // card.name  & card.link should be added from form.
- //   addCard.classList.remove('popup_open');
- //};
-

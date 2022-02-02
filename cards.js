@@ -1,26 +1,26 @@
 const initialCards = [
   {
     name: "Yosemite Valley",
-    link: "https://namerm.github.io/web_project_4/images/card-image-yosemite.png",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
   },
   {
     name: "Lake Louise",
-    link: "https://namerm.github.io/web_project_4/images/card-image-lake-loise.png",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
   },
   {
     name: "Bald Mountains",
-    link: "https://namerm.github.io/web_project_4/images/card-image-bald-mountains.png",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
   },
   {
     name: "Latemar",
-    link: "https://namerm.github.io/web_project_4/images/card-image-latemar.png",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
   },
   {
     name: "Vanoise National Park",
-    link: "https://namerm.github.io/web_project_4/images/card-image-vanoise-nation.png",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
   },
   {
     name: "Lago di Braies",
-    link: "https://namerm.github.io/web_project_4/images/card-image-lago-di-braies.png",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
   }
-  ];
+];
