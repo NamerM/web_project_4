@@ -1,18 +1,19 @@
-.elements__button_delete {
+.elements__button-delete {
   background-image: url('../../../images/deletebutton.svg');
   background-repeat: no-repeat;
   background-size: contain;
+  border: 0px;
   width: 18px;
   height: 19px;
-  /*margin-top: 18px;
-  margin-right: 16px;*/
   position: absolute;
     right: 16px;
-    top: 18px;
+    top: 18px;*/
   background-color: transparent;
   transition: opacity linear 0.45s;
   /*flex-direction: row;
   justify-self: self-end;*/
+  /*margin-top: 18px;
+  margin-left: 249px;*/
 }
 
 .elements__button-delete:hover {
