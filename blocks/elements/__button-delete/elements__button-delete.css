@@ -1,14 +1,17 @@
 .elements__button-delete {
   background-image: url('../../../images/deletebutton.svg');
   background-repeat: no-repeat;
-  width: 21px;
+  background-size: contain;
+  width: 18px;
   height: 19px;
   border: 0px;
+  /*position: absolute;
+  top: 23px;
+  right: 16px;*/
   background-color: transparent;
   transition: opacity linear 0.35s;
-  display: flex;
-  /*flex-direction: row;
-  justify-self: self-end;*/
+  flex-direction: row;
+  justify-self: self-end;
   margin-left: 250px;
   margin-top: 23.8px;
   margin-right: 16px;

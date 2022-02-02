@@ -74,6 +74,7 @@ function createCardElement(card) {
 
   deleteButton.addEventListener('click', () => {
     cardElement.remove();
+    //popupImage.reset();    //popupImage event click needs to be reset//
   });
 
    return cardElement;
