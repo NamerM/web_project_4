@@ -12,6 +12,7 @@
   border: 2px solid #FFFFFF;
   box-sizing: border-box;
   border-radius: 2px;
+  transition: opacity 0.8s linear 0.05s;
 }
 
 .add-button:hover {

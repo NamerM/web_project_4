@@ -10,6 +10,8 @@
   background-repeat: no-repeat;
   border: 0;
   /*transform: rotate(-45deg);*/
+  transition: opacity 0.8s linear 0.15s;
+
 }
 
 .popup__close:hover {

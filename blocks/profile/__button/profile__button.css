@@ -11,6 +11,7 @@
   background-repeat: no-repeat;
   background-position: center;
   margin-left: 16px;
+  transition: opacity 0.8s linear 0.5s;
 }
 
 .profile__button:hover {

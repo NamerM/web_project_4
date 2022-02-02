@@ -51,7 +51,7 @@ const buttonclose = document.querySelector('.popup__close.popup__close_add');
 const createButton = document.querySelector('.popup__save.popup_type_addup');
 let inputTitle = document.querySelector('.popup__input_type_title');
 let inputImage = document.querySelector('.popup__input_type_link');
-// Wrappers_________________________________________________________________________
+// Wrappers
 const elementsList = document.querySelector('.elements__cards');
 // Functions________________________________________________________________________
 function createCardElement(card) {
@@ -62,7 +62,8 @@ function createCardElement(card) {
   const likeButton = cardElement.querySelector('.elements__button-like');
   const deleteButton = cardElement.querySelector('.elements__button-delete');
 
-  cardImage.style.backgroundImage = `url(${card.link})` // = 'url('+ card.link + ');';``
+  cardImage.src = card.link;  // = 'url('+ card.link + ');';``
+  cardImage.alt = card.name;
   cardTitle.textContent = card.name;
 
   cardImage.addEventListener('click', () => clickImagePreview(card));
@@ -70,16 +71,11 @@ function createCardElement(card) {
   likeButton.addEventListener('click', (evt) => {
     const likeActive = evt.target;
     likeActive.classList.toggle('elements__button-like_active');
-      //const likeButton = cardElement.querySelector('.elements__button-like');
-      //let source = '../../../images/blackfillheart';
-      //likeButton.style.backgroundImage = 'url('+ source + ');';   Question: How could I make it work with this?
   });
 
 
   deleteButton.addEventListener('click', () => {
     cardImage.remove();
-    cardElement.remove();
-     //popupImage event click needs to be reset//
   });
 
    return cardElement;
@@ -97,8 +93,6 @@ initialCards.forEach(card => {
 function toggleForm() {
   addCards.classList.toggle('popup_open');
 }
-
-
 
 formCards.addEventListener('submit', (evt) => {
   const card = {
