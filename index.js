@@ -76,7 +76,7 @@ function createCardElement(card) {
 
   deleteButton.addEventListener('click', () => {
     cardImage.remove(); //Clicking on "delete" button delete the card image only, not the whole card element.
-    cardElement.remove(); // cardImage line is not needed?
+    cardElement.remove();
   });
 
    return cardElement;
