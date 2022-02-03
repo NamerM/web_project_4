@@ -75,14 +75,15 @@ function createCardElement(card) {
 
 
   deleteButton.addEventListener('click', () => {
-    cardImage.remove();
+    cardImage.remove(); //Clicking on "delete" button delete the card image only, not the whole card element.
+    cardElement.remove(); // cardImage line is not needed?
   });
 
    return cardElement;
  };
 
  function renderCard(card, wrapper) {
-   wrapper.append(card); // paranthesis createCardElement removed
+   wrapper.prepend(card); // paranthesis createCardElement removed
  };
 
 initialCards.forEach(card => {
