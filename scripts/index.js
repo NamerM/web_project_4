@@ -94,10 +94,6 @@ initialCards.forEach(card => {
   renderCard(newCard, elementsList);
 });
 
-//function toggleForm() {
-// addCards.classList.toggle('popup_open');
-//}
-
 formCards.addEventListener('submit', (evt) => {
   const card = {
       name: inputTitle.value,

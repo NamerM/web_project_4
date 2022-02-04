@@ -1,5 +1,5 @@
 .elements__card {
-  /*all: unset;*/
+
   display: flex;
   flex-direction: column;
   border-radius: 10px 10px 10px 10px;
@@ -9,6 +9,6 @@
   position: relative;
   }
 
-  .elements__card{
+  .elements__card:hover{
     cursor: pointer;
   }
