@@ -1,45 +1,45 @@
   ///////////////////
  // EDIT PROFILE  //
 ///////////////////
-const profile = document.querySelector(".profile");
+//const profile = document.querySelector(".profile");
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
 
-const profileForm = document.forms.profileForm;
-const profilePopup = document.querySelector('.popup.popup_type_profile');
+
+const profileForm = document.forms.profileForm; //querySelector('.popup_form');//
+const profilePopup = document.querySelector('.popup_type_profile'); //.popup bastaki silindi
 const editButton = document.querySelector (".profile__button");
 const saveButton = profilePopup.querySelector('.popup__save');
 const closeButton = profilePopup.querySelector('.popup__close');
 let inputName = profilePopup.querySelector('.popup__input_type_name');
 let inputProfession = profilePopup.querySelector('.popup__input_type_profession');
 
-//functions
-function formLoadUp () {
-  //openPopup();
-  profilePopup.classList.toggle('popup_open');
-  inputName.value = profileName.textContent;
-  inputProfession.value = profileProfession.textContent;
+//functions  openPopup & closePopup universal functions
+function openPopup (popup) {
+  popup.classList.add('popup_open');
+ }
+
+ function closePopup (popup) {
+  popup.classList.remove('popup_open');
 }
 
-//function openPopup (popup) {
-//  popup.classList.add('popup_open');
-//}
-function closePopup (popup) {
-  profilePopup.classList.remove('popup_open');
-  //popup.classList.remove('popup_open');
+function formLoadUp () {
+  openPopup(profilePopup);
+  inputName.value = profileName.textContent;
+  inputProfession.value = profileProfession.textContent;
 }
 
 function formSubmitHandle(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  profilePopup.addEventListener('submit', closePopup);
+  profilePopup.addEventListener('submit', function(){closePopup(profilePopup)});
 }
 //Event handlers
 editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formSubmitHandle);
-closeButton.addEventListener('click', closePopup);
+closeButton.addEventListener('click', function(){closePopup(profilePopup)} );
 
   ///////////
  // CARDS //
@@ -94,9 +94,9 @@ initialCards.forEach(card => {
   renderCard(newCard, elementsList);
 });
 
-function toggleForm() {
-  addCards.classList.toggle('popup_open');
-}
+//function toggleForm() {
+// addCards.classList.toggle('popup_open');
+//}
 
 formCards.addEventListener('submit', (evt) => {
   const card = {
@@ -105,21 +105,13 @@ formCards.addEventListener('submit', (evt) => {
   };
   renderCard(createCardElement(card), elementsList);
   evt.preventDefault();
-  toggleForm();
+  closePopup(addCards);
   formCards.reset();
 });
 
 
-function openImagePreview() {
-  previewImage.classList.add('popup_open');
-}
-
-function closeImagePreview() {
-  previewImage.classList.remove('popup_open');
-}
-
 const clickImagePreview = card => {
-  openImagePreview();
+  openPopup(previewImage);
   const popupImage = previewImage.querySelector('.popup__image');
   const popupTitle = previewImage.querySelector('.popup__subtitle');
   popupImage.src = card.link;
@@ -128,7 +120,6 @@ const clickImagePreview = card => {
 
 };
 
-
-previewButtonClose.addEventListener('click', closeImagePreview);
-addButton.addEventListener('click', toggleForm);
-buttonclose.addEventListener('click', toggleForm);
+previewButtonClose.addEventListener('click', function() {closePopup(previewImage)});
+addButton.addEventListener('click', function(){openPopup(addCards)} );
+buttonclose.addEventListener('click', function(){closePopup(addCards)});
