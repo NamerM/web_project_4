@@ -26,10 +26,10 @@ function closePopup () {
 }
 
 function formSubmitHandle(event) {
+  event.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  event.preventDefault();
-  profilePopup.classList.remove('popup_open');
+  profilePopup.addEventListener('submit', closePopup);
 }
 //Event handlers
 editButton.addEventListener('click', formLoadUp);
@@ -41,8 +41,8 @@ closeButton.addEventListener('click', closePopup);
 ///////////
 
 const formCards = document.querySelector('.popup__form_cards');
-
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
+const cardTemplateBase = document.querySelector('#card-template').content;
+const cardTemplate = cardTemplateBase.querySelector('.elements__card');
 const previewImage = document.querySelector('.popup_type-preview');
 const addCards = document.querySelector('.popup_type_add-card'); //const addCardPopUp = document.querySelector('.popup.popup_type_add-card');
 const addButton = document.querySelector('.add-button');
@@ -55,14 +55,13 @@ let inputImage = document.querySelector('.popup__input_type_link');
 const elementsList = document.querySelector('.elements__cards');
 // Functions________________________________________________________________________
 function createCardElement(card) {
-  //const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__card');
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.elements__image');
   const cardTitle = cardElement.querySelector('.elements__card-text');
   const likeButton = cardElement.querySelector('.elements__button-like');
   const deleteButton = cardElement.querySelector('.elements__button-delete');
 
-  cardImage.src = card.link;  // = 'url('+ card.link + ');';``
+  cardImage.src = card.link;
   cardImage.alt = card.name;
   cardTitle.textContent = card.name;
 
@@ -75,7 +74,6 @@ function createCardElement(card) {
 
 
   deleteButton.addEventListener('click', () => {
-    cardImage.remove(); //Clicking on "delete" button delete the card image only, not the whole card element.
     cardElement.remove();
   });
 
@@ -83,7 +81,7 @@ function createCardElement(card) {
  };
 
  function renderCard(card, wrapper) {
-   wrapper.prepend(card); // paranthesis createCardElement removed
+   wrapper.prepend(card);
  };
 
 initialCards.forEach(card => {
@@ -113,6 +111,7 @@ const clickImagePreview = card => {
   const popupImage = previewImage.querySelector('.popup__image');
   const popupTitle = previewImage.querySelector('.popup__subtitle');
   popupImage.src = card.link;
+  popupImage.alt = card.name;
   popupTitle.textContent = card.name;
   toggleFormImage(previewImage);
 };
