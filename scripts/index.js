@@ -16,13 +16,18 @@ let inputProfession = profilePopup.querySelector('.popup__input_type_profession'
 
 //functions
 function formLoadUp () {
+  //openPopup();
   profilePopup.classList.toggle('popup_open');
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
 }
 
-function closePopup () {
+//function openPopup (popup) {
+//  popup.classList.add('popup_open');
+//}
+function closePopup (popup) {
   profilePopup.classList.remove('popup_open');
+  //popup.classList.remove('popup_open');
 }
 
 function formSubmitHandle(event) {
