@@ -66,17 +66,17 @@ function createCardElement(card) {
   const likeButton = cardElement.querySelector('.elements__button-like');
   const deleteButton = cardElement.querySelector('.elements__button-delete');
 
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
+  const {name, link} = card; //destructuring assignment//
+  cardImage.src = link;
+  cardImage.alt = name;
   cardTitle.textContent = card.name;
 
-  cardImage.addEventListener('click', () => clickImagePreview(card));
+  cardImage.addEventListener('click', () => openImagePreview(card));
 
   likeButton.addEventListener('click', (evt) => {
     const likeActive = evt.target;
     likeActive.classList.toggle('elements__button-like_active');
   });
-
 
   deleteButton.addEventListener('click', () => {
     cardElement.remove();
@@ -84,6 +84,7 @@ function createCardElement(card) {
 
    return cardElement;
  };
+
 
  function renderCard(card, wrapper) {
    wrapper.prepend(card);
@@ -106,7 +107,7 @@ formCards.addEventListener('submit', (evt) => {
 });
 
 
-const clickImagePreview = card => {
+const openImagePreview = card => {
   openPopup(previewImage);
   const popupImage = previewImage.querySelector('.popup__image');
   const popupTitle = previewImage.querySelector('.popup__subtitle');
@@ -116,6 +117,6 @@ const clickImagePreview = card => {
 
 };
 
-previewButtonClose.addEventListener('click', function() {closePopup(previewImage)});
-addButton.addEventListener('click', function(){openPopup(addCards)} );
-buttonclose.addEventListener('click', function(){closePopup(addCards)});
+previewButtonClose.addEventListener('click', () => closePopup(previewImage));
+addButton.addEventListener('click', () => openPopup(addCards));
+buttonclose.addEventListener('click', () => closePopup(addCards));
