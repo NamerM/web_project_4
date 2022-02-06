@@ -34,12 +34,13 @@ function formSubmitHandle(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
-  profilePopup.addEventListener('submit', function(){closePopup(profilePopup)});
+  closePopup(profilePopup);
+  profileForm.reset();
 }
 //Event handlers
 editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formSubmitHandle);
-closeButton.addEventListener('click', function(){closePopup(profilePopup)} );
+closeButton.addEventListener('click', () => closePopup(profilePopup) );
 
   ///////////
  // CARDS //
