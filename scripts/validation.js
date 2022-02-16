@@ -1,25 +1,41 @@
 //// FORM VALIDATION PART ///
 
-//const formElement = document.querySelector(".popup");
-//const formInput = form.querySelector(".pop-up__input");
+
 //const formError = form.querySelector(`.${formInput.id}-error`);
 
-//const showInputError = (element) => {
-//element.classList.add("form__input_type_eror");
-//}
+const checkInputValidity = (input) => {
 
+}
 
-//const hideInputError = (element) => {
-//element.classList.add("form__input_type_error");
-//};
+const setEventListeners = (formElement, settings) => {
+  const inputs = Array.from(formElement.querySelectorAll(settings.inputSelector)); // [...formElement.querySelectorAll(settings.inputSelector)]
+    inputs.forEach( (input) => {
+      input.addEventListener('input', (evt) => {
+          console.log(evt);
+          //check validity
+          checkInputValidity(input, settings);
+          // error msg and class
+          // toggle submit button
+    });
+  })
+};
 
-const enableValidation = (settings) => {};
-console.log(settings);
+  const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', evt => evt.preventDefault());
+    setEventListeners(formElement, settings);
+  });
+};
+
 enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
+  submitButtonSelector: ".popup__save",
+  //popup__submit , changed it in according to css I have //
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
 });
+
+//enableValidation();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta http-equiv="X-UA-Compatible" window.top="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Around The U.S.</title>
   <link rel="stylesheet" href="./pages/index.css"/>
@@ -16,10 +16,13 @@
       <form name="profileForm" class="popup__form popup__form_edit" novalidate>
         <h1 class="popup__title">Edit Profile</h1>
           <label class="popup__field"></label>
-           <input class="popup__input popup__input_type_name" type="text" id="name-input">
+           <input class="popup__input popup__input_type_name" type="text" placeholder="Name" id="name-input" minlength="2" maxlength="40" required>
            <span class="popup__input_error name-input-error"> </span>
           </label>
-        <input class="popup__input popup__input_type_profession" type="text" id="profession-input">
+          <label class="popup__title">
+            <input class="popup__input popup__input_type_profession" type="text" placeholder="Profession" id="profession-input" minlength="2" maxlength="200" required>
+            <span class="popup__input_error name-input-error"> </span>
+          </label>
         <button type='submit' class="popup__save">Save</button>
         <button type='button' class='popup__close'></button>
       </form>
