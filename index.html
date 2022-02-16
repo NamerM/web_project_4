@@ -13,10 +13,13 @@
 <body class="page">
   <section class="popup popup_type_profile" id="popup-template">
     <div class="popup__square">
-      <form name="profileForm" class="popup__form popup__form_edit">
+      <form name="profileForm" class="popup__form popup__form_edit" novalidate>
         <h1 class="popup__title">Edit Profile</h1>
-        <input class="popup__input popup__input_type_name" type="text" id="Name" >
-        <input class="popup__input popup__input_type_profession" type="text" id="Profession">
+          <label class="popup__field"></label>
+           <input class="popup__input popup__input_type_name" type="text" id="name-input">
+           <span class="popup__input_error name-input-error"> </span>
+          </label>
+        <input class="popup__input popup__input_type_profession" type="text" id="profession-input">
         <button type='submit' class="popup__save">Save</button>
         <button type='button' class='popup__close'></button>
       </form>
@@ -76,6 +79,7 @@
       </li>
     </template>
   </div>
+  <script src="./scripts/validation.js" defer></script>
   <script src="./scripts/cards.js" defer></script>
   <script src="./scripts/index.js" defer></script>
 </body>
