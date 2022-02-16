@@ -9,6 +9,6 @@
 }
 
 
-.popup__input-type_error_active {
+.popup__input_type_error_active {
   opacity: 1;
 }
