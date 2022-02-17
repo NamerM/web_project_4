@@ -56,14 +56,18 @@ keyHandler();
 
 //Closing the popup windows by click
 //const popupList = document.querySelector('.popup');
-const popup = document.querySelector('.popup');
-popup.addEventListener('click', (evt) => {
-  if(evt.target.matches('.popup')) {
-      closePopup(profilePopup);
+const popupList = document.querySelectorAll('.popup');
+
+popupList.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if(evt.target.matches('.popup')) {
+       closePopup(profilePopup);
       closePopup(addCards);
       closePopup(previewImage);
-  }
+    }
+  });
 });
+
 
 
   ///////////
