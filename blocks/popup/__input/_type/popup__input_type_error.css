@@ -6,4 +6,9 @@
   line-height: 15px;
   color: #FF0000;
   opacity: 1;
+  text-decoration: none ;
  }
+
+ /*.popup__input_type_error_active {
+   opacity: 1;
+ }*/

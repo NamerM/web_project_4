@@ -4,25 +4,25 @@
 
 const showInputError = (input, formElement, {errorClass} ) => {
   const errorElement = formElement.querySelector("#" + input.id + "-error");
-  // error msg and class
   console.log(input.validationMessage);
   input.classList.add(errorClass);
   errorElement.textContent = input.validationMessage;
   errorElement.classList.add(inputErrorClass);
+
 };
 
 const hideInputError = (input, formElement, {errorClass} ) => {
   const errorElement = formElement.querySelector("#" + input.id + "-error");
-  // error msg and class
-  errorElement.textcontent = "";
-  errorElement.classList.remove(errorClass);
+  input.classList.remove(errorClass);
+  errorElement.textContent = "";
+  errorElement.classList.remove(inputErrorClass);
 };
 
 const checkInputValidity = (formElement, input, settings) => {
   console.log(input.validity.valid);
   if(input.validity.valid) {
     console.log('valid');
-    hideInputError();
+    hideInputError(input, formElement, settings);
   } else {
     showInputError(input, formElement, settings);
   //console.log('validity', input.validity.valid);
