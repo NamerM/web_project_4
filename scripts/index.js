@@ -42,6 +42,23 @@ editButton.addEventListener('click', formLoadUp);
 profileForm.addEventListener('submit', formSubmitHandle);
 closeButton.addEventListener('click', () => closePopup(profilePopup) );
 
+//Closing the popup windows escape button//
+function keyHandler() {
+   document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(profilePopup);
+      closePopup(addCards);
+      closePopup(previewImage);
+    }
+   });
+  }
+keyHandler();
+
+//Closing the popup windows by click
+
+
+
+
   ///////////
  // CARDS //
 ///////////
