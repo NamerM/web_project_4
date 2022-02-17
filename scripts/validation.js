@@ -2,7 +2,7 @@
 
 //const formError = form.querySelector(`.${formInput.id}-error`);
 
-const showInputError = (input, formElement, {errorClass} ) => {
+const showInputError = (input, formElement, {errorClass, inputErrorClass} ) => {
   const errorElement = formElement.querySelector("#" + input.id + "-error");
   console.log(input.validationMessage);
   input.classList.add(errorClass);
@@ -11,7 +11,7 @@ const showInputError = (input, formElement, {errorClass} ) => {
 
 };
 
-const hideInputError = (input, formElement, {errorClass} ) => {
+const hideInputError = (input, formElement, {errorClass, inputErrorClass}) => {
   const errorElement = formElement.querySelector("#" + input.id + "-error");
   input.classList.remove(errorClass);
   errorElement.textContent = "";
@@ -30,15 +30,29 @@ const checkInputValidity = (formElement, input, settings) => {
   }
 };
 
+const hasValidInput = (inputList) =>
+  inputList.every(input => input.validity.valid === true);
+
+
+const toggleButton = (inputList, button, settings) => {
+  console.log("hasValid", hasValidInput(inputList));
+  if(hasValidInput(inputList)) {
+    button.disabled = false;
+  } else {
+    button.disabled = true;
+    button.classList.add("popup__save_disabled");
+  }
+};
+
 const setEventListeners = (formElement, settings) => {
-  const inputs = Array.from(formElement.querySelectorAll(settings.inputSelector)); // [...formElement.querySelectorAll(settings.inputSelector)]
-    inputs.forEach( (input) => {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector)); // [...formElement.querySelectorAll(settings.inputSelector)]
+  const submitButton = formElement.querySelector(settings.submitButtonSelector);
+
+    inputList.forEach( (input) => {
       input.addEventListener('input', (evt) => {
         console.log(evt);
-          //check validity
-        checkInputValidity(formElement, input, settings);
-
-          // toggle submit button
+        checkInputValidity(formElement, input, settings);//check validity
+        toggleButton(inputList, submitButton, settings); //toggle submit
     });
   })
 };
@@ -54,11 +68,9 @@ const setEventListeners = (formElement, settings) => {
 enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save",
-  //popup__submit , changed it in according to css I have //
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
+  submitButtonSelector: ".popup__save",   //popup__button , changed it in according to css I have //
+  inactiveButtonClass: ".popup__save_disabled",
+  inputErrorClass: "popup__input-error_open",
   errorClass: "popup__error_visible"
 });
 
-//enableValidation();

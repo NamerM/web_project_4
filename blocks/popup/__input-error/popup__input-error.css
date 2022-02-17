@@ -1,4 +1,4 @@
-.popup__input_type_error {
+.popup__input-error_open{
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -7,8 +7,8 @@
   color: #FF0000;
   opacity: 1;
   text-decoration: none ;
+  position: absolute;
+  top: 50%;
  }
 
- /*.popup__input_type_error_active {
-   opacity: 1;
- }*/
+

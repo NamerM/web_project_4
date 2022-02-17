@@ -15,10 +15,14 @@
     <div class="popup__square">
       <form name="profileForm" class="popup__form popup__form_edit" novalidate>
         <h1 class="popup__title">Edit Profile</h1>
+        <label class="popup__formfield">
         <input class="popup__input popup__input_type_name" type="text" placeholder="Name" id="name-input" minlength="2" maxlength="40" required>
-        <span id="name-input-error" class="popup__input_type_error"></span>
+        <span id="name-input-error" class="popup__input-error"></span>
+      </label>
+      <label class="popup__formfield">
         <input class="popup__input popup__input_type_profession" type="text" placeholder="Profession" id="profession-input" minlength="2" maxlength="200" required>
-        <span id="profession-input-error" class="popup__input_type_error"> </span>
+        <span id="profession-input-error" class="popup__input-error"> </span>
+      </label>
         <button type='submit' class="popup__save">Save</button>
         <button type='button' class='popup__close'></button>
       </form>
@@ -29,10 +33,14 @@
     <div class="popup__square">
       <form name="addCards" class="popup__form popup__form_cards">
         <h1 class="popup__title">New Place</h1>
-        <input class="popup__input popup__input_type_title" type="text" placeholder="Title" id="cardTitle-input" minlength="1" maxlength="30" required>
-        <span id="cardTitle-input-error" class="popup__input_type_error"></span>
-        <input class="popup__input popup__input_type_link" type="url" placeholder="Link"  id="cardImageLink-input" required> <!-- pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"-->
-        <span id="cardImageLink-input-error" class="popup__input_type_error"></span>
+        <label class="popup__formfield">
+          <input class="popup__input popup__input_type_title" type="text" placeholder="Title" id="cardTitle-input" minlength="1" maxlength="30" required>
+         <span id="cardTitle-input-error" class="popup__input-error"></span>
+        </label>
+        <label class="popup__formfield">
+          <input class="popup__input popup__input_type_link" type="url" placeholder="Link"  id="cardImageLink-input" required> <!-- pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"-->
+          <span id="cardImageLink-input-error" class="popup__input-error"></span>
+        </label>
         <button type='submit' class="popup__save popup__save_addup">Create</button>
         <button type='button' class='popup__close popup__close_add'></button>
       </form>
