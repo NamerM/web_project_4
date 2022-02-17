@@ -1,7 +1,7 @@
   ///////////////////
  // EDIT PROFILE  //
 ///////////////////
-//const profile = document.querySelector(".profile");
+
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
@@ -55,14 +55,21 @@ function keyHandler() {
 keyHandler();
 
 //Closing the popup windows by click
-
-
+//const popupList = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
+popup.addEventListener('click', (evt) => {
+  if(evt.target.matches('.popup')) {
+      closePopup(profilePopup);
+      closePopup(addCards);
+      closePopup(previewImage);
+  }
+});
 
 
   ///////////
  // CARDS //
 ///////////
-//const popup = document.querySelector('.popup');
+
 const formCards = document.querySelector('.popup__form_cards');
 const cardTemplateBase = document.querySelector('#card-template').content;
 const cardTemplate = cardTemplateBase.querySelector('.elements__card');
