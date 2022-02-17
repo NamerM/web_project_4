@@ -61,7 +61,7 @@ const popupList = document.querySelectorAll('.popup');
 popupList.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if(evt.target.matches('.popup')) {
-       closePopup(profilePopup);
+      closePopup(profilePopup);
       closePopup(addCards);
       closePopup(previewImage);
     }
