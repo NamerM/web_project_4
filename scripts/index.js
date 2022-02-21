@@ -20,10 +20,12 @@ const popupSelector = 'popup_open';
 //functions  openPopup & closePopup universal functions
 function openPopup (popup) {
   popup.classList.add(popupSelector);
+  handleKeyDown();
  }
 
  function closePopup (popup) {
   popup.classList.remove(popupSelector);
+  handleKeyDownCleaner();
 }
 
 function openProfilePopup () {
@@ -45,26 +47,28 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 closeButton.addEventListener('click', () => closePopup(profilePopup) );
 
 //Closing the popup windows escape button//
-function handleKeyDown() {
-   document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      const openedPopup = document.querySelector('popup_open')
-      closePopup(openedPopup);
-    }
-   });
+function pressEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector(`.${popupSelector}`);
+    closePopup(openedPopup);
   }
-handleKeyDown();
+}
+
+function handleKeyDown() {
+  document.addEventListener('keydown', pressEsc);
+}
+
+function handleKeyDownCleaner() {
+  document.removeEventListener('keydown', pressEsc);
+}
 
 //Closing the popup windows by click
 //const popupList = document.querySelector('.popup');
-
-
 popupList.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if(evt.target.matches('.popup')) {
-      closePopup(profilePopup);
-      closePopup(addCards);
-      closePopup(previewImage);
+      const openedPopup = document.querySelector(`.${popupSelector}`);
+      closePopup(openedPopup);
     }
   });
 });
@@ -84,8 +88,8 @@ const addButton = document.querySelector('.add-button');
 const previewButtonClose = document.querySelector('.popup__close.popup__close_preview');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
 const createButton = document.querySelector('.popup__save_addup');
-let inputTitle = document.querySelector('.popup__input_type_title');
-let inputImage = document.querySelector('.popup__input_type_link');
+const inputTitle = document.querySelector('.popup__input_type_title');
+const inputImage = document.querySelector('.popup__input_type_link');
 // Wrappers
 const elementsList = document.querySelector('.elements__cards');
 // Functions________________________________________________________________________
