@@ -6,57 +6,58 @@ const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
 
+const popupList = document.querySelectorAll('.popup');
 
 const profileForm = document.forms.profileForm; //querySelector('.popup_form');//
 const profilePopup = document.querySelector('.popup_type_profile'); //.popup bastaki silindi
 const editButton = document.querySelector (".profile__button");
 const saveButton = profilePopup.querySelector('.popup__save');
 const closeButton = profilePopup.querySelector('.popup__close');
-let inputName = profilePopup.querySelector('.popup__input_type_name');
-let inputProfession = profilePopup.querySelector('.popup__input_type_profession');
+const inputName = profilePopup.querySelector('.popup__input_type_name');
+const inputProfession = profilePopup.querySelector('.popup__input_type_profession');
+const popupSelector = 'popup_open';
 
 //functions  openPopup & closePopup universal functions
 function openPopup (popup) {
-  popup.classList.add('popup_open');
+  popup.classList.add(popupSelector);
  }
 
  function closePopup (popup) {
-  popup.classList.remove('popup_open');
+  popup.classList.remove(popupSelector);
 }
 
-function formLoadUp () {
+function openProfilePopup () {
   openPopup(profilePopup);
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
 }
 
-function formSubmitHandle(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
   closePopup(profilePopup);
-  profileForm.reset();
+  //profileForm.reset();
 }
 //Event handlers
-editButton.addEventListener('click', formLoadUp);
-profileForm.addEventListener('submit', formSubmitHandle);
+editButton.addEventListener('click', openProfilePopup);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 closeButton.addEventListener('click', () => closePopup(profilePopup) );
 
 //Closing the popup windows escape button//
-function keyHandler() {
+function handleKeyDown() {
    document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      closePopup(profilePopup);
-      closePopup(addCards);
-      closePopup(previewImage);
+      const openedPopup = document.querySelector('popup_open')
+      closePopup(openedPopup);
     }
    });
   }
-keyHandler();
+handleKeyDown();
 
 //Closing the popup windows by click
 //const popupList = document.querySelector('.popup');
-const popupList = document.querySelectorAll('.popup');
+
 
 popupList.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
