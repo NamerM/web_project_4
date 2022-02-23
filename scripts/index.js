@@ -20,12 +20,12 @@ const popupSelector = 'popup_open';
 //functions  openPopup & closePopup universal functions
 function openPopup (popup) {
   popup.classList.add(popupSelector);
-  handleKeyDown();
+  addKeyDownListener();
  }
 
  function closePopup (popup) {
   popup.classList.remove(popupSelector);
-  handleKeyDownCleaner();
+  removeKeyDownListener();
 }
 
 function openProfilePopup () {
@@ -39,7 +39,6 @@ function handleProfileFormSubmit(event) {
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
   closePopup(profilePopup);
-  //profileForm.reset();
 }
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
@@ -47,25 +46,25 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 closeButton.addEventListener('click', () => closePopup(profilePopup) );
 
 //Closing the popup windows escape button//
-function pressEsc(evt) {
+function handleKeyDown(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector(`.${popupSelector}`);
     closePopup(openedPopup);
   }
 }
 
-function handleKeyDown() {
-  document.addEventListener('keydown', pressEsc);
+function addKeyDownListener() {
+  document.addEventListener('keydown', handleKeyDown);
 }
 
-function handleKeyDownCleaner() {
-  document.removeEventListener('keydown', pressEsc);
+function removeKeyDownListener() {
+  document.removeEventListener('keydown', handleKeyDown);
 }
 
 //Closing the popup windows by click
 //const popupList = document.querySelector('.popup');
 popupList.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
+  popup.addEventListener('mousedown', (evt) => {
     if(evt.target.matches('.popup')) {
       const openedPopup = document.querySelector(`.${popupSelector}`);
       closePopup(openedPopup);
@@ -83,10 +82,10 @@ const formCards = document.querySelector('.popup__form_cards');
 const cardTemplateBase = document.querySelector('#card-template').content;
 const cardTemplate = cardTemplateBase.querySelector('.elements__card');
 const previewImage = document.querySelector('.popup_type-preview');
-const addCards = document.querySelector('.popup_type_add-card');
+const cardPopup = document.querySelector('.popup_type_add-card');
 const addButton = document.querySelector('.add-button');
 const previewButtonClose = document.querySelector('.popup__close.popup__close_preview');
-const buttonclose = document.querySelector('.popup__close.popup__close_add');
+const buttonClose = document.querySelector('.popup__close.popup__close_add');
 const inputTitle = document.querySelector('.popup__input_type_title');
 const inputImage = document.querySelector('.popup__input_type_link');
 // Wrappers
@@ -105,12 +104,15 @@ function createCardElement(card) {
   cardName.textContent = card.name;
 
   cardImage.addEventListener('click', () => openImagePreview(card));
-  likeButton.addEventListener('click', buttonActivate);
 
-  function buttonActivate(evt) {
-    const likeActive = evt.target;
-    likeActive.classList.toggle('elements__button-like_active');
-   }
+  function activateLikeButton (evt){
+  const likeButton = evt.target;
+  likeButton.classList.toggle('elements__button-like_active');
+  }
+
+  likeButton.addEventListener('click', activateLikeButton);
+
+
 
   deleteButton.addEventListener('click', () => {
     cardElement.remove();
@@ -119,9 +121,8 @@ function createCardElement(card) {
    return cardElement;
  };
 
-
- function renderCard(card, wrapper) {
-   wrapper.prepend(card);
+  function renderCard(card, wrapper) {
+    wrapper.prepend(card);
  };
 
 initialCards.forEach(card => {
@@ -136,7 +137,7 @@ formCards.addEventListener('submit', (evt) => {
   };
   renderCard(createCardElement(card), elementsList);
   evt.preventDefault();
-  closePopup(addCards);
+  closePopup(cardPopup);
   formCards.reset();
 });
 
@@ -152,6 +153,7 @@ const openImagePreview = card => {
 };
 
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
-addButton.addEventListener('click', () => openPopup(addCards));
-buttonclose.addEventListener('click', () => closePopup(addCards));
-
+addButton.addEventListener('click', () => openPopup(cardPopup));
+buttonClose.addEventListener('click', () => closePopup(cardPopup));
+// import { toggleButton } from './modules/validation';
+// toggleButton(closePopup);

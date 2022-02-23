@@ -1,6 +1,5 @@
 //// FORM VALIDATION PART ///
 
-
 const showInputError = (input, formElement, {errorClass, inputErrorClass} ) => {
   const errorElement = formElement.querySelector(`#${input.id}-error`);
   input.classList.add(errorClass);
@@ -31,14 +30,14 @@ const hasValidInput = (inputList) =>
 
 
   const toggleButton = (inputList, button, {inactiveButtonClass}) => {
-  if(hasValidInput(inputList)) {
-    button.disabled = false;
-    button.classList.remove(inactiveButtonClass);
-  } else {
-    button.disabled = true;
-    button.classList.add(inactiveButtonClass);
+    if(hasValidInput(inputList)) {
+      button.disabled = false;
+      button.classList.remove(inactiveButtonClass);
+    } else {
+      button.disabled = true;
+      button.classList.add(inactiveButtonClass);
+    }
   }
-}
 
 const setEventListeners = (formElement, settings) => {
   const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
@@ -46,7 +45,6 @@ const setEventListeners = (formElement, settings) => {
 
     inputList.forEach( (input) => {
       input.addEventListener('input', (evt) => {
-        console.log(evt);
         checkInputValidity(formElement, input, settings);//check validity
         toggleButton(inputList, submitButton, settings); //toggle submit
     });
@@ -70,4 +68,4 @@ enableValidation({
   errorClass: "popup__error_visible"
 });
 
-
+export { toggleButton };
