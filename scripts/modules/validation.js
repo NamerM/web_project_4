@@ -29,7 +29,7 @@ const hasValidInput = (inputList) =>
   inputList.every(input => input.validity.valid === true);
 
 
-  const toggleButton = (inputList, button, {inactiveButtonClass}) => {
+  export const toggleButton = (inputList, button, {inactiveButtonClass}) => {
     if(hasValidInput(inputList)) {
       button.disabled = false;
       button.classList.remove(inactiveButtonClass);
@@ -68,4 +68,4 @@ enableValidation({
   errorClass: "popup__error_visible"
 });
 
-//export { toggleButton };
+

@@ -153,7 +153,10 @@ const openImagePreview = card => {
 };
 
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
-addButton.addEventListener('click', () => openPopup(cardPopup));
 buttonClose.addEventListener('click', () => closePopup(cardPopup));
-// import { toggleButton } from './modules/validation';
-// toggleButton(closePopup);
+
+import { toggleButton } from './modules/validation.js';
+addButton.addEventListener('click', () => {
+  toggleButton(inputList, button, {inactiveButtonClass})
+  openPopup(cardPopup)
+})
