@@ -87,7 +87,6 @@ const addCards = document.querySelector('.popup_type_add-card');
 const addButton = document.querySelector('.add-button');
 const previewButtonClose = document.querySelector('.popup__close.popup__close_preview');
 const buttonclose = document.querySelector('.popup__close.popup__close_add');
-const createButton = document.querySelector('.popup__save_addup');
 const inputTitle = document.querySelector('.popup__input_type_title');
 const inputImage = document.querySelector('.popup__input_type_link');
 // Wrappers
@@ -96,21 +95,22 @@ const elementsList = document.querySelector('.elements__cards');
 function createCardElement(card) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.elements__image');
-  const cardTitle = cardElement.querySelector('.elements__card-text');
+  const cardName = cardElement.querySelector('.elements__card-text');
   const likeButton = cardElement.querySelector('.elements__button-like');
   const deleteButton = cardElement.querySelector('.elements__button-delete');
 
   const {name, link} = card; //destructuring assignment//
   cardImage.src = link;
   cardImage.alt = name;
-  cardTitle.textContent = card.name;
+  cardName.textContent = card.name;
 
   cardImage.addEventListener('click', () => openImagePreview(card));
+  likeButton.addEventListener('click', buttonActivate);
 
-  likeButton.addEventListener('click', (evt) => {
+  function buttonActivate(evt) {
     const likeActive = evt.target;
     likeActive.classList.toggle('elements__button-like_active');
-  });
+   }
 
   deleteButton.addEventListener('click', () => {
     cardElement.remove();
@@ -154,3 +154,4 @@ const openImagePreview = card => {
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
 addButton.addEventListener('click', () => openPopup(addCards));
 buttonclose.addEventListener('click', () => closePopup(addCards));
+
