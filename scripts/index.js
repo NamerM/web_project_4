@@ -157,6 +157,7 @@ buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
 import { toggleButton } from './modules/validation.js';
 addButton.addEventListener('click', () => {
-  toggleButton(inputList, button, {inactiveButtonClass})
-  openPopup(cardPopup)
+  openPopup(cardPopup);
+  toggleButton(inputList, button, {inactiveButtonClass});
+
 })
