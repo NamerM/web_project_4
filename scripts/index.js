@@ -158,5 +158,5 @@ buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
 addButton.addEventListener('click', () => {
   openPopup(cardPopup);
-  toggleButton(setEventListeners, button, {inactiveButtonClass});
+  toggleButton(setEventListeners);
 })
