@@ -3,6 +3,7 @@
 ///////////////////
 
 import { toggleButton } from './modules/validation.js';
+import { setEventListeners} from './modules/validation.js';
 
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
@@ -34,7 +35,7 @@ function openProfilePopup() {
   openPopup(profilePopup);
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-  resetValidationErrorMessages();
+
 }
 
 function handleProfileFormSubmit(event) {
@@ -157,5 +158,5 @@ buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
 addButton.addEventListener('click', () => {
   openPopup(cardPopup);
-  toggleButton(inputList, button, {inactiveButtonClass});
+  toggleButton(setEventListeners, button, {inactiveButtonClass});
 })

@@ -40,9 +40,11 @@ const hasValidInput = (inputList) =>
     }
   }
 
-const setEventListeners = (formElement, settings) => {
+export const setEventListeners = (formElement, settings) => {
   const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
   const submitButton = formElement.querySelector(settings.submitButtonSelector);
+
+
 
     inputList.forEach( (input) => {
       input.addEventListener('input', (evt) => {
@@ -51,13 +53,6 @@ const setEventListeners = (formElement, settings) => {
     });
   })
 };
-
-export function resetValidationErrors(evt) {
-  this.toggleButton(evt);
-  this.formElement.forEach((formElement) => {
-  this.hideInputError(formElement);
-  });
-}
 
   const enableValidation = (settings) => {
   const formList = [...document.querySelectorAll(settings.formSelector)]; //Array.From replaced with [...]
