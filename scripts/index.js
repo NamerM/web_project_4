@@ -2,6 +2,8 @@
  // EDIT PROFILE  //
 ///////////////////
 
+import { toggleButton } from './modules/validation.js';
+
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
@@ -11,7 +13,7 @@ const popupList = document.querySelectorAll('.popup');
 const profileForm = document.forms.profileForm; //querySelector('.popup_form');//
 const profilePopup = document.querySelector('.popup_type_profile'); //.popup bastaki silindi
 const editButton = document.querySelector (".profile__button");
-const saveButton = profilePopup.querySelector('.popup__save');
+//const saveButton = profilePopup.querySelector('.popup__save');
 const closeButton = profilePopup.querySelector('.popup__close');
 const inputName = profilePopup.querySelector('.popup__input_type_name');
 const inputProfession = profilePopup.querySelector('.popup__input_type_profession');
@@ -28,10 +30,11 @@ function openPopup (popup) {
   removeKeyDownListener();
 }
 
-function openProfilePopup () {
+function openProfilePopup() {
   openPopup(profilePopup);
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
+  resetValidationErrorMessages();
 }
 
 function handleProfileFormSubmit(event) {
@@ -73,7 +76,6 @@ popupList.forEach((popup) => {
 });
 
 
-
   ///////////
  // CARDS //
 ///////////
@@ -106,18 +108,15 @@ function createCardElement(card) {
   cardImage.addEventListener('click', () => openImagePreview(card));
 
   function activateLikeButton (evt){
-  const likeButton = evt.target;
-  likeButton.classList.toggle('elements__button-like_active');
+    const likeButton = evt.target;
+    likeButton.classList.toggle('elements__button-like_active');
   }
 
   likeButton.addEventListener('click', activateLikeButton);
 
-
-
   deleteButton.addEventListener('click', () => {
     cardElement.remove();
   });
-
    return cardElement;
  };
 
@@ -155,9 +154,8 @@ const openImagePreview = card => {
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
 buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
-import { toggleButton } from './modules/validation.js';
+
 addButton.addEventListener('click', () => {
   openPopup(cardPopup);
   toggleButton(inputList, button, {inactiveButtonClass});
-
 })

@@ -14,6 +14,8 @@ const hideInputError = (input, formElement, {errorClass, inputErrorClass}) => {
   errorElement.classList.remove(inputErrorClass);
 };
 
+
+
 const checkInputValidity = (formElement, input, settings) => {
   console.log(input.validity.valid);
   if(input.validity.valid) {
@@ -21,7 +23,6 @@ const checkInputValidity = (formElement, input, settings) => {
     hideInputError(input, formElement, settings);
   } else {
     showInputError(input, formElement, settings);
-
   }
 };
 
@@ -50,6 +51,13 @@ const setEventListeners = (formElement, settings) => {
     });
   })
 };
+
+export function resetValidationErrors(evt) {
+  this.toggleButton(evt);
+  this.formElement.forEach((formElement) => {
+  this.hideInputError(formElement);
+  });
+}
 
   const enableValidation = (settings) => {
   const formList = [...document.querySelectorAll(settings.formSelector)]; //Array.From replaced with [...]
