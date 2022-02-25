@@ -17,35 +17,32 @@ const hideInputError = (input, formElement, {errorClass, inputErrorClass}) => {
 
 
 const checkInputValidity = (formElement, input, settings) => {
-  console.log(input.validity.valid);
+  //console.log(input.validity.valid);
   if(input.validity.valid) {
-    console.log('valid');
+    console.log("valid");
     hideInputError(input, formElement, settings);
   } else {
     showInputError(input, formElement, settings);
   }
 };
 
-const hasValidInput = (inputList) =>
-  inputList.every(input => input.validity.valid === true);
+export const hasValidInput = (inputList) => {
+  inputList.every((input) => input.validity.valid === true)
+  };
 
-
-  export const toggleButton = (inputList, button, {inactiveButtonClass}) => {
+  export const toggleButton = (inputList, button, settings) => {
     if(hasValidInput(inputList)) {
       button.disabled = false;
-      button.classList.remove(inactiveButtonClass);
+      button.classList.remove(settings.inactiveButtonClass);
     } else {
       button.disabled = true;
-      button.classList.add(inactiveButtonClass);
+      button.classList.add(settings.inactiveButtonClass);
     }
   }
 
-export const setEventListeners = (formElement, settings) => {
+const setEventListeners = (formElement, settings) => {
   const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
   const submitButton = formElement.querySelector(settings.submitButtonSelector);
-
-
-
     inputList.forEach( (input) => {
       input.addEventListener('input', (evt) => {
         checkInputValidity(formElement, input, settings);//check validity

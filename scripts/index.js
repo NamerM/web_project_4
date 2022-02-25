@@ -3,7 +3,6 @@
 ///////////////////
 
 import { toggleButton } from './modules/validation.js';
-import { setEventListeners} from './modules/validation.js';
 
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
@@ -14,11 +13,12 @@ const popupList = document.querySelectorAll('.popup');
 const profileForm = document.forms.profileForm; //querySelector('.popup_form');//
 const profilePopup = document.querySelector('.popup_type_profile'); //.popup bastaki silindi
 const editButton = document.querySelector (".profile__button");
-//const saveButton = profilePopup.querySelector('.popup__save');
+const saveButton = profilePopup.querySelector('.popup__save');
 const closeButton = profilePopup.querySelector('.popup__close');
 const inputName = profilePopup.querySelector('.popup__input_type_name');
 const inputProfession = profilePopup.querySelector('.popup__input_type_profession');
 const popupSelector = 'popup_open';
+
 
 //functions  openPopup & closePopup universal functions
 function openPopup (popup) {
@@ -156,7 +156,12 @@ previewButtonClose.addEventListener('click', () => closePopup(previewImage));
 buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
 
+// regarding to imported toggleButton function the elements
+const inputList = [...document.querySelectorAll('.popup__input')];
+const inactiveButtonClass = document.querySelector('.popup__save_disabled');
+
+
 addButton.addEventListener('click', () => {
   openPopup(cardPopup);
-  toggleButton(setEventListeners);
+  toggleButton(inputList, saveButton, {inactiveButtonClass});
 })
