@@ -27,14 +27,14 @@ const checkInputValidity = (formElement, input, settings) => {
 };
 
 const hasValidInput = (inputList) => {
-  return inputList.every((input) => input.validity.valid === true) //by default it's true*/
+  return inputList.every((input) => input.validity.valid === true); //by default it's true*/
   };
 
 export const toggleButton = (inputList, button, settings) => {
 
   console.log(hasValidInput(inputList));
     if(hasValidInput(inputList)) {
-      button.removeAttribute("disable");
+      button.disabled = false;
       button.classList.remove(settings.inactiveButtonClass);
     } else {
       button.disabled = true;
