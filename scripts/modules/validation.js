@@ -17,9 +17,7 @@ const hideInputError = (input, formElement, {errorClass, inputErrorClass}) => {
 
 
 const checkInputValidity = (formElement, input, settings) => {
-
   if(input.validity.valid) {
-
     hideInputError(input, formElement, settings);
   } else {
     showInputError(input, formElement, settings);
@@ -31,7 +29,6 @@ const hasValidInput = (inputList) => {
   };
 
 export const toggleButton = (inputList, button, settings) => {
-
   console.log(hasValidInput(inputList));
     if(hasValidInput(inputList)) {
       button.disabled = false;
