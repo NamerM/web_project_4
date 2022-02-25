@@ -35,7 +35,6 @@ function openProfilePopup() {
   openPopup(profilePopup);
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
-
 }
 
 function handleProfileFormSubmit(event) {
@@ -163,5 +162,6 @@ const inactiveButtonClass = document.querySelector('.popup__save_disabled');
 
 addButton.addEventListener('click', () => {
   openPopup(cardPopup);
+  console.log(saveButton);
   toggleButton(inputList, saveButton, {inactiveButtonClass});
-})
+});

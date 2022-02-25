@@ -17,20 +17,24 @@ const hideInputError = (input, formElement, {errorClass, inputErrorClass}) => {
 
 
 const checkInputValidity = (formElement, input, settings) => {
-    if(input.validity.valid) {
+
+  if(input.validity.valid) {
+
     hideInputError(input, formElement, settings);
   } else {
     showInputError(input, formElement, settings);
   }
 };
 
-export const hasValidInput = (inputList) => {
-  inputList.every((input) => input.validity.valid === true)
+const hasValidInput = (inputList) => {
+  return inputList.every((input) => input.validity.valid === true) //by default it's true*/
   };
 
-  export const toggleButton = (inputList, button, settings) => {
+export const toggleButton = (inputList, button, settings) => {
+
+  console.log(hasValidInput(inputList));
     if(hasValidInput(inputList)) {
-      button.disabled = false;
+      button.removeAttribute("disable");
       button.classList.remove(settings.inactiveButtonClass);
     } else {
       button.disabled = true;
@@ -42,7 +46,7 @@ const setEventListeners = (formElement, settings) => {
   const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
   const submitButton = formElement.querySelector(settings.submitButtonSelector);
     inputList.forEach( (input) => {
-      input.addEventListener('input', (evt) => {
+      input.addEventListener('input', () => {
         checkInputValidity(formElement, input, settings);//check validity
         toggleButton(inputList, submitButton, settings); //toggle submit
     });
