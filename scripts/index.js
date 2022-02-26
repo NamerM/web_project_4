@@ -26,7 +26,7 @@ function openPopup (popup) {
   addKeyDownListener();
  }
 
- function closePopup (popup) {
+function closePopup (popup) {
   popup.classList.remove(popupSelector);
   removeKeyDownListener();
 }
@@ -162,6 +162,5 @@ const inactiveButtonClass = document.querySelector('.popup__save_disabled');
 
 addButton.addEventListener('click', () => {
   openPopup(cardPopup);
-  console.log(saveButton);
-  toggleButton(inputList, saveButton, {inactiveButtonClass});
+  toggleButton(inputList, saveButton, inactiveButtonClass);
 });
