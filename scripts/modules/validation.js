@@ -25,7 +25,7 @@ const checkInputValidity = (formElement, input, settings) => {
 };
 
 const hasValidInput = (inputList) => {
-  return inputList.every((input) => input.validity.valid === true); //by default it's true*/
+  return inputList.every((input) => input.validity.valid); //by default it's true*/
   };
 
 export const toggleButton = (inputList, button, settings) => {
@@ -42,8 +42,7 @@ export const toggleButton = (inputList, button, settings) => {
 const setEventListeners = (formElement, settings) => {
   const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
   const submitButton = formElement.querySelector(settings.submitButtonSelector);
-  toggleButton(inputList, submitButton, settings); //toggle submit
-  inputList.forEach( (input) => {
+    inputList.forEach( (input) => {
       input.addEventListener('input', () => {
         checkInputValidity(formElement, input, settings);//check validity
         toggleButton(inputList, submitButton, settings); //toggle submit
@@ -67,5 +66,4 @@ enableValidation({
   inputErrorClass: "popup__input-error_open",
   errorClass: "popup__error_visible"
 });
-
 

@@ -157,10 +157,10 @@ buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
 // regarding to imported toggleButton function the elements
 const inputList = [...document.querySelectorAll('.popup__input')];
-const inactiveButtonClass = document.querySelector('.popup__save_disabled');
-
+const inactiveButtonClass = 'popup__save_disabled';
+const newCardSubmitButton = document.querySelector("form[name='addCards'] .popup__save");
 
 addButton.addEventListener('click', () => {
   openPopup(cardPopup);
-  toggleButton(inputList, saveButton, inactiveButtonClass);
+  toggleButton(inputList, newCardSubmitButton, { inactiveButtonClass });
 });
