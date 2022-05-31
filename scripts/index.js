@@ -3,25 +3,8 @@ import { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDown
 import FormValidator from './Formvalidator.js';
 import { Card, popupImage, popupTitle, initialCards } from './cards';
 
-const settings = {
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save",   //popup__button , changed it in according to css I have //
-  inactiveButtonClass: "popup__save_disabled",
-  inputErrorClass: "popup__input-error_open",
-  errorClass: "popup__error_visible"
-}
 
-const editForm = document.querySelector('.popup__form_edit')
-const addCardForm = document.querySelector('.popup__form_cards');
-
-const editFormValidator = new FormValidator(settings, editForm)
-const addCardFormValidator = new FormValidator(settings, addCardForm)
-
-editFormValidator.enableValidation()
-addCardFormValidator.enableValidation()
-editFormValidator.resetValidation()
-
-
+//profile popups
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
@@ -37,12 +20,32 @@ const inputName = profilePopup.querySelector('.popup__input_type_name');
 const inputProfession = profilePopup.querySelector('.popup__input_type_profession');
 const popupSelector = 'popup_open';
 
+//form valid variables//
+const settings = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save",   //popup__button , changed it in according to css I have //
+  inactiveButtonClass: "popup__save_disabled",
+  inputErrorClass: "popup__input-error_open",
+  errorClass: "popup__error_visible",
+}
+
+const editForm = document.querySelector('.popup__form_edit');
+const addCardForm = document.querySelector('.popup__form_cards');
+
+const editFormValidator = new FormValidator(settings, editForm);
+const addCardFormValidator = new FormValidator(settings, addCardForm);
+
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+editFormValidator.resetValidation();
+//
+
 openPopup(popup);
 closePopup(popup);
 
 const openProfilePopup = () => {
   openPopup(profilePopup);
-  editFormValidator.resetValidation()
+  editFormValidator.resetValidation();
 
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
@@ -101,11 +104,6 @@ const openImagePreview = () => {
   popupTitle.textContent = this._name;
 };
 
-  // const card = new Card(
-  //   {text: 'cardI', link: 'https://...'},
-  //   '#card-template',
-  //   openImagePreview,
-  // )
 
   const Card_Template_Selector = '#card-template'
 

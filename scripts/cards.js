@@ -35,7 +35,7 @@ export class Card {
   constructor(data, templateCardSelector, openImagePreview) {
     this._data = data
     this._templateCardSelector = templateCardSelector
-    //this._openImagePreview = openImagePreview
+    this._openImagePreview = openImagePreview
 
     // this._cardTemplate = document.querySelector(templateCardSelector)
     //     .content.querySelector('.elements__card');  // setting here
