@@ -1,9 +1,13 @@
 /// Shaping the Sphagetti Code ///
 class FormValidator {
     constructor(settings, formElement) {
-        this._settings = settings;
-        this._formElement = formElement;
+      this._settings = settings;
+      this._formElement = formElement;
+      this._submitButton = this._formElement.querySelector(
+        this._settings.submitButtonSelector
+      );
     }
+
 
     _showInputError = (input, errorMessage) => {
       const { inputErrorClass, errorClass } = this._settings
@@ -44,30 +48,30 @@ class FormValidator {
         })
     };
 
-    _hasValidInput = () => this.inpuList.every( input => input.validity.valid); //by default it's true*/
+    _hasValidInput = () => {
+      return this.inputList.every((input) => input.validity.valid);
+    }; //by default it's true*/
 
 
     _toggleButton = () => {
-      const { inactiveButtonClass, submitButtonSelector } = this._settings;
-      const submitButton = this._formElement.querySelector(submitButtonSelector); //this eklendi submitbuttoselector
-
-      console.log(this._hasValidInput(this.inputList));
+      const { inactiveButtonClass } = this._settings;
+      this._inactiveButtonClass = inactiveButtonClass;
 
       if(this._hasValidInput()) {
-          enableButton(submitButton, inactiveButtonClass)
+          this._enableButton();
         } else {
-          disableButton(submitButton, inactiveButtonClass)
+          this.disableButton();
         }
     };
 
-    enableButton = (submitButton, inactiveButtonClass) => {
+    _enableButton = () => {
       submitButton.disabled = false;
-      submitButton.classList.remove(inactiveButtonClass);
+      submitButton.classList.remove(this._inactiveButtonClass);
     }
 
-    disableButton = (submitButton, inactiveButtonClass) => {
+    disableButton = () => {
       submitButton.disabled = true;
-      submitButton.classList.add(inactiveButtonClass);
+      submitButton.classList.add(this._inactiveButtonClass);
     }
 
     resetValidation() {
