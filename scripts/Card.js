@@ -1,7 +1,6 @@
 import { openPopup } from './utils.js';
 import { previewImage, popupImage, popupTitle } from './constants.js'
 
-
 export class Card {
   constructor(data, templateCardSelector) {
     this._data = data;
