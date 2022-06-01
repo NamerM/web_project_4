@@ -32,7 +32,7 @@ class FormValidator {
     };
 
     _setEventListeners = () => {
-        const { inputSelector, submitButtonSelector } = this._settings
+        const { inputSelector } = this._settings
 
         this.inputList = Array.from(this._formElement.querySelectorAll(inputSelector)); // ... instead of-> Array.from(this.formElement.querySelectorAll(inputSelector))
 
@@ -44,22 +44,31 @@ class FormValidator {
         })
     };
 
-    _hasValidInput = () => this.inputList.every( input => input.validity.valid); //by default it's true*/
+    _hasValidInput = () => this.inpuList.every( input => input.validity.valid); //by default it's true*/
 
 
     _toggleButton = () => {
-      const { inactiveButtonClass } = this._settings;
-      const submitButton = this._formElement.querySelector(this._submitButtonSelector); //this eklendi submitbuttoselector
+      const { inactiveButtonClass, submitButtonSelector } = this._settings;
+      const submitButton = this._formElement.querySelector(submitButtonSelector); //this eklendi submitbuttoselector
 
-      console.log(this._hasValidInput(this._inputList));
-        if(this._hasValidInput()) {
-          submitButton.disabled = false;
-          submitButton.classList.remove(inactiveButtonClass);
+      console.log(this._hasValidInput(this.inputList));
+
+      if(this._hasValidInput()) {
+          enableButton(submitButton, inactiveButtonClass)
         } else {
-          submitButton.disabled = true;
-          submitButton.classList.add(inactiveButtonClass);
+          disableButton(submitButton, inactiveButtonClass)
         }
     };
+
+    enableButton = (submitButton, inactiveButtonClass) => {
+      submitButton.disabled = false;
+      submitButton.classList.remove(inactiveButtonClass);
+    }
+
+    disableButton = (submitButton, inactiveButtonClass) => {
+      submitButton.disabled = true;
+      submitButton.classList.add(inactiveButtonClass);
+    }
 
     resetValidation() {
       this.inputList.forEach(input => {

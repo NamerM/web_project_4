@@ -93,8 +93,9 @@ const elementsList = document.querySelector('.elements__cards');
 
 addButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
+  addCardFormValidator.disableButton();
   openPopup(cardPopup);
-  this._toggleButton()
+
 })
 
 
