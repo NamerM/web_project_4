@@ -2,13 +2,13 @@ const popupSelector = 'popup_open';
 
 const openPopup = (popup) => {
   popup.classList.add(popupSelector);
-  addKeyDownListener();
+  addKeyDownListener(popup);
  }
 
 const closePopup = (popup) => {
   popup.classList.remove(popupSelector);
-  handleKeyDown();
-  removeKeyDownListener();
+  handleKeyDown(popup);
+  removeKeyDownListener(popup);
 }
 
 
