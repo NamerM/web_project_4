@@ -51,7 +51,8 @@ popupList.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if(evt.target.matches('.popup')) {
       const openedPopup = document.querySelector(`.${popupSelector}`);
-      closePopup(openedPopup);
+
+      openedPopup && closePopup(openedPopup);
     }
   });
 });
