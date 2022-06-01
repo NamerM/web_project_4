@@ -1,7 +1,7 @@
 import { openPopup, closePopup, initialCards } from './utils.js';
 import FormValidator from './FormValidator.js';
 import { Card } from './Card.js';
-import { profileInfo, profileProfession, popupList, profileForm, profilePopup,
+import { profileInfo, profileName, profileProfession, popupList, profileForm, profilePopup,
   editButton, closeButton, inputName, inputProfession, popupSelector,
   previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage, elementsList } from './constants.js';
 
@@ -90,6 +90,7 @@ addCardForm.addEventListener('submit', (evt) => {
   renderCard(card, elementsList);
   evt.preventDefault();
   closePopup(cardPopup);
+  //formCards.reset();
 });
 
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
