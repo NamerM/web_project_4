@@ -11,7 +11,7 @@ class FormValidator {
     const { inputErrorClass, errorClass } = this._settings;
 
     const errorElement = this._formElement.querySelector(`#${input.id}-error`);
-    input.classList.add(errorClass); //(errorClass)
+    input.classList.add(errorClass); //(errorClas-inputErrorClass styles are reverse in my css)
     errorElement.textContent = errorMessage; //input.validationMessage;
     errorElement.classList.add(inputErrorClass);
   };
@@ -29,7 +29,7 @@ class FormValidator {
     if (!input.validity.valid) {
       this._showInputError(input, input.validationMessage);
     } else {
-      this._hideInputError(input, this._settings);
+      this._hideInputError(input);
     }
   };
 
@@ -38,13 +38,13 @@ class FormValidator {
 
     this.inputList = Array.from(
       this._formElement.querySelectorAll(inputSelector)
-    ); // ... instead of-> Array.from(this.formElement.querySelectorAll(inputSelector))
+    );
 
     this._toggleButton(); //method check
 
     this.inputList.forEach((input) => {
       input.addEventListener("input", () => {
-        this._checkInputValidity(input, this._settings); //check validity
+        this._checkInputValidity(input); //check validity
         this._toggleButton(); //toggle submit
       });
     });
