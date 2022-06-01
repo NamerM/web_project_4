@@ -15,7 +15,7 @@ export class Card {
 
   _clickedLikeButton = () => {
     this._likeButton.classList.toggle('elements__button-like_active');
-  } //this._cardElement//(evt) => evt.target.classList.toggle('elements__button-like_active');
+  }
 
   _handleCardDelete = () => {
     this._cardElement.remove();
@@ -30,20 +30,20 @@ export class Card {
   };
 
   _addEventListeners = () => {
-    this._likeButton.addEventListener('click', this._clickedLikeButton); //likebutton exchanged with this._likeButton
+    this._likeButton.addEventListener('click', this._clickedLikeButton);
     this._deleteButton.addEventListener('click', this._handleCardDelete);
     this._cardImage.addEventListener('click', () => this._openImagePreview());
   }
 
   generateCard() {
-    this._cardElement = this._getTemplate().cloneNode(true); //this._getTemplate().cloneNode(true); changed this._cardTemplate
+    this._cardElement = this._getTemplate().cloneNode(true);
 
     this._cardImage = this._cardElement.querySelector('.elements__image');
     this._cardName = this._cardElement.querySelector('.elements__card-text');
     this._likeButton = this._cardElement.querySelector('.elements__button-like');
     this._deleteButton = this._cardElement.querySelector('.elements__button-delete');
 
-    //const {name, link} = this._data; // card // destructuring assignment//
+    //card // destructuring assignment//
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;
     this._cardName.textContent = this._data.name;

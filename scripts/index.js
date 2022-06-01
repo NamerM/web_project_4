@@ -46,9 +46,6 @@ editButton.addEventListener('click', openProfilePopup);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 closeButton.addEventListener('click', () => closePopup(profilePopup));
 
-//Closing the popup windows escape button moved to utils//
-
-//Closing the popup windows by click moved to utils//
 
 popupList.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {

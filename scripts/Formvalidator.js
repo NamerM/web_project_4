@@ -11,8 +11,8 @@ class FormValidator {
     const { inputErrorClass, errorClass } = this._settings;
 
     const errorElement = this._formElement.querySelector(`#${input.id}-error`);
-    input.classList.add(errorClass); //(errorClas-inputErrorClass styles are reverse in my css)
-    errorElement.textContent = errorMessage; //input.validationMessage;
+    input.classList.add(errorClass);
+    errorElement.textContent = errorMessage;
     errorElement.classList.add(inputErrorClass);
   };
 
@@ -44,15 +44,15 @@ class FormValidator {
 
     this.inputList.forEach((input) => {
       input.addEventListener("input", () => {
-        this._checkInputValidity(input); //check validity
-        this._toggleButton(); //toggle submit
+        this._checkInputValidity(input);
+        this._toggleButton();
       });
     });
   };
 
   _hasValidInput = () => {
     return this.inputList.every((input) => input.validity.valid);
-  }; //by default it's true*/
+  };
 
   _toggleButton = () => {
     const { inactiveButtonClass } = this._settings;
