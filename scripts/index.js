@@ -90,7 +90,6 @@ addCardForm.addEventListener('submit', (evt) => {
   renderCard(card, elementsList);
   evt.preventDefault();
   closePopup(cardPopup);
-  //formCards.reset();
 });
 
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
