@@ -22,7 +22,7 @@ const popupSelector = 'popup_open';
 //form valid variables//
 const settings = {
   inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save",   //popup__button , changed it in according to css I have //
+  submitButtonSelector: ".popup__save",
   inactiveButtonClass: "popup__save_disabled",
   inputErrorClass: "popup__input-error_open",
   errorClass: "popup__error_visible",
@@ -45,6 +45,8 @@ const openProfilePopup = () => {
 
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
+
+  editFormValidator.enableButton();
 }
 
 const handleProfileFormSubmit = (event) => {
@@ -58,14 +60,11 @@ editButton.addEventListener('click', openProfilePopup);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 closeButton.addEventListener('click', () => closePopup(profilePopup));
 
-//Closing the popup windows escape button//
-// handleKeyDown(evt)
-// addKeyDownListener();
-// removeKeyDownListener();
+//Closing the popup windows escape button moved to utils//
 
 
-//Closing the popup windows by click
-//const popupList = document.querySelector('.popup');
+//Closing the popup windows by click moved to utils//
+
 popupList.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if(evt.target.matches('.popup')) {
@@ -100,20 +99,20 @@ addButton.addEventListener("click", () => {
 })
 
 
-//moved from cards to here to make function work?
-const openImagePreview = () => {
-  openPopup(previewImage);
+// //moved from cards to here to make function work?
+// const openImagePreview = () => {
+//   openPopup(previewImage);
 
-  popupImage.src = this._link;
-  popupImage.alt = `${this._name}`;
-  popupTitle.textContent = this._name;
-};
+//   popupImage.src = this._link;
+//   popupImage.alt = `${this._name}`;
+//   popupTitle.textContent = this._name;
+// };
 
 
 const Card_Template_Selector = '#card-template'
 
 const createCard = (data) => {
-    const card = new Card(data, Card_Template_Selector, openImagePreview)
+    const card = new Card(data, Card_Template_Selector)
     const cardElement = card.generateCard();
 
     return cardElement
@@ -124,12 +123,6 @@ const renderCard = (data, wrapper) => {
     wrapper.prepend(card);
 }
 
-//   const renderCard = (data, wrapper) => {
-//     const card = new Card(data, Card_Template_Selector, openImagePreview)
-//     const cardElement = card.generateCard()
-
-//     wrapper.prepend(cardElement);
-//  };
 
 initialCards.forEach(data => {
   renderCard(data, elementsList);
@@ -140,7 +133,7 @@ formCards.addEventListener('submit', (evt) => {
       name: inputTitle.value,
       link: inputImage.value,
   };
-  renderCard(generateCard(card), wrapper);
+  renderCard(card, elementsList);
   evt.preventDefault();
   closePopup(cardPopup);
   formCards.reset();
@@ -150,14 +143,3 @@ formCards.addEventListener('submit', (evt) => {
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
 buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
-
-
-// regarding to imported toggleButton function the elements
-// const inputList = [...document.querySelectorAll('.popup__input')];
-// const inactiveButtonClass = 'popup__save_disabled';
-// const newCardSubmitButton = document.querySelector("form[name='addCards'] .popup__save");
-
-// addButton.addEventListener('click', () => {
-//   openPopup(cardPopup);
-//   toggleButton(inputList, newCardSubmitButton, { inactiveButtonClass });
-// });
