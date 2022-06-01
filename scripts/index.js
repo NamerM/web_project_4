@@ -1,9 +1,13 @@
 import { openPopup, closePopup, initialCards } from './utils.js';
 import FormValidator from './FormValidator.js';
 import { Card } from './Card.js';
-import { profileInfo, profileName, profileProfession, popupList, profileForm, profilePopup,
+import { profileProfession, popupList, profileForm, profilePopup,
   editButton, closeButton, inputName, inputProfession, popupSelector,
   previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage, elementsList } from './constants.js';
+
+
+  const profileInfo = document.querySelector('.profile__info');
+  const profileName = profileInfo.querySelector('.profile__header');
 
 //form validator settings dom references//
 const settings = {
