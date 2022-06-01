@@ -1,9 +1,10 @@
-  ///////////////////
  // EDIT PROFILE  //
-///////////////////
-
+import { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDownListener  } from "./utils.js";
+import FormValidator from './Formvalidator.js';
+import { Card, popupImage, popupTitle, initialCards } from './cards.js';
 import { toggleButton } from './modules/validation.js';
 
+//profile popups
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
@@ -19,25 +20,36 @@ const inputName = profilePopup.querySelector('.popup__input_type_name');
 const inputProfession = profilePopup.querySelector('.popup__input_type_profession');
 const popupSelector = 'popup_open';
 
-
-//functions  openPopup & closePopup universal functions
-function openPopup (popup) {
-  popup.classList.add(popupSelector);
-  addKeyDownListener();
- }
-
-function closePopup (popup) {
-  popup.classList.remove(popupSelector);
-  removeKeyDownListener();
+//form valid variables//
+const settings = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save",   //popup__button , changed it in according to css I have //
+  inactiveButtonClass: "popup__save_disabled",
+  inputErrorClass: "popup__input-error_open",
+  errorClass: "popup__error_visible",
 }
 
-function openProfilePopup() {
+const editForm = document.querySelector('.popup__form_edit');
+const addCardForm = document.querySelector('.popup__form_cards');
+
+const editFormValidator = new FormValidator(settings, editForm);
+const addCardFormValidator = new FormValidator(settings, addCardForm);
+
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+editFormValidator.resetValidation();
+//
+
+
+const openProfilePopup = () => {
   openPopup(profilePopup);
+  editFormValidator.resetValidation();
+
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
 }
 
-function handleProfileFormSubmit(event) {
+const handleProfileFormSubmit = (event) => {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileProfession.textContent = inputProfession.value;
@@ -46,23 +58,13 @@ function handleProfileFormSubmit(event) {
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
-closeButton.addEventListener('click', () => closePopup(profilePopup) );
+closeButton.addEventListener('click', () => closePopup(profilePopup));
 
 //Closing the popup windows escape button//
-function handleKeyDown(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector(`.${popupSelector}`);
-    closePopup(openedPopup);
-  }
-}
+// handleKeyDown(evt)
+// addKeyDownListener();
+// removeKeyDownListener();
 
-function addKeyDownListener() {
-  document.addEventListener('keydown', handleKeyDown);
-}
-
-function removeKeyDownListener() {
-  document.removeEventListener('keydown', handleKeyDown);
-}
 
 //Closing the popup windows by click
 //const popupList = document.querySelector('.popup');
@@ -76,13 +78,11 @@ popupList.forEach((popup) => {
 });
 
 
-  ///////////
- // CARDS //
-///////////
+// /////CARDS
 
 const formCards = document.querySelector('.popup__form_cards');
-const cardTemplateBase = document.querySelector('#card-template').content;
-const cardTemplate = cardTemplateBase.querySelector('.elements__card');
+//const cardTemplateBase = document.querySelector('#card-template').content;
+//const cardTemplate = cardTemplateBase.querySelector('.elements__card');
 const previewImage = document.querySelector('.popup_type-preview');
 const cardPopup = document.querySelector('.popup_type_add-card');
 const addButton = document.querySelector('.add-button');
@@ -92,41 +92,40 @@ const inputTitle = document.querySelector('.popup__input_type_title');
 const inputImage = document.querySelector('.popup__input_type_link');
 // Wrappers
 const elementsList = document.querySelector('.elements__cards');
-// Functions________________________________________________________________________
-function createCardElement(card) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector('.elements__image');
-  const cardName = cardElement.querySelector('.elements__card-text');
-  const likeButton = cardElement.querySelector('.elements__button-like');
-  const deleteButton = cardElement.querySelector('.elements__button-delete');
 
-  const {name, link} = card; //destructuring assignment//
-  cardImage.src = link;
-  cardImage.alt = name;
-  cardName.textContent = card.name;
+//moved from cards to here to make function work?
+const openImagePreview = () => {
+  openPopup(previewImage);
 
-  cardImage.addEventListener('click', () => openImagePreview(card));
+  popupImage.src = this._link;
+  popupImage.alt = `${this._name}`;
+  popupTitle.textContent = this._name;
+};
 
-  function activateLikeButton (evt){
-    const likeButton = evt.target;
-    likeButton.classList.toggle('elements__button-like_active');
+
+  const Card_Template_Selector = '#card-template'
+
+  const createCard = (data) => {
+    const card = new Card(data, Card_Template_Selector, openImagePreview)
+    const cardElement = card.generateCard();
+
+    return cardElement
   }
 
-  likeButton.addEventListener('click', activateLikeButton);
-
-  deleteButton.addEventListener('click', () => {
-    cardElement.remove();
-  });
-   return cardElement;
- };
-
-  function renderCard(card, wrapper) {
+  const renderCard = (data, wrapper) => {
+    const card = createCard(data);
     wrapper.prepend(card);
- };
+  }
 
-initialCards.forEach(card => {
-  const newCard = createCardElement(card);
-  renderCard(newCard, elementsList);
+//   const renderCard = (data, wrapper) => {
+//     const card = new Card(data, Card_Template_Selector, openImagePreview)
+//     const cardElement = card.generateCard()
+
+//     wrapper.prepend(cardElement);
+//  };
+
+initialCards.forEach(data => {
+  renderCard(data, elementsList);
 });
 
 formCards.addEventListener('submit', (evt) => {
@@ -134,33 +133,24 @@ formCards.addEventListener('submit', (evt) => {
       name: inputTitle.value,
       link: inputImage.value,
   };
-  renderCard(createCardElement(card), elementsList);
+  renderCard(generateCard(card), wrapper);
   evt.preventDefault();
   closePopup(cardPopup);
   formCards.reset();
 });
 
 
-const openImagePreview = card => {
-  openPopup(previewImage);
-  const popupImage = previewImage.querySelector('.popup__image');
-  const popupTitle = previewImage.querySelector('.popup__subtitle');
-  popupImage.src = card.link;
-  popupImage.alt = card.name;
-  popupTitle.textContent = card.name;
-
-};
-
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
 buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
 
-// regarding to imported toggleButton function the elements
-const inputList = [...document.querySelectorAll('.popup__input')];
-const inactiveButtonClass = 'popup__save_disabled';
-const newCardSubmitButton = document.querySelector("form[name='addCards'] .popup__save");
 
-addButton.addEventListener('click', () => {
-  openPopup(cardPopup);
-  toggleButton(inputList, newCardSubmitButton, { inactiveButtonClass });
-});
+// regarding to imported toggleButton function the elements
+// const inputList = [...document.querySelectorAll('.popup__input')];
+// const inactiveButtonClass = 'popup__save_disabled';
+// const newCardSubmitButton = document.querySelector("form[name='addCards'] .popup__save");
+
+// addButton.addEventListener('click', () => {
+//   openPopup(cardPopup);
+//   toggleButton(inputList, newCardSubmitButton, { inactiveButtonClass });
+// });
