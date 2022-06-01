@@ -1,9 +1,4 @@
 //For Profile and popup elements
-// export const profileVariables = {
-//   profileInfo: '.profile__info',
-//   profileName: '.profile__header',
-// }
-
 const profileInfo = document.querySelector('.profile__info');
 const profileName = profileInfo.querySelector('.profile__header');
 const profileProfession = profileInfo.querySelector('.profile__profession');
@@ -26,11 +21,14 @@ const previewButtonClose = document.querySelector('.popup__close.popup__close_pr
 const buttonClose = document.querySelector('.popup__close.popup__close_add');
 const inputTitle = document.querySelector('.popup__input_type_title');
 const inputImage = document.querySelector('.popup__input_type_link');
+const popupImage = previewImage.querySelector('.popup__image');
+const popupTitle = previewImage.querySelector('.popup__subtitle');
 // Wrappers
 const elementsList = document.querySelector('.elements__cards');
 
 
 export { profileInfo, profileName, profileProfession, popupList, profileForm, profilePopup,
   editButton, closeButton, inputName, inputProfession, popupSelector,
-  previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage, elementsList
+  previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage,
+  popupImage, popupTitle, elementsList
 }

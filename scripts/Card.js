@@ -1,5 +1,5 @@
-import { openPopup, previewImage, popupImage, popupTitle } from './utils.js';
-
+import { openPopup } from './utils.js';
+import { previewImage, popupImage, popupTitle } from './constants.js'
 
 
 export class Card {
