@@ -1,7 +1,7 @@
  // EDIT PROFILE  //
-import { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDownListener  } from './utils.js';
+import { openPopup, closePopup, initialCards } from './utils.js';
 import FormValidator from './Formvalidator.js';
-import { Card, popupImage, popupTitle, initialCards } from './cards.js';
+import { Card} from './cards.js';
 
 //profile popups
 const profileInfo = document.querySelector('.profile__info');
@@ -62,7 +62,6 @@ closeButton.addEventListener('click', () => closePopup(profilePopup));
 
 //Closing the popup windows escape button moved to utils//
 
-
 //Closing the popup windows by click moved to utils//
 
 popupList.forEach((popup) => {
@@ -74,9 +73,7 @@ popupList.forEach((popup) => {
   });
 });
 
-
 // /////CARDS
-
 const formCards = document.querySelector('.popup__form_cards');
 //const cardTemplateBase = document.querySelector('#card-template').content;
 //const cardTemplate = cardTemplateBase.querySelector('.elements__card');
@@ -98,17 +95,6 @@ addButton.addEventListener("click", () => {
 
 })
 
-
-// //moved from cards to here to make function work?
-// const openImagePreview = () => {
-//   openPopup(previewImage);
-
-//   popupImage.src = this._link;
-//   popupImage.alt = `${this._name}`;
-//   popupTitle.textContent = this._name;
-// };
-
-
 const Card_Template_Selector = '#card-template'
 
 const createCard = (data) => {
@@ -122,7 +108,6 @@ const renderCard = (data, wrapper) => {
     const card = createCard(data);
     wrapper.prepend(card);
 }
-
 
 initialCards.forEach(data => {
   renderCard(data, elementsList);
@@ -139,7 +124,5 @@ formCards.addEventListener('submit', (evt) => {
   formCards.reset();
 });
 
-
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
 buttonClose.addEventListener('click', () => closePopup(cardPopup));
-

@@ -6,7 +6,7 @@ As sprint 3 project here in this landing page I did a repsonsive website design,
 
 Design set with the css files with respect to that.
 
-In addition there is a Form which functions with javascript, we are editing Profile Name and Profile Profession elements with the assistance of javascript.
+In addition there is a Form which functions with javascript, we are editing Profile Name and Profile Profession elements with the assistance of javascript,the OOP classes & methods.
 
 **Techniques & Tech**
 Html and CSS is used for initial responsive design.
@@ -17,6 +17,8 @@ Also mingled with branches - develope branched opened, worked over and merged to
 In Project 5th the New Card button activated with the popup menu enabling users to five a name and add a photo picture they would like to in prepend style. Heart shaped like button also made clickable to choose the cards the visitor likes. On top right of each card an additional delete icon added with a trash can icon.
 
 In Project 6 the form validation works done using with another javascript file - validation.js file. This enables the browser to display error messages on the form for the visitors, providing an efficient UI/UX for the given forms.
+
+In Project 7 we set sailed to the new depths. As following our OOP knowledge presented in Sprint 7 the script files are multiplied.  Have cards.js, utils.js, formvalidator.js and finally index.js . Each class has it's own methods; public, private.
 
 
 **GitHub**
