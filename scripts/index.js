@@ -91,6 +91,13 @@ const inputImage = document.querySelector('.popup__input_type_link');
 // Wrappers
 const elementsList = document.querySelector('.elements__cards');
 
+addButton.addEventListener("click", () => {
+  addCardFormValidator.resetValidation();
+  openPopup(cardPopup);
+
+})
+
+
 //moved from cards to here to make function work?
 const openImagePreview = () => {
   openPopup(previewImage);
@@ -101,19 +108,19 @@ const openImagePreview = () => {
 };
 
 
-  const Card_Template_Selector = '#card-template'
+const Card_Template_Selector = '#card-template'
 
-  const createCard = (data) => {
+const createCard = (data) => {
     const card = new Card(data, Card_Template_Selector, openImagePreview)
     const cardElement = card.generateCard();
 
     return cardElement
-  }
+}
 
-  const renderCard = (data, wrapper) => {
+const renderCard = (data, wrapper) => {
     const card = createCard(data);
     wrapper.prepend(card);
-  }
+}
 
 //   const renderCard = (data, wrapper) => {
 //     const card = new Card(data, Card_Template_Selector, openImagePreview)

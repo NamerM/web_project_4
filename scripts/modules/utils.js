@@ -1,7 +1,6 @@
 const popupSelector = 'popup_open';
 
 const openPopup = (popup) => {
-  //addCardFormValidator.resetValidation()//liza opencardformbutton a ekledi
   popup.classList.add(popupSelector);
   addKeyDownListener();
  }
