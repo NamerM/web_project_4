@@ -1,7 +1,7 @@
  // EDIT PROFILE  //
-import { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDownListener  } from "./modules/utils.js";
-import FormValidator from './modules/Formvalidator.js';
-import { Card, popupImage, popupTitle, initialCards } from './modules/cards.js';
+import { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDownListener  } from './utils.js';
+import FormValidator from './Formvalidator.js';
+import { Card, popupImage, popupTitle, initialCards } from './cards.js';
 
 //profile popups
 const profileInfo = document.querySelector('.profile__info');
@@ -94,7 +94,7 @@ const elementsList = document.querySelector('.elements__cards');
 addButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
   openPopup(cardPopup);
-
+  this._toggleButton()
 })
 
 

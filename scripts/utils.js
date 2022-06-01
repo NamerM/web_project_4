@@ -7,7 +7,7 @@ const openPopup = (popup) => {
 
 const closePopup = (popup) => {
   popup.classList.remove(popupSelector);
-  handleKeyDown(evt);
+  handleKeyDown();
   removeKeyDownListener();
 }
 
