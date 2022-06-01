@@ -1,8 +1,7 @@
  // EDIT PROFILE  //
-import { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDownListener  } from "./utils.js";
-import FormValidator from './Formvalidator.js';
-import { Card, popupImage, popupTitle, initialCards } from './cards.js';
-import { toggleButton } from './modules/validation.js';
+import { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDownListener  } from "./modules/utils.js";
+import FormValidator from './modules/Formvalidator.js';
+import { Card, popupImage, popupTitle, initialCards } from './modules/cards.js';
 
 //profile popups
 const profileInfo = document.querySelector('.profile__info');
@@ -39,7 +38,6 @@ editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 editFormValidator.resetValidation();
 //
-
 
 const openProfilePopup = () => {
   openPopup(profilePopup);
