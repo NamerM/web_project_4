@@ -25,9 +25,8 @@ export const initialCards = [
   }
 ];
 
-// export const previewImage = document.querySelector('.popup_type-preview');
-// export const popupImage = previewImage.querySelector('.popup__image');
-// export const popupTitle = previewImage.querySelector('.popup__subtitle');
+
+
 const popupSelector = 'popup_open';
 
 
