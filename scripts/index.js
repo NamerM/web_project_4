@@ -27,7 +27,7 @@ editFormValidator.resetValidation();
 
 const openProfilePopup = () => {
   openPopup(profilePopup);
-  editFormValidator.resetValidation();
+  editFormValidator.resetValidation(); //2 kere mi resetlendi bakalım
 
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
@@ -46,6 +46,8 @@ editButton.addEventListener('click', openProfilePopup);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 closeButton.addEventListener('click', () => closePopup(profilePopup));
 
+//can be moved to utils.js with a function covering the actions // 2nd function for 2nd part of the event listener
+//8-II-3 creating several classes in a project - will use the methodology mentioned there on here
 
 popupList.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
@@ -65,6 +67,7 @@ addButton.addEventListener("click", () => {
 
 })
 
+//8-II-3 section component' same as above try
 const Card_Template_Selector = '#card-template'
 
 const createCard = (data) => {
