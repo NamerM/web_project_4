@@ -1,11 +1,13 @@
-import "./styles/index.css";
 
-import { openPopup, closePopup, initialCards } from './scripts/utils.js';
-import FormValidator from './scripts/FormValidator.js';
-import { Card } from './scripts/Card.js';
+import "../src/styles/index.css"; // main bridge to css files after webpack build always install 1st
+
 import { profileInfo, profileName, profileProfession, popupList, profileForm, profilePopup,
   editButton, closeButton, inputName, inputProfession, popupSelector,
-  previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage, elementsList } from './scripts/constants.js';
+  previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage, elementsList } from './scripts/utils/constants';
+import { openPopup, closePopup, initialCards } from './scripts/utils/utils.js';
+import FormValidator from './scripts/components/FormValidator.js';
+import { Card } from './scripts/components/Card.js';
+import { Section } from './scripts/components/Section.js';
 
 //form validator settings dom references//
 const settings = {
@@ -51,7 +53,7 @@ closeButton.addEventListener('click', () => closePopup(profilePopup));
 //can be moved to utils.js with a function covering the actions // 2nd function for 2nd part of the event listener
 //8-II-3 creating several classes in a project - will use the methodology mentioned there on here
 
-popupList.forEach((popup) => {
+popupList.forEach((popup) => { //popup.js üstünde çalışılıyor
   popup.addEventListener('mousedown', (evt) => {
     if(evt.target.matches('.popup')) {
       const openedPopup = document.querySelector(`.${popupSelector}`);
