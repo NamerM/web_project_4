@@ -27,7 +27,7 @@ export const initialCards = [
 
 
 
-const popupSelector = 'popup_open';
+export const popupSelector = 'popup_open';  // Popup.js üstünde calısıyoruz
 
 
 
@@ -43,7 +43,7 @@ const closePopup = (popup) => {
 }
 
 
-//Closing the popup windows escape button//
+//   popup.js used -
 const handleKeyDown = (evt) => {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector(`.${popupSelector}`);

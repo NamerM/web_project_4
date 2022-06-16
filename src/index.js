@@ -8,6 +8,10 @@ import { openPopup, closePopup, initialCards } from './scripts/utils/utils.js';
 import FormValidator from './scripts/components/FormValidator.js';
 import { Card } from './scripts/components/Card.js';
 import { Section } from './scripts/components/Section.js';
+import { Popup } from './scripts/components/Popup.js';
+import { PopupWithForm } from './scripts/components/PopupWithForm.js';
+
+//console.log(Popup);
 
 //form validator settings dom references//
 const settings = {
@@ -27,12 +31,42 @@ const addCardFormValidator = new FormValidator(settings, addCardForm);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 editFormValidator.resetValidation();
-//
 
+
+// addCardForm.addEventListener('submit', () => {
+//   const card = {
+//       name: inputTitle.value,
+//       link: inputImage.value,
+//   };
+//   renderCard(card, elementsList);
+//   addCardPopup.close();
+// });
+
+
+const handleCardForm = () => {
+  const card = {
+      name: inputTitle.value,
+      link: inputImage.value,
+  };
+  renderCard(card, elementsList);
+  addCardPopup.close();
+}
+
+//addCardForm.addEventListener('submit', handleCardForm);
+
+const addCardPopup = new PopupWithForm('#popup-template-form', () => {
+  console.log("merry christmas")
+
+  handleCardForm();
+})
+
+addCardPopup.setEventListeners() //only call once , never in if loop etc
+
+
+//userinfo class
 const openProfilePopup = () => {
   openPopup(profilePopup);
   editFormValidator.resetValidation(); //2 kere mi resetlendi bakalım
-
   inputName.value = profileName.textContent;
   inputProfession.value = profileProfession.textContent;
 
@@ -47,21 +81,25 @@ const handleProfileFormSubmit = (event) => {
 }
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
-profileForm.addEventListener('submit', handleProfileFormSubmit);
 closeButton.addEventListener('click', () => closePopup(profilePopup));
+//COMMENTLENECEK ALTTAKİ
+//profileForm.addEventListener('submit', handleProfileFormSubmit);
 
-//can be moved to utils.js with a function covering the actions // 2nd function for 2nd part of the event listener
-//8-II-3 creating several classes in a project - will use the methodology mentioned there on here
+//end of userinfo class related code - change after class
 
-popupList.forEach((popup) => { //popup.js üstünde çalışılıyor
-  popup.addEventListener('mousedown', (evt) => {
-    if(evt.target.matches('.popup')) {
-      const openedPopup = document.querySelector(`.${popupSelector}`);
+//done on popup.js // 2nd function for 2nd part of the event listener
+//8-II-3
 
-      openedPopup && closePopup(openedPopup);
-    }
-  });
-});
+// popupList.forEach((popup) => {
+//   popup.addEventListener('mousedown', (evt) => {
+//     if(evt.target.matches('.popup')) {
+//       const openedPopup = document.querySelector(`.${popupSelector}`);
+
+//       openedPopup && closePopup(openedPopup);
+//     }
+//   });
+// });
+
 
 addButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
@@ -71,7 +109,10 @@ addButton.addEventListener("click", () => {
 
 })
 
-//8-II-3 section component' same as above try
+
+
+//8-II-3 section component' same as above try - subscription need to be moved as well
+
 const Card_Template_Selector = '#card-template'
 
 const createCard = (data) => {
@@ -86,19 +127,20 @@ const renderCard = (data, wrapper) => {
     wrapper.prepend(card);
 }
 
+// addCardForm.addEventListener('submit', () => {
+//   const card = {
+//       name: inputTitle.value,
+//       link: inputImage.value,
+//   };
+//   renderCard(card, elementsList);
+//   addCardPopup.close();
+// });
+
 initialCards.forEach(data => {
   renderCard(data, elementsList);
 });
 
-addCardForm.addEventListener('submit', (evt) => {
-  const card = {
-      name: inputTitle.value,
-      link: inputImage.value,
-  };
-  renderCard(card, elementsList);
-  evt.preventDefault();
-  closePopup(cardPopup);
-});
+
 
 previewButtonClose.addEventListener('click', () => closePopup(previewImage));
 buttonClose.addEventListener('click', () => closePopup(cardPopup));
