@@ -9,15 +9,25 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
+    const values = {}
 
-  }
+    const inputs = [...this._form.querySelectorAll('.popup__input')]
+
+    inputs.forEach((input) => {
+      const key = input.id
+      const value = input.value
+      values[key] = value
+    })
+    return values;
+  }// addcard{id # cardTitle-input: value1, cardImageLink-input: value2 }
+   // editProfile(id # name-input: value1, profession-input:value2)
 
   setEventListeners() {
       super.setEventListeners()
 
       this._form.addEventListener( 'submit', (e) => {
           e.preventDefault()
-          this._handleSubmitForm()
+          this._handleSubmitForm(this._getInputValues())
         })
       }
 

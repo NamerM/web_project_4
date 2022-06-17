@@ -32,35 +32,30 @@ editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 editFormValidator.resetValidation();
 
+//addcardsubmit
+const handleCardSubmit = (data) => {
 
-// addCardForm.addEventListener('submit', () => {
-//   const card = {
-//       name: inputTitle.value,
-//       link: inputImage.value,
-//   };
-//   renderCard(card, elementsList);
-//   addCardPopup.close();
-// });
-
-
-const handleCardForm = () => {
   const card = {
-      name: inputTitle.value,
-      link: inputImage.value,
+    name: data['cardTitle-input'],
+    link: data['cardImageLink-input']
   };
   renderCard(card, elementsList);
+
   addCardPopup.close();
 }
+//editprofile submit
+const handleProfileFormSubmit = (data) => {
+  profileName.textContent = data.name;
+  profileProfession.textContent = data.profession;
 
-//addCardForm.addEventListener('submit', handleCardForm);
+  editProfilePopup.close()
+}
 
-const addCardPopup = new PopupWithForm('#popup-template-form', () => {
-  console.log("merry christmas")
-
-  handleCardForm();
-})
-
+const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
 addCardPopup.setEventListeners() //only call once , never in if loop etc
+
+const editProfilePopup = new PopupWithForm('#popup-template', handleProfileFormSubmit)
+editProfilePopup.setEventListeners()
 
 
 //userinfo class
@@ -73,12 +68,7 @@ const openProfilePopup = () => {
   editFormValidator.enableButton();
 }
 
-const handleProfileFormSubmit = (event) => {
-  event.preventDefault();
-  profileName.textContent = inputName.value;
-  profileProfession.textContent = inputProfession.value;
-  closePopup(profilePopup);
-}
+
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
 closeButton.addEventListener('click', () => closePopup(profilePopup));
@@ -115,26 +105,13 @@ addButton.addEventListener("click", () => {
 
 const Card_Template_Selector = '#card-template'
 
-const createCard = (data) => {
-    const card = new Card(data, Card_Template_Selector)
-    const cardElement = card.generateCard();
-
-    return cardElement
-}
-
 const renderCard = (data, wrapper) => {
-    const card = createCard(data);
-    wrapper.prepend(card);
+  const card = new Card (data, Card_Template_Selector);
+  wrapper.prepend(card.generateCard());
+
+  //Section.addItem(card.generateCard());
 }
 
-// addCardForm.addEventListener('submit', () => {
-//   const card = {
-//       name: inputTitle.value,
-//       link: inputImage.value,
-//   };
-//   renderCard(card, elementsList);
-//   addCardPopup.close();
-// });
 
 initialCards.forEach(data => {
   renderCard(data, elementsList);
