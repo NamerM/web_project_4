@@ -1,17 +1,16 @@
 
 import "../src/styles/index.css"; // main bridge to css files after webpack build always install 1st
 
-import { profileInfo, profileName, profileProfession, popupList, profileForm, profilePopup,
-  editButton, closeButton, inputName, inputProfession, popupSelector,
-  Card_Template_Selector, previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage, elementsList } from './scripts/utils/constants';
-import { openPopup,  initialCards } from './scripts/utils/utils.js'; //openPopup, closePopup
+import { editButton, closeButton, inputName, inputProfession,
+  addButton, elementsList } from './scripts/utils/constants';
+import { initialCards } from './scripts/utils/utils.js'; //openPopup, closePopup
 import FormValidator from './scripts/components/FormValidator.js';
 import { Card } from './scripts/components/Card.js';
 import { Section } from './scripts/components/Section.js';
 import { PopupWithForm } from './scripts/components/PopupWithForm.js';
 import { PopupWithImage } from "./scripts/components/PopupWithImage";
+import { UserInfo } from "./scripts/components/UserInfo";
 
-//console.log(Popup);
 
 //form validator settings dom references//
 const settings = {
@@ -45,8 +44,7 @@ const handleCardSubmit = (data) => {
 }
 //editprofile submit
 const handleProfileFormSubmit = (data) => {
-  profileName.textContent = data.name;
-  profileProfession.textContent = data.profession;
+  userInfo.setUserInfo(data.name, data.profession)
 
   editProfilePopup.close()
 }
@@ -61,6 +59,18 @@ editProfilePopup.setEventListeners()
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
 
+
+const renderCard = (data) => {
+  const card = new Card (
+    data,
+    '#card-template',
+    (name, link) => {
+      imagePopup.open(name, link)
+    });
+
+  section.addItem(card.generateCard());
+}
+
 const section = new Section(
     {
       items: initialCards,
@@ -71,62 +81,34 @@ const section = new Section(
 
   section.rendererItems()
 
-//const Card_Template_Selector = '#card-template' imported from constant
-const renderCard = (data, wrapper) => {
-  const card = new Card (
-    data,
-    Card_Template_Selector,
-    (name, link) => {
-      imagePopup.open(name, link)
-    });
-
-  wrapper.prepend(card.generateCard());
-
-  //Section.addItem(card.generateCard());
-}
+const userInfo = new UserInfo({
+  profileNameSelector: '.profile__header',
+  profileProfessionSelector: '.profile__profession',
+})
 
 //userinfo class
 const openProfilePopup = () => {
-  openPopup(profilePopup); // userinfo class replace this so it will not need utils.js stuff
-  editFormValidator.resetValidation(); //2 kere mi resetlendi bakalım
-  inputName.value = profileName.textContent;
-  inputProfession.value = profileProfession.textContent;
+  const profileInfo = userInfo.getUserInfo();
 
+  inputName.value = profileInfo.name
+  inputProfession.value = profileInfo.profession;
+
+  editFormValidator.resetValidation(); //2 kere mi resetlendi bakalım
   editFormValidator.enableButton();
+  editProfilePopup.open()
 }
 
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
-closeButton.addEventListener('click', () => closePopup(profilePopup));
-//COMMENTLENECEK ALTTAKİ
-//profileForm.addEventListener('submit', handleProfileFormSubmit);
+closeButton.addEventListener('click', () => editProfilePopup.close());
 
-//end of userinfo class related code - change after class
 
 addButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
   addCardForm.reset();
   addCardFormValidator.disableButton();
-  addCardPopup.open();  //openPopup(cardPopup); değişince popup eventlisenetlerı çalışmaya başladı!
-
+  addCardPopup.open();
 })
 
-// initialCards.forEach(data => {
-//   renderCard(data, elementsList);
-// });
-
-// previewButtonClose.addEventListener('click', () => closePopup(previewImage));
-// buttonClose.addEventListener('click', () => closePopup(cardPopup));
 
 
-//done on popup.js // 2nd function for 2nd part of the event listener
-//8-II-3
-// popupList.forEach((popup) => {
-//   popup.addEventListener('mousedown', (evt) => {
-//     if(evt.target.matches('.popup')) {
-//       const openedPopup = document.querySelector(`.${popupSelector}`);
-
-//       openedPopup && closePopup(openedPopup);
-//     }
-//   });
-// });
