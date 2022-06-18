@@ -34,12 +34,12 @@
       <form name="addCards" class="popup__form popup__form_cards" novalidate>
         <h1 class="popup__title">New Place</h1>
         <label class="popup__formfield">
-          <input class="popup__input popup__input_type_title" type="text" placeholder="Title" id="cardTitle-input" name="cardTitle-input" minlength="1" maxlength="30" required>
-         <span id="cardTitle-input-error" class="popup__input-error"></span>
+          <input class="popup__input popup__input_type_title" type="text" placeholder="Title" id="cardTitle" name="cardTitle-input" minlength="1" maxlength="30" required>
+         <span id="cardTitle-error" class="popup__input-error"></span>
         </label>
         <label class="popup__formfield">
-          <input class="popup__input popup__input_type_link" type="url" placeholder="Link"  id="cardImageLink-input" required> <!-- pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"-->
-          <span id="cardImageLink-input-error" class="popup__input-error"></span>
+          <input class="popup__input popup__input_type_link" type="url" placeholder="Link"  id="cardImageLink" required> <!-- pattern="http(s?)(:\/\/)((www.)?)(([^.]+)\.)?([a-zA-z0-9\-_]+)(.com|.net|.gov|.org|.in)(\/[^\s]*)?"-->
+          <span id="cardImageLink-error" class="popup__input-error"></span>
         </label>
         <button type='submit' class="popup__save">Create</button>
         <button type='button' class='popup__close popup__close_add'></button>
@@ -47,7 +47,7 @@
     </div>
   </section>
   <!--popup for image-->
-  <section class="popup popup_type-preview">
+  <section class="popup popup_type-preview" id="popup-image">
     <div class="popup__square popup__square_preview">
       <button type='button' class='popup__close popup__close_preview'></button>
       <img class="popup__image" src=" " alt=" ">

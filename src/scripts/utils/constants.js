@@ -14,6 +14,7 @@ const inputProfession = profilePopup.querySelector('.popup__input_type_professio
 const popupSelector = 'popup_open';
 
 // /////CARDS
+const Card_Template_Selector = '#card-template'
 const previewImage = document.querySelector('.popup_type-preview');
 const cardPopup = document.querySelector('.popup_type_add-card');
 const addButton = document.querySelector('.add-button');
@@ -29,6 +30,6 @@ const elementsList = document.querySelector('.elements__cards');
 
 export { profileInfo, profileName, profileProfession, popupList, profileForm, profilePopup,
   editButton, closeButton, inputName, inputProfession, popupSelector,
-  previewImage, cardPopup, addButton, previewButtonClose, buttonClose, inputTitle, inputImage,
-  popupImage, popupTitle, elementsList
+  Card_Template_Selector, previewImage, cardPopup, addButton, previewButtonClose, buttonClose,
+  inputTitle, inputImage, popupImage, popupTitle, elementsList
 }

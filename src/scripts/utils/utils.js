@@ -1,3 +1,5 @@
+import { Popup } from '../components/Popup.js';
+
 export const initialCards = [
   {
     name: "Yosemite Valley",
@@ -27,23 +29,24 @@ export const initialCards = [
 
 
 
-export const popupSelector = 'popup_open';  // Popup.js üstünde calısıyoruz
+const popupSelector = 'popup_open';
 
 
 
 const openPopup = (popup) => {
   popup.classList.add(popupSelector);
   addKeyDownListener(popup);
+
  }
 
 const closePopup = (popup) => {
   popup.classList.remove(popupSelector);
-  handleKeyDown(popup);
+   handleKeyDown(popup);
   removeKeyDownListener(popup);
 }
 
 
-//   popup.js used -
+// //   popup.js used - DENEME YAPTIK BU HALİYLE DE ÇALIŞIYPRS
 const handleKeyDown = (evt) => {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector(`.${popupSelector}`);
@@ -60,5 +63,5 @@ const removeKeyDownListener = () => {
 }
 
 
-export { openPopup, closePopup, handleKeyDown, addKeyDownListener, removeKeyDownListener };
+export {  openPopup, closePopup, addKeyDownListener, removeKeyDownListener };
 

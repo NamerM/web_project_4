@@ -19,14 +19,14 @@ export class PopupWithForm extends Popup {
       values[key] = value
     })
     return values;
-  }// addcard{id # cardTitle-input: value1, cardImageLink-input: value2 }
-   // editProfile(id # name-input: value1, profession-input:value2)
+  }
 
   setEventListeners() {
       super.setEventListeners()
 
       this._form.addEventListener( 'submit', (e) => {
           e.preventDefault()
+
           this._handleSubmitForm(this._getInputValues())
         })
       }

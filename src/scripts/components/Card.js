@@ -2,9 +2,13 @@ import { openPopup } from '../utils/utils.js';
 import { previewImage, popupImage, popupTitle } from '../utils/constants.js'
 
 export class Card {
-  constructor(data, templateCardSelector) {
-    this._data = data;
+  constructor(data, templateCardSelector, handleCardClick) {
+    //this._data = data;
+    this._name = data.name;
+    this._link = data.link;
+
     this._templateCardSelector = templateCardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -20,18 +24,10 @@ export class Card {
     this._cardElement.remove();
   }
 
-  _openImagePreview = () => {
-    openPopup(previewImage);
-
-    popupImage.src = this._data.link;
-    popupImage.alt = `${this._data.name}`;
-    popupTitle.textContent = this._data.name;
-  };
-
   _addEventListeners = () => {
     this._likeButton.addEventListener('click', this._clickedLikeButton);
     this._deleteButton.addEventListener('click', this._handleCardDelete);
-    this._cardImage.addEventListener('click', () => this._openImagePreview());
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
 
   generateCard() {
@@ -43,9 +39,9 @@ export class Card {
     this._deleteButton = this._cardElement.querySelector('.elements__button-delete');
 
     //card // destructuring assignment//
-    this._cardImage.src = this._data.link;
-    this._cardImage.alt = this._data.name;
-    this._cardName.textContent = this._data.name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardName.textContent = this._name;
 
     this._addEventListeners();
 
