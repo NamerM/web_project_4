@@ -1,7 +1,7 @@
 
 import "../src/styles/index.css"; // main bridge to css files after webpack build always install 1st
 
-import { editButton, closeButton, inputName, inputProfession,
+import { settings, editForm, addCardForm, editButton, closeButton, inputName, inputProfession,
   addButton, elementsList } from './scripts/utils/constants';
 import { initialCards } from './scripts/utils/utils.js'; //openPopup, closePopup
 import FormValidator from './scripts/components/FormValidator.js';
@@ -13,19 +13,16 @@ import { UserInfo } from "./scripts/components/UserInfo";
 
 
 //form validator settings dom references//
-const settings = {
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save",
-  inactiveButtonClass: "popup__save_disabled",
-  inputErrorClass: "popup__input-error_open",
-  errorClass: "popup__error_visible",
-}
 
-const editForm = document.querySelector('.popup__form_edit');
-const addCardForm = document.querySelector('.popup__form_cards');
 
-const editFormValidator = new FormValidator(settings, editForm);
-const addCardFormValidator = new FormValidator(settings, addCardForm);
+const editFormValidator = new FormValidator(
+  settings,
+   editForm
+  );
+const addCardFormValidator = new FormValidator(
+  settings,
+  addCardForm
+  );
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
