@@ -1,6 +1,3 @@
-import { openPopup } from '../utils/utils.js';
-import { previewImage, popupImage, popupTitle } from '../utils/constants.js'
-
 export class Card {
   constructor(data, templateCardSelector, handleCardClick) {
     //this._data = data;

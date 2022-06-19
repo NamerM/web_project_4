@@ -25,7 +25,7 @@ export class Popup {
   }
 
   setEventListeners() {
-    this._popup.addEventListener("click", (evt) => {
+    this._popup.addEventListener("mousedown", (evt) => {
       if (
         evt.target.classList.contains(POPUP_CLASS) ||
         evt.target.classList.contains(CLOSE_BUTTON_CLASS)
@@ -35,12 +35,5 @@ export class Popup {
     })
   }
 }
-    //2nd option for setEventListeners
-    // this._popup.querySelector(CLOSE_BUTTON_CLASS).addeventListener('click', () => {
-    //   this.close();
-    // })
-    // this._popup.addeventListener('click', (event) => {
-    //   if (!event.target.closest('POPUP_SELECTOR_CLASS')){
-    //     this.close();
-    //   }
-    // })
+//*** mousedown replaced click to prevent the bug if you click inside a popup and then move your mouse outside it
+// and release the button above the overlay then the popup closes but it’s not

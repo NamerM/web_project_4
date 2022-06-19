@@ -11,7 +11,7 @@ export class PopupWithForm extends Popup {
   _getInputValues() {
     const values = {}
 
-    const inputs = [...this._form.querySelectorAll('.popup__input')]
+    const inputs = this._form.querySelectorAll('.popup__input')       //[...this._form.querySelectorAll('.popup__input')]
 
     inputs.forEach((input) => {
       const key = input.id
@@ -31,7 +31,11 @@ export class PopupWithForm extends Popup {
         })
       }
 
-
+  setInputValues(data){
+    this._inputs.forEach((input) => {
+      input.value = data[input.id];
+    })
+  }
 
   close() {
       super.close()

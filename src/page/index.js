@@ -1,15 +1,15 @@
 
-import "../src/styles/index.css"; // main bridge to css files after webpack build always install 1st
+import "../page/index.css"; // main bridge to css files after webpack build always install 1st
 
 import { settings, editForm, addCardForm, editButton, closeButton, inputName, inputProfession,
-  addButton, elementsList } from './scripts/utils/constants';
-import { initialCards } from './scripts/utils/utils.js'; //openPopup, closePopup
-import FormValidator from './scripts/components/FormValidator.js';
-import { Card } from './scripts/components/Card.js';
-import { Section } from './scripts/components/Section.js';
-import { PopupWithForm } from './scripts/components/PopupWithForm.js';
-import { PopupWithImage } from "./scripts/components/PopupWithImage";
-import { UserInfo } from "./scripts/components/UserInfo";
+  addButton, elementsList } from '../utils/constants.js';
+import { initialCards } from '../utils/utils.js'; //openPopup, closePopup
+import FormValidator from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 
 //form validator settings dom references//
@@ -27,6 +27,9 @@ const addCardFormValidator = new FormValidator(
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 editFormValidator.resetValidation();
+
+
+
 
 //addcardsubmit
 const handleCardSubmit = (data) => {
@@ -56,16 +59,18 @@ editProfilePopup.setEventListeners()
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
 
+const createCard = (card) => {
+  const item = new Card ( card,'#card-template',
+  (name, link) => {
+    imagePopup.open(name, link)
+  });
+  const cardElement = item.generateCard();
+  return cardElement
+}
 
 const renderCard = (data) => {
-  const card = new Card (
-    data,
-    '#card-template',
-    (name, link) => {
-      imagePopup.open(name, link)
-    });
-
-  section.addItem(card.generateCard());
+  const card = createCard(data)
+  section.addItem(card);
 }
 
 const section = new Section(

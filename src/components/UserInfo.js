@@ -1,5 +1,3 @@
-import { inputName, inputProfession } from "../utils/constants"
-
 export class UserInfo {
   constructor({profileNameSelector, profileProfessionSelector})
   {

@@ -20,6 +20,8 @@ In Project 6 the form validation works done using with another javascript file -
 
 In Project 7 we set sailed to the new depths. As following our OOP knowledge presented in Sprint 7 the script files are multiplied.  Have cards.js, utils.js, formvalidator.js and finally index.js . Each class has it's own methods; public, private.
 
+In Project 8 we initiated usage of Classes more efficiently and dived deeper through OOP, also learnt about destructuring and magical this. A attribute/ joker element taking place of required or referenced object. You got to love this!
+Enchanté , we also learnt using webpack - welcome to less littered compact world of newage browsers.
 
 **GitHub**
 https://namerm.github.io/web_project_4
