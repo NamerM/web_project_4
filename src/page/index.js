@@ -38,7 +38,7 @@ const handleCardSubmit = (data) => {
     name: data['cardTitle'],
     link: data['cardImageLink']
   };
-  renderCard(card, elementsList);
+  section.addItem(card);
 
   addCardPopup.close();
 }
@@ -64,24 +64,25 @@ const createCard = (card) => {
   (name, link) => {
     imagePopup.open(name, link)
   });
-  const cardElement = item.generateCard();
-  return cardElement
+
+  return item.generateCard();
 }
 
-const renderCard = (data) => {
-  const card = createCard(data)
-  section.addItem(card);
-}
+// const renderCard = (data) => {
+//   const card = createCard(data)
+//   section.addItem(card);
+// }
 
 const section = new Section(
     {
       items: initialCards,
-      renderer: renderCard
+      renderer: createCard
     },
     '.elements__cards'
   )
 
   section.rendererItems()
+
 
 const userInfo = new UserInfo({
   profileNameSelector: '.profile__header',
