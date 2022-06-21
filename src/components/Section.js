@@ -10,14 +10,14 @@ export class Section {
 
   rendererItems() {
     this._items.forEach((data) => {
-      this.addItem(this._renderer(data))
+      this.addItem(data)
     })
-  }
-
-  addItem(element) {
-    this._container.prepend(element)
   };
 
+  addItem(data) {
+    const element = this._renderer(data)
+    this._container.prepend(element)
+  };
 
 
 }

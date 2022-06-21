@@ -28,17 +28,14 @@ editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 editFormValidator.resetValidation();
 
-
-
-
 //addcardsubmit
 const handleCardSubmit = (data) => {
 
   const card = {
     name: data['cardTitle'],
-    link: data['cardImageLink']
+    link: data['cardImageLink'],
   };
-  renderCard(card, elementsList);
+  section.addItem(card);
 
   addCardPopup.close();
 }
@@ -48,7 +45,6 @@ const handleProfileFormSubmit = (data) => {
 
   editProfilePopup.close()
 }
-
 
 const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
 addCardPopup.setEventListeners() //only call once , never in if loop etc
@@ -65,25 +61,18 @@ const createCard = (card) => {
     imagePopup.open(name, link)
   });
 
-  // const cardElement = item.generateCard();
-  // return cardElement
   return item.generateCard();
-}
-
-const renderCard = (data) => {
-  const card = createCard(data)
-  section.addItem(card);
 }
 
 const section = new Section(
     {
       items: initialCards,
-      renderer: createCard
+      renderer: createCard,
     },
     '.elements__cards'
   )
 
-  section.rendererItems()
+  section.rendererItems();
 
 
 const userInfo = new UserInfo({
@@ -105,12 +94,11 @@ const openProfilePopup = () => {
 
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
-closeButton.addEventListener('click', () => editProfilePopup.close());
+//closeButton.addEventListener('click', () => editProfilePopup.close());
 
 
 addButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
-  addCardForm.reset();
   addCardFormValidator.disableButton();
   addCardPopup.open();
 })
