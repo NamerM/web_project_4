@@ -94,7 +94,7 @@ const openProfilePopup = () => {
 
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
-//closeButton.addEventListener('click', () => editProfilePopup.close());
+
 
 
 addButton.addEventListener("click", () => {
