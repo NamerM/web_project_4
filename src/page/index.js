@@ -11,10 +11,14 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 
+import { api, Api } from "../utils/Api.js";
+
+api.getUserInfo()
+  .then(res => {
+    console.log('res =>', res)
+  })
 
 //form validator settings dom references//
-
-
 const editFormValidator = new FormValidator(
   settings,
    editForm
