@@ -9,7 +9,7 @@ class Api {
       headers: this._headers
 
     }).then( res => res.ok ? res.json() : Promise.reject("Error dear human!"))
-    .catch
+    .catch()
   }
 
 
