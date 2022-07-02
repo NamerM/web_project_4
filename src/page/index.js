@@ -3,7 +3,6 @@ import "../page/index.css"; // main bridge to css files after webpack build alwa
 
 import { settings, editForm, addCardForm, editButton, closeButton, inputName, inputProfession,
   addButton, elementsList } from '../utils/constants.js';
-import { initialCards } from '../utils/utils.js'; //openPopup, closePopup
 import FormValidator from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
@@ -13,10 +12,25 @@ import { UserInfo } from "../components/UserInfo.js";
 
 import { api, Api } from "../utils/Api.js";
 
+let userId
+
 api.getUserInfo()
-  .then(res => {
-    console.log('res =>', res)
+  .then( res => {
+    userId = res.id
+    userInfo.setUserInfo(res.name,  res.about)
   })
+  .catch(console.log)
+
+api.getInitialCards()
+  .then( res => {
+    console.log('res getInitialCards =>', res)
+
+    section.rendererItems(res);
+  })
+  .catch(console.log)
+
+
+
 
 //form validator settings dom references//
 const editFormValidator = new FormValidator(
@@ -35,20 +49,30 @@ editFormValidator.resetValidation();
 //addcardsubmit
 const handleCardSubmit = (data) => {
 
-  const card = {
-    name: data['cardTitle'],
-    link: data['cardImageLink'],
-  };
-  section.addItem(card);
+  api.addCard(data.cardTitle, data.cardImageLink)
+  .then(res => {
+    console.log('res =>', res)
+    const card = {
+      name: res.name,
+      link: res.link,
+    };
+    section.addItem(card);
+  })
+  .catch(console.log)
 
   addCardPopup.close();
 }
 //editprofile submit
 const handleProfileFormSubmit = (data) => {
-  userInfo.setUserInfo(data.name, data.profession)
-
-  editProfilePopup.close()
-}
+  api.editProfile(data.name, data.profession)
+  .then( res => {
+    userInfo.setUserInfo(data.name, data.profession)
+  })
+  .catch(console.log)
+  .finally( () => {
+    editProfilePopup.close()
+  })
+};
 
 const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
 addCardPopup.setEventListeners() //only call once , never in if loop etc
@@ -59,24 +83,33 @@ editProfilePopup.setEventListeners()
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
 
-const createCard = (card) => {
-  const item = new Card ( card,'#card-template',
+const createCard = (data) => {
+  const item = new Card (
+    data,
+    '...',
+    '#card-template',
   (name, link) => {
     imagePopup.open(name, link)
-  });
+    },
+    () => {
+      api.addLike(item.getId())
+      .then(res => {
+        item.setLikeCounter(res.likes),
+        console.log('You like it don\'t you')
+        //
+      })
+    }
+  );
 
-  return item.generateCard();
+ return item.generateCard();
 }
 
 const section = new Section(
     {
-      items: initialCards,
       renderer: createCard,
     },
     '.elements__cards'
   )
-
-  section.rendererItems();
 
 
 const userInfo = new UserInfo({

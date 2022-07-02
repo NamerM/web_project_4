@@ -7,3 +7,10 @@
   align-items: center;
   margin: 0 auto;
 }
+
+.elements__handle_likecolumn{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  /*margin-top: auto;*/
+}

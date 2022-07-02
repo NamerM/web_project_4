@@ -11,3 +11,9 @@
   margin-bottom: 31px;
   color: #000000;
 }
+
+
+.elements__card_likes {
+  flex-direction: column;
+  margin: auto;
+}
