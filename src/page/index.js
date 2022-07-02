@@ -14,23 +14,15 @@ import { api, Api } from "../utils/Api.js";
 
 let userId
 
-api.getUserInfo()
-  .then( res => {
-    userId = res.id
-    userInfo.setUserInfo(res.name,  res.about)
+//api.getUserInfo & api.getInitialCards combined with Promise.
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id  //userData._userId
+    userInfo.setUserInfo(userData.name,  userData.about)
+
+    section.rendererItems(cards);
   })
   .catch(console.log)
-
-api.getInitialCards()
-  .then( res => {
-    console.log('res getInitialCards =>', res)
-
-    section.rendererItems(res);
-  })
-  .catch(console.log)
-
-
-
 
 //form validator settings dom references//
 const editFormValidator = new FormValidator(
@@ -55,6 +47,8 @@ const handleCardSubmit = (data) => {
     const card = {
       name: res.name,
       link: res.link,
+      likes: res.likes,
+      _id: res._id,
     };
     section.addItem(card);
   })
@@ -86,18 +80,25 @@ imagePopup.setEventListeners();
 const createCard = (data) => {
   const item = new Card (
     data,
-    '...',
+    userId,
     '#card-template',
   (name, link) => {
     imagePopup.open(name, link)
     },
     () => {
-      api.addLike(item.getId())
-      .then(res => {
-        item.setLikeCounter(res.likes),
-        console.log('You like it don\'t you')
-        //
-      })
+      if(item.isLiked()) {
+        api.removeLike(item.getId())
+        .then(res => {
+          item.setLikeCounter(res.likes)
+          //console.log("you don't like it")
+        })
+      } else {
+        api.addLike(item.getId())
+        .then(res => {
+          item.setLikeCounter(res.likes)
+          //console.log("you like it!")
+        })
+      }
     }
   );
 

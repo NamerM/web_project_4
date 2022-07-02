@@ -5,7 +5,7 @@ export class Card {
     this._link = data.link;
     this._likes = data.likes;
     this._id = data._id;
-    this.userId = userId;
+    this._userId = userId;
 
 
     this._templateCardSelector = templateCardSelector;
@@ -22,10 +22,6 @@ export class Card {
       .content.querySelector('.elements__card');
   }
 
-  // _handleLikeIcon = () => {
-  //   this._likeButton.classList.toggle('elements__button-like_active');
-  // }
-
   _handleCardDelete = () => {
     this._cardElement.remove();
   }
@@ -36,17 +32,22 @@ export class Card {
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
 
-  setLikeCounter(newLikes) {   //length kısmını okuyamıyor kart eklenemiyor
-    this._likes = newLikes
+  setLikeCounter(newLikes) {   //length kısmını okuyamıyor kart eklenemiyor - handlecardsubmit fonksiyonuna likes ve _id ekleyerek çözdü ^^++
+    this._likes = newLikes;
+
     const likeCounter = this._likes.length;
     this._cardElement.querySelector('.elements__card_likes').textContent = likeCounter;
 
-    const likeClickedbyCurrentUser = false;
+    const likeClickedbyCurrentUser = this.isLiked();
     if(likeClickedbyCurrentUser) {
-      this._likeButton.classList.toggle('elements__button-like_active');
+      this._likeButton.classList.add('elements__button-like_active');
+    } else {
+      this._likeButton.classList.remove('elements__button-like_active');
     }
+  }
 
-
+  isLiked(){
+    return this._likes.find(user => user._id === this._userId);
   }
 
   generateCard() {

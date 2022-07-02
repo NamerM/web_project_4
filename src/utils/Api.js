@@ -17,7 +17,7 @@ class Api {
     return fetch(this._baseUrl + '/cards', {
       headers: this._headers
     }).then( res => res.ok ? res.json() : Promise.reject(res.statusText))
-  } //name  & link in the body?
+  } //name  & link in the body check m.
 
   editProfile(name, about) {
     return fetch(this._baseUrl + '/users/me', {
@@ -44,9 +44,17 @@ class Api {
   addLike(id) {
     return fetch(this._baseUrl + '/cards/likes/' + id, {
       method: "PUT",
-      headers: this._headers,
+      headers: this._headers
     }).then(res => res.ok ? res.json() : Promise.reject(res.statusText))
   }
+
+  removeLike(id) {
+    return fetch(this._baseUrl + '/cards/likes/' + id, {
+      method: "DELETE",
+      headers: this._headers
+    }).then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+  }
+
 
 }
 
