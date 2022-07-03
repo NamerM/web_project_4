@@ -68,7 +68,7 @@ const handleCardSubmit = (data) => {
 const handleProfileFormSubmit = (data) => {
   api.editProfile(data.name, data.profession)
   .then( res => {
-    userInfo.setUserInfo(data.name, data.profession) //data.name, data.profession
+    userInfo.setUserInfo(res.name, data.profession, res.avatar) //data.name, data.profession
   })
   .catch(console.log)
   .finally( () => {
@@ -78,12 +78,11 @@ const handleProfileFormSubmit = (data) => {
 
 //avatar Picture Submit
 const handleAvatarSubmit = (data) => {
-  api.editAvatar(data.name, data.profession, data.link)
+  api.editAvatar( data.link)  //data.name, data.profession,
   .then( res => {
-    console.log(res)
-    //userInfo.setUserInfo(res.avatar)
+    //console.log(res)
+    userInfo.setUserInfo(res.name, res.profession, res.avatar)
   })
-
   .catch(console.log)
   .finally( () => {
     avatarChangePopup.close();
