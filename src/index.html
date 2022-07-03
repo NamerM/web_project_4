@@ -46,6 +46,20 @@
       </form>
     </div>
   </section>
+  <!--popup for avatar-->
+  <section class="popup popup_type_avatar-change" id="popup-template-avatar">
+    <div class="popup__square">
+      <form name="avatarChange" class="popup__form popup__form_avatar" novalidate>
+        <h1 class="popup__title">Change Profile Picture</h1>
+        <label class="popup__formfield">
+          <input class="popup__input popup__input_type_link" type="url" placeholder="Picture Url"  id="link" name="link"  required>
+          <span id="link-error" class="popup__input-error"></span>
+        </label>
+        <button type='submit' class="popup__save">Save</button>
+        <button type='button' class='popup__close popup__close_add'></button>
+      </form>
+    </div>
+  </section>
   <!--popup for image-->
   <section class="popup popup_type-preview" id="popup-image">
     <div class="popup__square popup__square_preview">
@@ -60,7 +74,7 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__image" src="<%=require ('./images/image.jpg')%>" alt="An image of Jacques Costau">
+        <div class="profile__image"></div>
         <div class="profile__info">
           <div class="profile__line-header">
             <h2 class="profile__header"> </h2>

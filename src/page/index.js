@@ -2,7 +2,7 @@
 import "../page/index.css"; // main bridge to css files after webpack build always install 1st
 
 import { settings, editForm, addCardForm, editButton, closeButton, inputName, inputProfession,
-  addButton, elementsList } from '../utils/constants.js';
+  addButton, profileAvatar, avatarChange, elementsList } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
@@ -11,6 +11,7 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 
 import { api, Api } from "../utils/Api.js";
+//import { Popup } from "../components/Popup";
 
 let userId
 
@@ -18,9 +19,10 @@ let userId
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userId = userData._id  //userData._userId
-    userInfo.setUserInfo(userData.name,  userData.about)
 
-    section.rendererItems(cards);
+    console.log('user =>', userData)
+    userInfo.setUserInfo(userData.name,  userData.about, userData.avatar)
+    section.rendererItems(cards)
   })
   .catch(console.log)
 
@@ -34,8 +36,14 @@ const addCardFormValidator = new FormValidator(
   addCardForm
   );
 
+const avatarFormValidator = new FormValidator(
+  settings,
+  avatarChange
+);
+
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 editFormValidator.resetValidation();
 
 //addcardsubmit
@@ -43,7 +51,7 @@ const handleCardSubmit = (data) => {
 
   api.addCard(data.cardTitle, data.cardImageLink)
   .then(res => {
-    console.log('res =>', res)
+    //console.log('res =>', res)
     const card = {
       name: res.name,
       link: res.link,
@@ -60,7 +68,7 @@ const handleCardSubmit = (data) => {
 const handleProfileFormSubmit = (data) => {
   api.editProfile(data.name, data.profession)
   .then( res => {
-    userInfo.setUserInfo(data.name, data.profession)
+    userInfo.setUserInfo(data.name, data.profession) //data.name, data.profession
   })
   .catch(console.log)
   .finally( () => {
@@ -68,11 +76,29 @@ const handleProfileFormSubmit = (data) => {
   })
 };
 
-const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
-addCardPopup.setEventListeners() //only call once , never in if loop etc
+//avatar Picture Submit
+const handleAvatarSubmit = (data) => {
+  api.editAvatar(data.name, data.profession, data.link)
+  .then( res => {
+    console.log(res)
+    //userInfo.setUserInfo(res.avatar)
+  })
+
+  .catch(console.log)
+  .finally( () => {
+    avatarChangePopup.close();
+  })
+
+};
 
 const editProfilePopup = new PopupWithForm('#popup-template', handleProfileFormSubmit)
 editProfilePopup.setEventListeners()
+
+const avatarChangePopup = new PopupWithForm('#popup-template-avatar', handleAvatarSubmit)
+avatarChangePopup.setEventListeners()
+
+const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
+addCardPopup.setEventListeners() //only call once , never in if loop etc
 
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
@@ -116,24 +142,23 @@ const section = new Section(
 const userInfo = new UserInfo({
   profileNameSelector: '.profile__header',
   profileProfessionSelector: '.profile__profession',
+  profileAvatar: '.profile__image',
 })
 
-//userinfo class
-const openProfilePopup = () => {
+
+function openProfilePopup() {
   const profileInfo = userInfo.getUserInfo();
 
-  inputName.value = profileInfo.name
+  inputName.value = profileInfo.name;
   inputProfession.value = profileInfo.profession;
 
   editFormValidator.resetValidation(); //2 kere mi resetlendi bakalım
   editFormValidator.enableButton();
-  editProfilePopup.open()
+  editProfilePopup.open();
 }
 
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
-
-
 
 addButton.addEventListener("click", () => {
   addCardFormValidator.resetValidation();
@@ -141,5 +166,11 @@ addButton.addEventListener("click", () => {
   addCardPopup.open();
 })
 
+// console.log('avatar', avatar)
+profileAvatar.addEventListener('click', () => {
+  avatarFormValidator.resetValidation();
+  avatarFormValidator.disableButton();
+  avatarChangePopup.open();
+})
 
 

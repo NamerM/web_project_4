@@ -3,11 +3,11 @@ const profileInfo = document.querySelector(".profile__info");
 const profileName = profileInfo.querySelector(".profile__header");
 const profileProfession = profileInfo.querySelector(".profile__profession");
 const popupList = document.querySelectorAll(".popup");
+const profileAvatar = document.querySelector(".profile__image");
 
 const profileForm = document.forms.profileForm; //querySelector('.popup_form');//
 const profilePopup = document.querySelector(".popup_type_profile"); //.popup bastaki silindi
 const editButton = document.querySelector(".profile__button");
-//const saveButton = profilePopup.querySelector('.popup__save');  //not used-submitButtonSelector used in settings
 const closeButton = profilePopup.querySelector(".popup__close");
 const inputName = profilePopup.querySelector(".popup__input_type_name");
 const inputProfession = profilePopup.querySelector(
@@ -18,6 +18,7 @@ const popupSelector = "popup_open";
 // /////CARDS
 const Card_Template_Selector = "#card-template";
 const previewImage = document.querySelector(".popup_type-preview");
+
 const cardPopup = document.querySelector(".popup_type_add-card");
 const addButton = document.querySelector(".add-button");
 const previewButtonClose = document.querySelector(
@@ -41,7 +42,9 @@ const settings = {
 
 const editForm = document.querySelector(".popup__form_edit");
 const addCardForm = document.querySelector(".popup__form_cards");
+const avatarChange = document.querySelector(".popup__form_avatar");
 
 export {
-  settings, editForm, addCardForm, editButton, closeButton, inputName, inputProfession, addButton, elementsList
+  settings, editForm, addCardForm, avatarChange, editButton, closeButton, inputName, inputProfession,
+  addButton, elementsList, profileAvatar
 };
