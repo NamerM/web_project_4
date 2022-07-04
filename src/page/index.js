@@ -80,8 +80,7 @@ const handleProfileFormSubmit = (data) => {
 const handleAvatarSubmit = (data) => {
   api.editAvatar( data.link)  //data.name, data.profession,
   .then( res => {
-    //console.log(res)
-    userInfo.setUserInfo(res.name, res.profession, res.avatar)
+    userInfo.setUserInfo(res.name, res.about, res.avatar)
   })
   .catch(console.log)
   .finally( () => {
