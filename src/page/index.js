@@ -1,8 +1,8 @@
 
 import "../page/index.css"; // main bridge to css files after webpack build always install 1st
 
-import { settings, editForm, addCardForm, editButton, closeButton, inputName, inputProfession,
-  addButton, profileAvatar, avatarChange, elementsList } from '../utils/constants.js';
+import { settings, editForm, addCardForm, editButton, inputName, inputProfession,
+  addButton, profileAvatar, avatarChange } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
@@ -19,8 +19,7 @@ let userId
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userId = userData._id  //userData._userId
-
-    console.log('user =>', userData)
+    //console.log('user =>', userData)
     userInfo.setUserInfo(userData.name,  userData.about, userData.avatar)
     section.rendererItems(cards)
   })
@@ -41,10 +40,16 @@ const avatarFormValidator = new FormValidator(
   avatarChange
 );
 
+// const confirmDeleteFormValidator = new FormValidator(
+//   settings,
+//   avatarChange
+// );
+
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 editFormValidator.resetValidation();
+
 
 //addcardsubmit
 const handleCardSubmit = (data) => {
@@ -98,6 +103,10 @@ avatarChangePopup.setEventListeners()
 const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
 addCardPopup.setEventListeners() //only call once , never in if loop etc
 
+const confirmCardDelete = new PopupWithForm('#popup-template-confirm',
+() => { })
+confirmCardDelete.setEventListeners()
+
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
 
@@ -106,10 +115,10 @@ const createCard = (data) => {
     data,
     userId,
     '#card-template',
-  (name, link) => {
+  (name, link) => {   //4th constructor item handleCardClick
     imagePopup.open(name, link)
     },
-    () => {
+    () => {   //5th  constructor item handleLikeIcon
       if(item.isLiked()) {
         api.removeLike(item.getId())
         .then(res => {
@@ -123,6 +132,10 @@ const createCard = (data) => {
           //console.log("you like it!")
         })
       }
+    },
+    () => {   //6th constrcutor item handleDeleteClick
+      confirmCardDelete.open();
+      //confirmCardDelete.enableButton();
     }
   );
 
@@ -158,13 +171,13 @@ function openProfilePopup() {
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
 
-addButton.addEventListener("click", () => {
+addButton.addEventListener('click', () => {
   addCardFormValidator.resetValidation();
   addCardFormValidator.disableButton();
   addCardPopup.open();
 })
 
-// console.log('avatar', avatar)
+
 profileAvatar.addEventListener('click', () => {
   avatarFormValidator.resetValidation();
   avatarFormValidator.disableButton();

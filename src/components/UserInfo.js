@@ -10,7 +10,7 @@ export class UserInfo {
     return {
       name: this._profileName.textContent,
       profession: this._profileProfession.textContent,
-      avatar: this._profileAvatar.style.backgroundImage
+        avatar: this._profileAvatar.style.backgroundImage
     }
   }
 

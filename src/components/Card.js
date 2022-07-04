@@ -1,5 +1,5 @@
 export class Card {
-  constructor(data, userId, templateCardSelector, handleCardClick, handleLikeIcon) {
+  constructor(data, userId, templateCardSelector, handleCardClick, handleLikeIcon, handleDeleteClick) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
@@ -11,6 +11,7 @@ export class Card {
     this._templateCardSelector = templateCardSelector;
     this._handleCardClick = handleCardClick;
     this._handleLikeIcon = handleLikeIcon;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   getId() {
@@ -22,14 +23,15 @@ export class Card {
       .content.querySelector('.elements__card');
   }
 
-  _handleCardDelete = () => {
-    this._cardElement.remove();
-  }
+  // _handleCardDelete = () => {
+  //   this._cardElement.remove();
+  // }
 
   _addEventListeners = () => {
     this._likeButton.addEventListener('click', () => this._handleLikeIcon());
-    this._deleteButton.addEventListener('click', () => this._handleCardDelete());
+    this._deleteButton.addEventListener('click', () => this._handleDeleteClick());
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
+
   }
 
   setLikeCounter(newLikes) {   //length kısmını okuyamıyor kart eklenemiyor - handlecardsubmit fonksiyonuna likes ve _id ekleyerek çözdü ^^++

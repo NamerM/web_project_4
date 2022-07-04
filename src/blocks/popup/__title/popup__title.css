@@ -12,6 +12,10 @@
   color: black;
 }
 
+.popup__title_confirmDelete {
+  text-align: center;
+}
+
 @media screen and (max-width: 324px) {
   .popup__title {
     width: 238px;
