@@ -39,7 +39,7 @@ export class PopupWithForm extends Popup {
   }
 
   changeSubmitHandler(newSubmitHandler) {
-    this._handleSubmitForm = newSubmitHandler;
+    this._handleSubmitForm = newSubmitHandler
   }
 
 

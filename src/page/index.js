@@ -26,50 +26,26 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .catch(console.log)
 
 //form validator settings dom references//
-const editFormValidator = new FormValidator(
-  settings,
-   editForm
-  );
-const addCardFormValidator = new FormValidator(
-  settings,
-  addCardForm
-  );
-
-const avatarFormValidator = new FormValidator(
-  settings,
-  avatarChange
-);
-
-// const confirmDeleteFormValidator = new FormValidator(
-//   settings,
-//   avatarChange
-// );
+const editFormValidator = new FormValidator( settings, editForm );
+const addCardFormValidator = new FormValidator( settings, addCardForm );
+const avatarFormValidator = new FormValidator( settings,  avatarChange );
 
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 editFormValidator.resetValidation();
 
-
-//addcardsubmit
+// handle addcardsubmit
 const handleCardSubmit = (data) => {
   api.addCard(data.cardTitle, data.cardImageLink)
     .then(res => {
-      //console.log('res =>', res)
-      const card = {
-        name: res.name,
-        link: res.link,
-        likes: res.likes,
-        _id: res._id,
-        ownerId: res.owner._id
-      };
-      section.addItem(card);
+      section.addItem(res);
     })
     .catch(console.log)
 
     addCardPopup.close();
 }
-//editprofile submit
+//handle editprofile submit
 const handleProfileFormSubmit = (data) => {
   api.editProfile(data.name, data.profession)
     .then( res => {
@@ -81,7 +57,7 @@ const handleProfileFormSubmit = (data) => {
     })
 };
 
-//avatar Picture Submit
+// handle avatar Picture Submit
 const handleAvatarSubmit = (data) => {
   api.editAvatar( data.link)
     .then( res => {
@@ -93,23 +69,35 @@ const handleAvatarSubmit = (data) => {
     })
 };
 
+//handle Card Click
+const handleCardClick = (data) => {
+  imagePopup.open(data.name, data.link);
+}
 
-//confirm Card Delete Function
+// //handle Card Like Function
+const handleLikeIcon = (item) => {
+  const request = item.isLiked() ? api.removeLike : api.addLike
+  request()
+    .then(res => {
+      item.setLikeCounter(res.likes)
+    })
+}
+
+
+// handle confirm Card Delete Function
 const handleDeleteClick = (card) => {
   confirmCardDelete.open()
 
   confirmCardDelete.changeSubmitHandler(() => {
     api.deleteCard(card.getId())
-    .then(res => {
+    .then( () => {
       card.removeCard()
     })
     confirmCardDelete.close()
-  });
+  })
 }
 
-
-
-
+//class instances of Popup
 const editProfilePopup = new PopupWithForm('#popup-template', handleProfileFormSubmit)
 editProfilePopup.setEventListeners()
 
@@ -122,19 +110,6 @@ addCardPopup.setEventListeners() //only call once
 const confirmCardDelete = new PopupWithForm('#popup-template-confirm', handleDeleteClick)
 confirmCardDelete.setEventListeners()
 
-// const confirmCardDelete = new PopupWithForm('#popup-template-confirm',
-//    () => {
-//   api.deleteCard(cardToDelete.getId())
-//   .then(res => {
-//     cardToDelete.removeCard(res)
-//   })
-//     confirmCardDelete.close()
-//   }
-// )
-// confirmCardDelete.setEventListeners()
-
-
-
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
 
@@ -143,43 +118,17 @@ const createCard = (data) => {
   const item = new Card (
     data,
     userId,
-
     '#card-template',
-  (name, link) => {   //4th constructor item handleCardClick
-    imagePopup.open(name, link)
-    },
-    () => {   //5th  constructor item handleLikeIcon
-      if(item.isLiked()) {
-        api.removeLike(item.getId())
-          .then(res => {
-            item.setLikeCounter(res.likes)
-            //console.log("you don't like it")
-        })
-      } else {
-        api.addLike(item.getId())
-          .then(res => {
-            item.setLikeCounter(res.likes)
-            //console.log("you like it!")
-        })
-      }
-    },
-  (id) => {
-      //confirmCardDelete.open()
-      handleDeleteClick(id)
-    } //6th constrcutor item handleDeleteClick
-
+    () => handleCardClick(data),     //4th constructor item handleCardClick
+    () => handleLikeIcon(item),       //5th  constructor item handleLikeIcon
+    (id) => handleDeleteClick(id)     //6th constrcutor item handleDeleteClick
   )
-
  return item.generateCard();
 }
 
-const section = new Section(
-    {
-      renderer: createCard
-    },
-    '.elements__cards'
-  )
 
+
+const section = new Section( { renderer: createCard }, '.elements__cards' )
 
 const userInfo = new UserInfo({
   profileNameSelector: '.profile__header',
@@ -187,29 +136,25 @@ const userInfo = new UserInfo({
   profileAvatar: '.profile__image',
 })
 
-
 function openProfilePopup() {
   const profileInfo = userInfo.getUserInfo();
 
   inputName.value = profileInfo.name;
   inputProfession.value = profileInfo.profession;
 
-  editFormValidator.resetValidation(); //2 kere mi resetlendi bakalım
+  editFormValidator.resetValidation();
   editFormValidator.enableButton();
   editProfilePopup.open();
 }
 
-//Event handlers
-editButton.addEventListener('click', openProfilePopup);
-
-
+//Event handlers subscriptions to popup/modal controls
+editButton.addEventListener('click', openProfilePopup)
 
 addButton.addEventListener('click', () => {
   addCardFormValidator.resetValidation();
   addCardFormValidator.disableButton();
   addCardPopup.open();
 })
-
 
 profileAvatar.addEventListener('click', () => {
   avatarFormValidator.resetValidation();

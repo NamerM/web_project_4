@@ -1,6 +1,6 @@
 export class Card {
   constructor(data, userId, templateCardSelector, handleCardClick, handleLikeIcon, handleDeleteClick) {
-    console.log("data", data);
+    //console.log("data", data);
     this._data = data;
     this._name = data.name;
     this._link = data.link;
@@ -53,12 +53,6 @@ export class Card {
   isLiked(){
     return this._likes.find(user => user._id === this._userId);
   }
-
-  // idMatch() {
-  //   if(this._userId !== this._ownerId) {
-  //     this._deleteButton.style.display = 'none' // elements__button-delete
-  //    };
-  // }
 
 
   generateCard() {
