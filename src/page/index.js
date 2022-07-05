@@ -37,9 +37,11 @@ editFormValidator.resetValidation();
 
 // handle addcardsubmit
 const handleCardSubmit = (data) => {
+  addCardPopup.changeText('Saving')
   api.addCard(data.cardTitle, data.cardImageLink)
     .then(res => {
-      section.addItem(res);
+      section.addItem(res)
+      addCardPopup.changeText('Default')
     })
     .catch(console.log)
 
@@ -47,9 +49,11 @@ const handleCardSubmit = (data) => {
 }
 //handle editprofile submit
 const handleProfileFormSubmit = (data) => {
+  editProfilePopup.changeText('Saving')
   api.editProfile(data.name, data.profession)
     .then( res => {
       userInfo.setUserInfo(res.name, data.profession, res.avatar)
+      editProfilePopup.changeText('Default')
     })
     .catch(console.log)
     .finally( () => {
@@ -59,9 +63,11 @@ const handleProfileFormSubmit = (data) => {
 
 // handle avatar Picture Submit
 const handleAvatarSubmit = (data) => {
+  avatarChangePopup.changeText('Saving')
   api.editAvatar( data.link)
     .then( res => {
       userInfo.setUserInfo(res.name, res.about, res.avatar)
+      avatarChangePopup.changeText('Default')
     })
     .catch(console.log)
     .finally( () => {

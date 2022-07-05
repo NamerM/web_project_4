@@ -42,6 +42,16 @@ export class PopupWithForm extends Popup {
     this._handleSubmitForm = newSubmitHandler
   }
 
+  changeText(text) {
+    const button = this._popup.querySelector('.popup__save')
+
+    if(text === 'Saving') {
+      button.textContent = 'Saving...'
+    }
+    if(text === 'Default') {
+      button.textContent = 'Save'
+    }
+  }
 
   close() {
       super.close()
