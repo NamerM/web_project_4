@@ -61,6 +61,7 @@ const handleCardSubmit = (data) => {
         link: res.link,
         likes: res.likes,
         _id: res._id,
+        ownerId: res.owner._id
       };
       section.addItem(card);
     })
@@ -94,13 +95,18 @@ const handleAvatarSubmit = (data) => {
 
 
 //confirm Card Delete Function
-let cardToDelete
 const handleDeleteClick = (card) => {
   confirmCardDelete.open()
 
-  cardToDelete = card;
-  console.log('id =>', card)
+  confirmCardDelete.changeSubmitHandler(() => {
+    api.deleteCard(card.getId())
+    .then(res => {
+      card.removeCard()
+    })
+    confirmCardDelete.close()
+  });
 }
+
 
 
 
@@ -113,26 +119,31 @@ avatarChangePopup.setEventListeners()
 const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
 addCardPopup.setEventListeners() //only call once
 
-const confirmCardDelete = new PopupWithForm('#popup-template-confirm',
-   () => {
-  api.deleteCard(cardToDelete.getId())
-  .then(res => {
-    cardToDelete.removeCard(res)
-  })
-    confirmCardDelete.close()
-  }
-)
+const confirmCardDelete = new PopupWithForm('#popup-template-confirm', handleDeleteClick)
 confirmCardDelete.setEventListeners()
+
+// const confirmCardDelete = new PopupWithForm('#popup-template-confirm',
+//    () => {
+//   api.deleteCard(cardToDelete.getId())
+//   .then(res => {
+//     cardToDelete.removeCard(res)
+//   })
+//     confirmCardDelete.close()
+//   }
+// )
+// confirmCardDelete.setEventListeners()
+
+
 
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
-
 
 
 const createCard = (data) => {
   const item = new Card (
     data,
     userId,
+
     '#card-template',
   (name, link) => {   //4th constructor item handleCardClick
     imagePopup.open(name, link)
@@ -156,6 +167,7 @@ const createCard = (data) => {
       //confirmCardDelete.open()
       handleDeleteClick(id)
     } //6th constrcutor item handleDeleteClick
+
   )
 
  return item.generateCard();

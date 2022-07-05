@@ -8,7 +8,7 @@ export class Card {
     this._id = data._id;
     this._userId = userId;
     this._ownerId = data.owner._id;
-    console.log("ownerId", data.owner._id)
+    //console.log("ownerId", data.owner._id)
 
     this._templateCardSelector = templateCardSelector;
     this._handleCardClick = handleCardClick;
@@ -33,6 +33,7 @@ export class Card {
 
   removeCard(){
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
   setLikeCounter(newLikes) {   //length kısmını okuyamıyor kart eklenemiyor - handlecardsubmit fonksiyonuna likes ve _id ekleyerek çözdü ^^++
@@ -53,6 +54,12 @@ export class Card {
     return this._likes.find(user => user._id === this._userId);
   }
 
+  // idMatch() {
+  //   if(this._userId !== this._ownerId) {
+  //     this._deleteButton.style.display = 'none' // elements__button-delete
+  //    };
+  // }
+
 
   generateCard() {
     this._cardElement = this._getTemplate().cloneNode(true);
@@ -71,7 +78,6 @@ export class Card {
     this.setLikeCounter(this._likes);
 
     if(this._userId !== this._ownerId) {
-      console.log("userId", this._userId, "ownerId", this._ownerId )
       this._deleteButton.style.display = 'none' // elements__button-delete
       };
 
@@ -79,8 +85,3 @@ export class Card {
   }
 }
 
-// idMatch() {
-//   if(this._userId !== this._ownerId) {
-//     this._deleteButton.style.display = 'none' // elements__button-delete
-//    };
-// }
