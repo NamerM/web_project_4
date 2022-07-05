@@ -1,12 +1,14 @@
 export class Card {
   constructor(data, userId, templateCardSelector, handleCardClick, handleLikeIcon, handleDeleteClick) {
+    console.log("data", data);
     this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._id = data._id;
     this._userId = userId;
-
+    this._ownerId = data.owner._id;
+    console.log("ownerId", data.owner._id)
 
     this._templateCardSelector = templateCardSelector;
     this._handleCardClick = handleCardClick;
@@ -23,15 +25,14 @@ export class Card {
       .content.querySelector('.elements__card');
   }
 
-  // _handleCardDelete = () => {
-  //   this._cardElement.remove();
-  // }
-
-  _addEventListeners = () => {
+  _addEventListeners() {
     this._likeButton.addEventListener('click', () => this._handleLikeIcon());
-    this._deleteButton.addEventListener('click', () => this._handleDeleteClick());
+    this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this));
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
+  }
 
+  removeCard(){
+    this._cardElement.remove();
   }
 
   setLikeCounter(newLikes) {   //length kısmını okuyamıyor kart eklenemiyor - handlecardsubmit fonksiyonuna likes ve _id ekleyerek çözdü ^^++
@@ -52,6 +53,7 @@ export class Card {
     return this._likes.find(user => user._id === this._userId);
   }
 
+
   generateCard() {
     this._cardElement = this._getTemplate().cloneNode(true);
 
@@ -68,7 +70,17 @@ export class Card {
     this._addEventListeners();
     this.setLikeCounter(this._likes);
 
+    if(this._userId !== this._ownerId) {
+      console.log("userId", this._userId, "ownerId", this._ownerId )
+      this._deleteButton.style.display = 'none' // elements__button-delete
+      };
+
     return this._cardElement;
   }
 }
 
+// idMatch() {
+//   if(this._userId !== this._ownerId) {
+//     this._deleteButton.style.display = 'none' // elements__button-delete
+//    };
+// }

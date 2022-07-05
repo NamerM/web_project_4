@@ -53,46 +53,56 @@ editFormValidator.resetValidation();
 
 //addcardsubmit
 const handleCardSubmit = (data) => {
-
   api.addCard(data.cardTitle, data.cardImageLink)
-  .then(res => {
-    //console.log('res =>', res)
-    const card = {
-      name: res.name,
-      link: res.link,
-      likes: res.likes,
-      _id: res._id,
-    };
-    section.addItem(card);
-  })
-  .catch(console.log)
+    .then(res => {
+      //console.log('res =>', res)
+      const card = {
+        name: res.name,
+        link: res.link,
+        likes: res.likes,
+        _id: res._id,
+      };
+      section.addItem(card);
+    })
+    .catch(console.log)
 
-  addCardPopup.close();
+    addCardPopup.close();
 }
 //editprofile submit
 const handleProfileFormSubmit = (data) => {
   api.editProfile(data.name, data.profession)
-  .then( res => {
-    userInfo.setUserInfo(res.name, data.profession, res.avatar) //data.name, data.profession
-  })
-  .catch(console.log)
-  .finally( () => {
-    editProfilePopup.close()
-  })
+    .then( res => {
+      userInfo.setUserInfo(res.name, data.profession, res.avatar)
+    })
+    .catch(console.log)
+    .finally( () => {
+      editProfilePopup.close()
+    })
 };
 
 //avatar Picture Submit
 const handleAvatarSubmit = (data) => {
-  api.editAvatar( data.link)  //data.name, data.profession,
-  .then( res => {
-    userInfo.setUserInfo(res.name, res.about, res.avatar)
-  })
-  .catch(console.log)
-  .finally( () => {
-    avatarChangePopup.close();
-  })
-
+  api.editAvatar( data.link)
+    .then( res => {
+      userInfo.setUserInfo(res.name, res.about, res.avatar)
+    })
+    .catch(console.log)
+    .finally( () => {
+      avatarChangePopup.close();
+    })
 };
+
+
+//confirm Card Delete Function
+let cardToDelete
+const handleDeleteClick = (card) => {
+  confirmCardDelete.open()
+
+  cardToDelete = card;
+  console.log('id =>', card)
+}
+
+
 
 const editProfilePopup = new PopupWithForm('#popup-template', handleProfileFormSubmit)
 editProfilePopup.setEventListeners()
@@ -101,14 +111,23 @@ const avatarChangePopup = new PopupWithForm('#popup-template-avatar', handleAvat
 avatarChangePopup.setEventListeners()
 
 const addCardPopup = new PopupWithForm('#popup-template-form', handleCardSubmit)
-addCardPopup.setEventListeners() //only call once , never in if loop etc
+addCardPopup.setEventListeners() //only call once
 
 const confirmCardDelete = new PopupWithForm('#popup-template-confirm',
-() => { })
+   () => {
+  api.deleteCard(cardToDelete.getId())
+  .then(res => {
+    cardToDelete.removeCard(res)
+  })
+    confirmCardDelete.close()
+  }
+)
 confirmCardDelete.setEventListeners()
 
 const imagePopup = new PopupWithImage('#popup-image')
 imagePopup.setEventListeners();
+
+
 
 const createCard = (data) => {
   const item = new Card (
@@ -121,30 +140,30 @@ const createCard = (data) => {
     () => {   //5th  constructor item handleLikeIcon
       if(item.isLiked()) {
         api.removeLike(item.getId())
-        .then(res => {
-          item.setLikeCounter(res.likes)
-          //console.log("you don't like it")
+          .then(res => {
+            item.setLikeCounter(res.likes)
+            //console.log("you don't like it")
         })
       } else {
         api.addLike(item.getId())
-        .then(res => {
-          item.setLikeCounter(res.likes)
-          //console.log("you like it!")
+          .then(res => {
+            item.setLikeCounter(res.likes)
+            //console.log("you like it!")
         })
       }
     },
-    () => {   //6th constrcutor item handleDeleteClick
-      confirmCardDelete.open();
-      //confirmCardDelete.enableButton();
-    }
-  );
+  (id) => {
+      //confirmCardDelete.open()
+      handleDeleteClick(id)
+    } //6th constrcutor item handleDeleteClick
+  )
 
  return item.generateCard();
 }
 
 const section = new Section(
     {
-      renderer: createCard,
+      renderer: createCard
     },
     '.elements__cards'
   )
@@ -170,6 +189,8 @@ function openProfilePopup() {
 
 //Event handlers
 editButton.addEventListener('click', openProfilePopup);
+
+
 
 addButton.addEventListener('click', () => {
   addCardFormValidator.resetValidation();

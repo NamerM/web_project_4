@@ -26,6 +26,7 @@ const editForm = document.querySelector(".popup__form_edit");
 const addCardForm = document.querySelector(".popup__form_cards");
 const avatarChange = document.querySelector(".popup__form_avatar");
 
+
 export {
   settings, editForm, addCardForm, avatarChange, editButton, closeButton, inputName, inputProfession,
   addButton, elementsList, profileAvatar
