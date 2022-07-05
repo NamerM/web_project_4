@@ -74,15 +74,20 @@ const handleCardClick = (data) => {
   imagePopup.open(data.name, data.link);
 }
 
-// //handle Card Like Function
-const handleLikeIcon = (item) => {
-  const request = item.isLiked() ? api.removeLike : api.addLike
-  request()
-    .then(res => {
-      item.setLikeCounter(res.likes)
+//handle Card Like Function
+const handleLikeIcon = (card) => {
+  if(card.isLiked()) {
+    api.removeLike(card.getId())
+      .then(res => {
+        card.setLikeCounter(res.likes)
     })
+  } else {
+    api.addLike(card.getId())
+      .then(res => {
+        card.setLikeCounter(res.likes)
+    })
+  }
 }
-
 
 // handle confirm Card Delete Function
 const handleDeleteClick = (card) => {
@@ -119,7 +124,7 @@ const createCard = (data) => {
     data,
     userId,
     '#card-template',
-    () => handleCardClick(data),     //4th constructor item handleCardClick
+    () => handleCardClick(data),      //4th constructor item handleCardClick
     () => handleLikeIcon(item),       //5th  constructor item handleLikeIcon
     (id) => handleDeleteClick(id)     //6th constrcutor item handleDeleteClick
   )
