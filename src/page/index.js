@@ -47,17 +47,6 @@ const enableValidation = (config) => {
 enableValidation(settings);
 
 
-//form validator settings dom references//
-// const editFormValidator = new FormValidator( settings, editForm );
-// const addCardFormValidator = new FormValidator( settings, addCardForm );
-// const avatarFormValidator = new FormValidator( settings,  avatarChange );
-
-// editFormValidator.enableValidation();
-// addCardFormValidator.enableValidation();
-// avatarFormValidator.enableValidation();
-// editFormValidator.resetValidation();
-
-// handle addcardsubmit   //deneme
 const handleCardSubmit = (data) => {
   addCardPopup.changeText('Saving')
   api.addCard(data.cardTitle, data.cardImageLink)
