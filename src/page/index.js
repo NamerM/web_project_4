@@ -1,8 +1,8 @@
 
 import "../page/index.css"; // main bridge to css files after webpack build always install 1st
 
-import { settings, editForm, addCardForm, editButton, inputName, inputProfession,
-         addButton, profileAvatar, avatarChange } from '../utils/constants.js';
+import { settings, editButton, inputName, inputProfession,
+         addButton, profileAvatar } from '../utils/constants.js';
 import { FormValidator }  from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
@@ -47,6 +47,7 @@ const enableValidation = (config) => {
 enableValidation(settings);
 
 
+
 const handleCardSubmit = (data) => {
   addCardPopup.changeText('Saving')
   api.addCard(data.cardTitle, data.cardImageLink)
@@ -58,8 +59,6 @@ const handleCardSubmit = (data) => {
     })
     .catch(console.log)
     .finally (() => {
-      formValidators['add-cards'].resetValidation();
-      formValidators['add-cards'].disableButton();
       addCardPopup.changeText('Default');
     })
 
@@ -77,8 +76,6 @@ const handleProfileFormSubmit = (data) => {
     })
     .catch(console.log)
     .finally(() => {
-      formValidators['profileForm'].resetValidation();
-      formValidators['profileForm'].enableButton();
       editProfilePopup.changeText('Default')
     })
 };
@@ -96,8 +93,6 @@ const handleAvatarSubmit = (data) => {
     })
     .catch(console.log)
     .finally( () => {
-      formValidators['avatarChange'].resetValidation();
-      formValidators['avatarChange'].disableButton();
     })
 };
 
@@ -166,6 +161,7 @@ const userInfo = new UserInfo({
   profileAvatar: '.profile__image',
 })
 
+
 function openProfilePopup() {
   const profileInfo = userInfo.getUserInfo();
 
@@ -177,12 +173,18 @@ function openProfilePopup() {
 
 //Event handlers subscriptions to popup/modal controls
 editButton.addEventListener('click', openProfilePopup)
+  formValidators['profileForm'].resetValidation();
+  formValidators['profileForm'].enableButton();
 
 addButton.addEventListener('click', () => {
+  formValidators['add-cards'].resetValidation();
+  formValidators['add-cards'].disableButton();
   addCardPopup.open();
 })
 
 profileAvatar.addEventListener('click', () => {
+  formValidators['avatarChange'].resetValidation();
+  formValidators['avatarChange'].disableButton();
   avatarChangePopup.open();
 })
 
