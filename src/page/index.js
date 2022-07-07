@@ -2,8 +2,8 @@
 import "../page/index.css"; // main bridge to css files after webpack build always install 1st
 
 import { settings, editForm, addCardForm, editButton, inputName, inputProfession,
-  addButton, profileAvatar, avatarChange } from '../utils/constants.js';
-import FormValidator from '../components/FormValidator.js';
+         addButton, profileAvatar, avatarChange } from '../utils/constants.js';
+import { FormValidator }  from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
@@ -18,34 +18,63 @@ let userId
 //api.getUserInfo & api.getInitialCards combined with Promise.
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
-    userId = userData._id  //userData._userId
-    //console.log('user =>', userData)
+    userId = userData._id //console.log('user =>', userData)
+
     userInfo.setUserInfo(userData.name,  userData.about, userData.avatar)
     section.rendererItems(cards)
   })
   .catch(console.log)
 
+
+
+const formValidators = {}
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator( config, formElement )
+    const formName = formElement.getAttribute('name')
+
+    formValidators[formName] = validator;
+
+    validator.enableValidation();
+    validator.resetValidation();
+    validator.disableButton();
+    validator.enableButton();
+  });
+};
+
+enableValidation(settings);
+
+
 //form validator settings dom references//
-const editFormValidator = new FormValidator( settings, editForm );
-const addCardFormValidator = new FormValidator( settings, addCardForm );
-const avatarFormValidator = new FormValidator( settings,  avatarChange );
+// const editFormValidator = new FormValidator( settings, editForm );
+// const addCardFormValidator = new FormValidator( settings, addCardForm );
+// const avatarFormValidator = new FormValidator( settings,  avatarChange );
 
-editFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
-avatarFormValidator.enableValidation();
-editFormValidator.resetValidation();
+// editFormValidator.enableValidation();
+// addCardFormValidator.enableValidation();
+// avatarFormValidator.enableValidation();
+// editFormValidator.resetValidation();
 
-// handle addcardsubmit
+// handle addcardsubmit   //deneme
 const handleCardSubmit = (data) => {
   addCardPopup.changeText('Saving')
   api.addCard(data.cardTitle, data.cardImageLink)
     .then(res => {
       section.addItem(res)
-      addCardPopup.changeText('Default')
+    })
+    .then( res => {
+      addCardPopup.close(res);
     })
     .catch(console.log)
+    .finally (() => {
+      formValidators['add-cards'].resetValidation();
+      formValidators['add-cards'].disableButton();
+      addCardPopup.changeText('Default');
+    })
 
-    addCardPopup.close();
+
 }
 //handle editprofile submit
 const handleProfileFormSubmit = (data) => {
@@ -53,11 +82,15 @@ const handleProfileFormSubmit = (data) => {
   api.editProfile(data.name, data.profession)
     .then( res => {
       userInfo.setUserInfo(res.name, data.profession, res.avatar)
-      editProfilePopup.changeText('Default')
+    })
+    .then( res => {
+      editProfilePopup.close(res)
     })
     .catch(console.log)
-    .finally( () => {
-      editProfilePopup.close()
+    .finally(() => {
+      formValidators['profileForm'].resetValidation();
+      formValidators['profileForm'].enableButton();
+      editProfilePopup.changeText('Default')
     })
 };
 
@@ -69,9 +102,13 @@ const handleAvatarSubmit = (data) => {
       userInfo.setUserInfo(res.name, res.about, res.avatar)
       avatarChangePopup.changeText('Default')
     })
+    .then( res => {
+      avatarChangePopup.close(res);
+    })
     .catch(console.log)
     .finally( () => {
-      avatarChangePopup.close();
+      formValidators['avatarChange'].resetValidation();
+      formValidators['avatarChange'].disableButton();
     })
 };
 
@@ -82,17 +119,12 @@ const handleCardClick = (data) => {
 
 //handle Card Like Function
 const handleLikeIcon = (card) => {
-  if(card.isLiked()) {
-    api.removeLike(card.getId())
-      .then(res => {
-        card.setLikeCounter(res.likes)
-    })
-  } else {
-    api.addLike(card.getId())
-      .then(res => {
-        card.setLikeCounter(res.likes)
-    })
-  }
+  const request = card.isLiked() ? api.removeLike : api.addLike
+
+  request(card.getId())
+  .then (res =>  {
+      card.setLikeCounter(res.likes)
+  })
 }
 
 // handle confirm Card Delete Function
@@ -137,8 +169,6 @@ const createCard = (data) => {
  return item.generateCard();
 }
 
-
-
 const section = new Section( { renderer: createCard }, '.elements__cards' )
 
 const userInfo = new UserInfo({
@@ -153,8 +183,6 @@ function openProfilePopup() {
   inputName.value = profileInfo.name;
   inputProfession.value = profileInfo.profession;
 
-  editFormValidator.resetValidation();
-  editFormValidator.enableButton();
   editProfilePopup.open();
 }
 
@@ -162,14 +190,10 @@ function openProfilePopup() {
 editButton.addEventListener('click', openProfilePopup)
 
 addButton.addEventListener('click', () => {
-  addCardFormValidator.resetValidation();
-  addCardFormValidator.disableButton();
   addCardPopup.open();
 })
 
 profileAvatar.addEventListener('click', () => {
-  avatarFormValidator.resetValidation();
-  avatarFormValidator.disableButton();
   avatarChangePopup.open();
 })
 

@@ -40,7 +40,7 @@ export class Card {
     this._likes = newLikes;
 
     const likeCounter = this._likes.length;
-    this._cardElement.querySelector('.elements__card_likes').textContent = likeCounter;
+    this._cardLikeCounter.textContent = likeCounter;
 
     const likeClickedbyCurrentUser = this.isLiked();
     if(likeClickedbyCurrentUser) {
@@ -62,6 +62,7 @@ export class Card {
     this._cardName = this._cardElement.querySelector('.elements__card-text');
     this._likeButton = this._cardElement.querySelector('.elements__button-like');
     this._deleteButton = this._cardElement.querySelector('.elements__button-delete');
+    this._cardLikeCounter =  this._cardElement.querySelector('.elements__card_likes');
 
     //card // destructuring assignment//
     this._cardImage.src = this._link;

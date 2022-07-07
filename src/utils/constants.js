@@ -20,6 +20,7 @@ const settings = {
   inactiveButtonClass: "popup__save_disabled",
   inputErrorClass: "popup__input-error_open",
   errorClass: "popup__error_visible",
+  formSelector: ".popup__form"
 };
 
 const editForm = document.querySelector(".popup__form_edit");
