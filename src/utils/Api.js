@@ -2,16 +2,18 @@ class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl
     this._headers = options.headers
-    this._checkResponse = options.checkResponse
   }
 
+
+  _checkResponse(res){
+    return res.ok ? res.json() : Promise.reject(res.StatusText)
+  }
 
 
   getUserInfo() {
     return fetch(this._baseUrl + '/users/me', {
       headers: this._headers
     }).then(this._checkResponse)
-    .then(res => res.json())
     // .catch(err => {
     //   console.log('Api has an error!!!')
     // })
@@ -27,7 +29,6 @@ class Api {
       })
     })
     .then(this._checkResponse)
-    .then(res => res.json())
   }
 
   editAvatar(avatar) {
@@ -39,7 +40,6 @@ class Api {
       })
     })
     .then(this._checkResponse)
-    .then(res => res.json())
   }
 
   getInitialCards() {
@@ -47,7 +47,6 @@ class Api {
       headers: this._headers
     })
     .then(this._checkResponse)
-    .then(res => res.json())
   } //name  & link in the body check m.
 
   addCard(name, link) {
@@ -60,7 +59,6 @@ class Api {
       })
     })
     .then(this._checkResponse)
-    .then(res => res.json())
   }
 
   addLike = (id) => {
@@ -69,7 +67,6 @@ class Api {
       headers: this._headers
     })
     .then(this._checkResponse)
-    .then(res => res.json())
   }
 
   removeLike = (id) => {
@@ -78,7 +75,6 @@ class Api {
       headers: this._headers
     })
     .then(this._checkResponse)
-    .then(res => res.json())
   }
 
   deleteCard(id) {
@@ -87,17 +83,10 @@ class Api {
       headers: this._headers
     })
     .then(this._checkResponse)
-    .then(res => res.json())
   }
 
-  _checkResponse(res){
-    if (res.ok) {
-      return res.json()
-    } else {
-      return Promise.reject(res.statusText);
-    }
-  }
 }
+
 
 
 export const api = new Api({

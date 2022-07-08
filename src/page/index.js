@@ -38,9 +38,6 @@ const enableValidation = (config) => {
     formValidators[formName] = validator;
 
     validator.enableValidation();
-    validator.resetValidation();
-    validator.disableButton();
-    validator.enableButton();
   });
 };
 
@@ -86,13 +83,13 @@ const handleAvatarSubmit = (data) => {
   api.editAvatar( data.link)
     .then( res => {
       userInfo.setUserInfo(res.name, res.about, res.avatar)
-      avatarChangePopup.changeText('Default')
     })
     .then( res => {
       avatarChangePopup.close(res);
     })
     .catch(console.log)
     .finally( () => {
+      avatarChangePopup.changeText('Default')
     })
 };
 
@@ -100,7 +97,6 @@ const handleAvatarSubmit = (data) => {
 const handleCardClick = (data) => {
   imagePopup.open(data.name, data.link);
 }
-
 //handle Card Like Function
 const handleLikeIcon = (card) => {
   const request = card.isLiked() ? api.removeLike : api.addLike
@@ -109,6 +105,7 @@ const handleLikeIcon = (card) => {
   .then (res =>  {
       card.setLikeCounter(res.likes)
   })
+  .catch(console.log)
 }
 
 // handle confirm Card Delete Function
@@ -120,7 +117,10 @@ const handleDeleteClick = (card) => {
     .then( () => {
       card.removeCard()
     })
-    confirmCardDelete.close()
+    .then( () => {
+      confirmCardDelete.close()
+    })
+    .catch(console.log)
   })
 }
 
@@ -177,15 +177,15 @@ editButton.addEventListener('click', openProfilePopup)
   formValidators['profileForm'].enableButton();
 
 addButton.addEventListener('click', () => {
+  addCardPopup.open();
   formValidators['add-cards'].resetValidation();
   formValidators['add-cards'].disableButton();
-  addCardPopup.open();
 })
 
 profileAvatar.addEventListener('click', () => {
+  avatarChangePopup.open();
   formValidators['avatarChange'].resetValidation();
   formValidators['avatarChange'].disableButton();
-  avatarChangePopup.open();
 })
 
 
