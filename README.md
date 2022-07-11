@@ -1,4 +1,4 @@
-# Project 4: Around The U.S.
+# CAPTAIN's LOG :: Project 4: Around The U.S.
 
 **Description**
 This project is my first step of combining javascript and responsive website design together.
@@ -22,6 +22,12 @@ In Project 7 we set sailed to the new depths. As following our OOP knowledge pre
 
 In Project 8 we initiated usage of Classes more efficiently and dived deeper through OOP, also learnt about destructuring and magical this. A attribute/ joker element taking place of required or referenced object. You got to love this!
 Enchanté , we also learnt using webpack - welcome to less littered compact world of newage browsers.
+
+In Project 9 welcome to the world of API's,  we implemented api's for all of the functions to fetch, patch, post or delete the information or the cards wholesomely.  The instances we used in classes used togeter with API methods in order to arrange the initiation of functions or validation methods such as resetValidation , disableButton etc.
+
+With this project for the first time we started to communicated with the server and backend side of the webdevelopment - We used the server to  receive, update information  also add and delete cards as well as like and check out which users liked it from the network tool, one of the developer tools.
+
+
 
 **GitHub**
 https://namerm.github.io/web_project_4

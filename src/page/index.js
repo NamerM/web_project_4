@@ -9,9 +9,7 @@ import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
-
 import { api, Api } from "../utils/Api.js";
-//import { Popup } from "../components/Popup";
 
 let userId
 
@@ -24,8 +22,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     section.rendererItems(cards)
   })
   .catch(console.log)
-
-
 
 const formValidators = {}
 
@@ -42,7 +38,6 @@ const enableValidation = (config) => {
 };
 
 enableValidation(settings);
-
 
 
 const handleCardSubmit = (data) => {
