@@ -25,7 +25,7 @@ Enchanté , we also learnt using webpack - welcome to less littered compact worl
 
 In Project 9 welcome to the world of API's,  we implemented api's for all of the functions to fetch, patch, post or delete the information or the cards wholesomely.  The instances we used in classes used togeter with API methods in order to arrange the initiation of functions or validation methods such as resetValidation , disableButton etc.
 
-With this project for the first time we started to communicated with the server and backend side of the webdevelopment - We used the server to  receive, update information  also add and delete cards as well as like and check out which users liked it from the network tool, one of the developer tools.
+With this project for the first time we started to communicate with the server and experienced back-end side of the webdevelopment - We used the server to receive, update information  also add and delete cards as well as like and check out which users liked it from the network tool, one of the developer tools.
 
 
 
